@@ -11,6 +11,10 @@ export const navList = {
       name: 'About Us',
     },
     {
+      link: '/profile',
+      name: 'Profile'
+    },
+    {
       link: '#dataexplorer',
       name: 'Data Explorer',
       submenu: [
