@@ -7,8 +7,12 @@ import { ArrowDown, ArrowTail } from 'components/icons';
 import styled from 'styled-components';
 import { submenuHover, submenuClick } from './navbar.helper';
 
+import { useKeycloak } from '@react-keycloak/ssr'
+import type { KeycloakInstance } from 'keycloak-js'
+
 const Nav = ({ data }) => {
   const router = useRouter();
+  const { keycloak } = useKeycloak<KeycloakInstance>()
 
   // shows and hides the submenu on hover and focus
   useEffect(() => {
@@ -93,8 +97,42 @@ const Nav = ({ data }) => {
                     )}
                   </li>
                 ))}
+                {keycloak?.authenticated ? (
+                      <>
+                      <Navitem
+                      onClick={() => {
+                        if(keycloak){
+                          window.location.href = keycloak.createAccountUrl()
+                        }
+                      }}
+                      >
+                        Profile
+                      </Navitem>
+                      <Navitem
+                      onClick={() => {
+                        if(keycloak){
+                          window.location.href = keycloak.createLogoutUrl()
+                        }
+                      }}
+                      >
+                        Logout
+                      </Navitem>
+                      </>
+                    ):(
+                      <>
+                      <Navitem
+                      onClick={() => {
+                        if(keycloak){
+                          window.location.href = keycloak.createLoginUrl()
+                        }
+                      }}
+                      >
+                        Login
+                      </Navitem>
+                      </>
+                    )}
             </ul>
-          </Navlinks>
+          </Navlinks> 
         </div>
       </NavbarWrapper>
       <MobileNav data={data} />
