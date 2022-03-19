@@ -8,6 +8,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ['justicehub.in'],
+  },
 };
 
 module.exports = withPlugins([withTM, withBundleAnalyzer], nextConfig);

@@ -1,28 +1,18 @@
 export const navList = {
-  site: 'Constituency Dashboard',
+  site: 'OPub',
   logo: '',
   links: [
     {
-      link: '/about',
-      name: 'About',
+      link: '/orgs',
+      name: 'Organizations',
     },
     {
-      link: '#dataexplorer',
-      name: 'Dashboards',
-      submenu: [
-        {
-          link: '#',
-          name: 'Budget Summary',
-        },
-        {
-          link: '#',
-          name: 'Summary',
-        },
-        {
-          link: '#',
-          name: 'Data Story',
-        },
-      ],
+      link: '/datasets',
+      name: 'Datasets',
+    },
+    {
+      link: '/about',
+      name: 'About',
     },
     {
       link: '#resources',

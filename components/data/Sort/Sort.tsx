@@ -29,15 +29,16 @@ const options = [
   },
 ];
 
-const Sort: React.FC<{ newSort: any; className?:string }> = ({ newSort, className }) => {
+const Sort: React.FC<{ newSort: any; className?: string }> = ({
+  newSort,
+  className,
+}) => {
   const router = useRouter();
-  const [sort, setSort] = useState('tender_bid_opening_date:asc');
+  const [sort, setSort] = useState('');
   const [value, setValue] = useState('Date Asc');
 
   useEffect(() => {
-    const currentSort = router.query.sort
-      ? router.query.sort
-      : 'tender_bid_opening_date:asc';
+    const currentSort = router.query.sort ? router.query.sort : '';
 
     setSort(currentSort as string);
   }, [router.query.sort]);

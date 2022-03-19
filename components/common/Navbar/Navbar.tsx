@@ -204,6 +204,7 @@ const Navitem = styled.a`
   color: var(--text-dark-high);
   transition: background-color 200ms ease;
   width: max-content;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--nav-bg-hover);

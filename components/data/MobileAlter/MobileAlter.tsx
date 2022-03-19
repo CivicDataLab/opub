@@ -55,12 +55,8 @@ const MobileAlter: React.FC<{
   const router = useRouter();
   const [sortIsOpen, setSortIsOpen] = useState(false);
   const [filterIsOpen, setFilterIsOpen] = useState(false);
-  const [currentSort, setCurrentSort] = useState(
-    router.query.sort ? router.query.sort : 'tender_bid_opening_date:asc'
-  );
-  const [selectedSort, setSelectedSort] = useState(
-    router.query.sort ? router.query.sort : 'tender_bid_opening_date:asc'
-  );
+  const [currentSort, setCurrentSort] = useState(router.query.sort);
+  const [selectedSort, setSelectedSort] = useState(router.query.sort);
 
   function checkInput(selected) {
     const filterElement = document.getElementById(

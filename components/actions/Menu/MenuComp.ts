@@ -21,6 +21,7 @@ export const MenuLabel = styled.span`
   font-weight: var(--font-weight-medium);
   color: var(--text-light-light);
   font-size: 14px;
+  min-width: fit-content;
 `;
 
 export const Wrapper = styled.div`

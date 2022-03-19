@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Constituency Dashboard</title>
+        <title>Open Publishers</title>
       </Head>
       <HomePage>
         <HomeHeader />
