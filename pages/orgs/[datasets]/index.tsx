@@ -7,21 +7,32 @@ import styled from 'styled-components';
 import { fetchFilters, convertToCkanSearchQuery } from 'utils/fetch';
 
 import { Header } from 'components/layouts';
-import { Search, Total, Filter, Sort, Pagination } from 'components/data';
-import { DatasetList } from 'components/pages/datasets';
+import {
+  Search,
+  Total,
+  Filter,
+  Sort,
+  Pagination,
+  Tags,
+} from 'components/data';
 import MobileAlter from 'components/data/MobileAlter/MobileAlter';
 import { fetchOrgDatasets } from '../orgs.helper';
 import { truncate } from 'utils/helper';
 import { MenuComp } from 'components/actions/Menu/MenuComp';
+import { DatasetListComp } from 'components/pages/datasets/List/ListComp';
+import { explorerPopulation } from 'utils/explorer';
+import Link from 'next/link';
+import { DatasetCardComp } from 'components/data/Cards/DatasetCard/CardComp';
 
 type Props = {
   data: any;
   facets: any;
+  variables: any;
 };
 
-const list = '"tags", "groups"';
+const list = '"tags", "res_format"';
 
-const Datasets: React.FC<Props> = ({ data, facets }) => {
+const Datasets: React.FC<Props> = ({ data, facets, variables }) => {
   const router = useRouter();
   const { q, sort, size, fq, from } = router.query;
   const [search, setSearch] = useState(q);
@@ -31,22 +42,19 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
   const [pages, setPages] = useState(from);
 
   const { results, count } = data.result;
-  const orgDetails = results[0].organization;
 
-  // useEffect(() => {
-  //   router.push({
-  //     pathname: router.pathname,
-  //     query: {
-  //       fq: datsetsFilters,
-  //       q: search,
-  //       sort: sorts,
-  //       size: items,
-  //       from: pages,
-  //     },
-  //   });
-  // }, [datsetsFilters, search, sorts, pages, items]);
-
-  console.log(datsetsFilters, search, sorts, pages, items);
+  useEffect(() => {
+    router.push({
+      pathname: `/orgs/${router.query.datasets}`,
+      query: {
+        fq: datsetsFilters,
+        q: search,
+        sort: sorts,
+        size: items,
+        from: pages,
+      },
+    });
+  }, [datsetsFilters, search, sorts, pages, items]);
 
   function handleDatasetsChange(val: any) {
     switch (val.query) {
@@ -69,14 +77,24 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
   }
 
   const headerData = {
-    title: orgDetails.title,
-    content: truncate(orgDetails.description || '', 300),
+    title: results.length ? results[0].organization.title : 'Header Title',
+    content: results.length
+      ? truncate(results[0].organization.description || '', 300)
+      : truncate(
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores delectus quam aut quo labore exercitationem itaque soluta earum dicta, dolore ab velit nulla perspiciatis porro, adipisci ipsum eligendi! Deserunt, suscipit.',
+          300
+        ),
+  };
+  const simplifyNames = {
+    res_format: 'Format',
   };
 
   return (
     <>
       <Head>
-        <title>HAQ | Datasets</title>
+        <title>
+          {results.length ? results[0].organization.title : 'OPub'} | OPub
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header data={headerData} />
@@ -87,6 +105,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
               data={facets}
               newFilters={handleDatasetsChange}
               fq={datsetsFilters}
+              simpleNames={simplifyNames}
             />
             <DatasetRight>
               <DatasetSearch>
@@ -94,7 +113,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
               </DatasetSearch>
               <DatasetSort>
                 <Total text="datasets found" total={count} />
-                <Sort className="fluid" newSort={handleDatasetsChange} />
+                <Sort className="fill" newSort={handleDatasetsChange} />
               </DatasetSort>
               <MobileAlter
                 data={facets}
@@ -102,7 +121,31 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
                 fq={datsetsFilters}
                 sortShow={true}
               />
-              <DatasetList data={results} />
+              <DatasetListComp className="list">
+                {results.map((pkg: any, index: number) => {
+                  const parsedData = explorerPopulation(pkg);
+                  return (
+                    <li key={`list-${index}`} className="list__item">
+                      <Link
+                        href={`/orgs/${router.query.datasets}/${parsedData.id}`}
+                        passHref
+                      >
+                        <DatasetCardComp>
+                          <section>
+                            <h3 className="card__heading">
+                              {parsedData.title}
+                            </h3>
+                            <Tags data={parsedData.tags} />
+                            <div className="card__content">
+                              <p>{truncate(parsedData.notes, 300)}</p>
+                            </div>
+                          </section>
+                        </DatasetCardComp>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </DatasetListComp>
               <Pagination total={count} newPage={handleDatasetsChange} />
             </DatasetRight>
           </DatasetsComp>
@@ -115,13 +158,18 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query || {};
   const variables = convertToCkanSearchQuery(query);
-  const facets = await fetchFilters(list, variables);
 
-  const data = await fetchOrgDatasets(query.datasets);
+  variables.fq = variables.fq
+    ? variables.fq.concat(` AND (organization:${query.datasets})`)
+    : (variables.fq = `(organization:${query.datasets})`);
+
+  const facets = await fetchFilters(list, variables);
+  const data = await fetchOrgDatasets(query.datasets, variables);
   return {
     props: {
       data,
       facets,
+      variables,
     },
   };
 };
@@ -173,6 +221,6 @@ const DatasetSort = styled.div`
   border-bottom: var(--separator-5);
 
   ${MenuComp} {
-    flex-basis: 250px;
+    max-width: 250px;
   }
 `;

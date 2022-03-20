@@ -4,28 +4,24 @@ import { Menu } from 'components/actions';
 
 const options = [
   {
-    value: 'tender_bid_opening_date:asc',
-    title: 'Date Asc',
+    id: 'score:desc',
+    name: 'Relevance',
   },
   {
-    value: 'tender_bid_opening_date:desc',
-    title: 'Date Desc',
+    id: 'title_string:asc',
+    name: 'Name Ascending',
   },
   {
-    value: 'tender_value_amount:asc',
-    title: 'Tender Value Asc',
+    id: 'title_string:desc',
+    name: 'Name Descending',
   },
   {
-    value: 'tender_value_amount:desc',
-    title: 'Tender Value Desc',
+    id: 'metadata_modified:desc',
+    name: 'Last Modified',
   },
   {
-    value: 'buyer_name:asc',
-    title: 'Departments',
-  },
-  {
-    value: 'score:desc',
-    title: 'Relevance',
+    id: 'views_recent:desc',
+    name: 'Popular',
   },
 ];
 
@@ -34,8 +30,8 @@ const Sort: React.FC<{ newSort: any; className?: string }> = ({
   className,
 }) => {
   const router = useRouter();
-  const [sort, setSort] = useState('');
-  const [value, setValue] = useState('Date Asc');
+  const [sort, setSort] = useState(options[0].id);
+  const [value, setValue] = useState(options[0].name);
 
   useEffect(() => {
     const currentSort = router.query.sort ? router.query.sort : '';
@@ -44,8 +40,8 @@ const Sort: React.FC<{ newSort: any; className?: string }> = ({
   }, [router.query.sort]);
 
   useEffect(() => {
-    let currentSort = options.find((o) => o.value === sort);
-    currentSort && setValue(currentSort.title);
+    let currentSort = options.find((o) => o.id === sort);
+    currentSort && setValue(currentSort.name);
   }, [sort]);
 
   const handleChange = (event: any) => {

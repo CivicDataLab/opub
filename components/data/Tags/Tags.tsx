@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Tags = ({ data }) => {
   return (
     <TagsWrapper>
-      {data.map((item, index) => (
+      {data.slice(0, 9).map((item, index) => (
         <li key={`explorer-${index}`}>{item}</li>
       ))}
     </TagsWrapper>

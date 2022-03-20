@@ -196,18 +196,6 @@ const SchemeSelector = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-
-  .fill {
-    flex-grow: 1;
-
-    button {
-      width: 100%;
-    }
-
-    ${MenuContent} {
-      width: 100%;
-    }
-  }
 `;
 
 const HeaderToggle = styled.div`

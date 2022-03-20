@@ -96,7 +96,7 @@ export function filter_data_budgettype(mainData, budgetType) {
 export async function fetchFromTags(tags, id) {
   const tagsString = tags.map((i) => `"${i}"`).join(' OR ');
   const response = await fetch(
-    `${process.env.CKAN_URL}/package_search?fq=tags:(${tagsString}) AND groups:budgets-for-justice`
+    `${process.env.CKAN_URL}/package_search?fq=tags:(${tagsString})`
   ).then((res) => res.json());
   const data = response.result.results;
   let filteredData = data.filter((item) => item.name != id).splice(0, 2);

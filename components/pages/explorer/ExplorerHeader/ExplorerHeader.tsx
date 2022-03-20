@@ -4,7 +4,7 @@ import { Share } from 'components/actions';
 import { Tags } from 'components/data';
 import { categoryIcon, categoryTag } from 'utils/explorer';
 
-const ExplorerHeader = ({ data, meta }) => {
+const ExplorerHeader:React.FC<{data: any; meta?: any}> = ({ data, meta }) => {
   return (
     <Wrapper>
       <div className="container">
@@ -20,10 +20,12 @@ const ExplorerHeader = ({ data, meta }) => {
           </div>
         </HeaderContent>
         <HeaderText>{data.notes}</HeaderText>
-        <HeaderMeta>
-          {meta['Type of Scheme'] && <span>{meta['Type of Scheme']}</span>}
-          {<span>{categoryTag(data.tags)}</span>}
-        </HeaderMeta>
+        {meta && (
+          <HeaderMeta>
+            {meta['Type of Scheme'] && <span>{meta['Type of Scheme']}</span>}
+            {<span>{categoryTag(data.tags)}</span>}
+          </HeaderMeta>
+        )}
       </section>
     </Wrapper>
   );

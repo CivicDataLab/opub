@@ -15,20 +15,24 @@ import { simplifyNaming } from 'utils/helper';
 
 const sort = [
   {
-    id: 'tender_bid_opening_date:asc',
-    name: 'Date',
-  },
-  {
-    id: 'tender_value_amount:asc',
-    name: 'Tender Value',
-  },
-  {
-    id: 'organization.title:desc',
-    name: 'Departments',
-  },
-  {
-    id: 'score:desc',
+    id: 'score:desc metadata_modified:desc',
     name: 'Relevance',
+  },
+  {
+    id: 'title_string:asc',
+    name: 'Name Ascending',
+  },
+  {
+    id: 'title_string:desc',
+    name: 'Name Descending',
+  },
+  {
+    id: 'metadata_modified:desc',
+    name: 'Last Modified',
+  },
+  {
+    id: 'views_recent:desc',
+    name: 'Popular',
   },
 ];
 

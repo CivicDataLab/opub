@@ -15,8 +15,8 @@ interface Props {
    * Options to display in the menu
    */
   options: {
-    value: string;
-    title: string;
+    id: string;
+    name: string;
   }[];
 
   /**
@@ -274,14 +274,14 @@ const Menu = ({
         >
           {options.length > 0 ? (
             options.map((item, index) => (
-              <MenuItem key={item.value} role="none">
+              <MenuItem key={item.id} role="none">
                 <button
                   onClick={(e) => menuItemHandle(e)}
-                  data-value={item.value}
+                  data-value={item.id}
                   role="menuitem"
                   tabIndex={index == 0 ? 0 : -1}
                 >
-                  {item.title}
+                  {item.name}
                 </button>
               </MenuItem>
             ))

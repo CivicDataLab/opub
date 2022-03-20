@@ -20,7 +20,6 @@ export const MenuComp = styled.div`
 export const MenuLabel = styled.span`
   font-weight: var(--font-weight-medium);
   color: var(--text-light-light);
-  font-size: 14px;
   min-width: fit-content;
 `;
 
@@ -39,6 +38,7 @@ export const MenuButton = styled.button`
   line-height: 1.5;
   position: relative;
   text-align: start;
+  width: 100%;
 
   > span {
     width: 97%;
