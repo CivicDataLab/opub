@@ -35,7 +35,6 @@ export function explorerPopulation(obj) {
     });
 
   newObj = {
-    groups: obj.groups.map((group) => group.display_name),
     id: obj.name,
     title: obj.title,
     notes: obj.notes || '',
