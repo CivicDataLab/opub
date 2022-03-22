@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
+import { Document, Page } from 'react-pdf';
 import {
   tabbedInterface,
   filter_data_indicator,
@@ -24,6 +25,8 @@ const SimpleBarLineChartViz = dynamic(
 );
 
 const ExplorerViz = ({ data, fileDataTable, vizData }) => {
+  console.log(data);
+
   const [selectedIndicator, setSelectedIndicator] =
     useState('Budget Estimates');
   const [indicatorFiltered, setIndicatorFiltered] = useState([]);
@@ -33,8 +36,15 @@ const ExplorerViz = ({ data, fileDataTable, vizData }) => {
   const [isTable, setIsTable] = useState(true);
   const [currentViz, setCurrentViz] = useState('#barGraph');
 
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
   const barRef = useRef(null);
   const lineRef = useRef(null);
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
 
   // todo: make it dynamic lie scheme dashboard
   // const IndicatorDesc = [
@@ -113,7 +123,12 @@ const ExplorerViz = ({ data, fileDataTable, vizData }) => {
             sortable
           />
         ) : (
-          <></>
+          <Document
+            file={{ url: data.resUrls['PDF'] }}
+            onLoadSuccess={onDocumentLoadSuccess}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
         ),
     },
     {
