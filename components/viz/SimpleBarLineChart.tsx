@@ -61,10 +61,6 @@ const SimpleBarLineChartViz: React.FC<SimpleBarLineChartProps> = ({
   const options = {
     tooltip: {
       trigger: 'axis',
-      formatter: function (params) {
-        return `${Title.split('-')[0]} - <br />
-        ${params[0].name}: ${params[0].data} ${unit}<br />`;
-      },
     },
     grid: {
       show: false,
@@ -89,11 +85,6 @@ const SimpleBarLineChartViz: React.FC<SimpleBarLineChartProps> = ({
       max: function (val) {
         return val.max <= 1 ? 1 : null;
       },
-    },
-    title: {
-      text: Title,
-      left: 'center',
-      subtext: subTitle,
     },
     // toolbox: {
     //   show: true,

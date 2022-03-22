@@ -8,7 +8,7 @@ const About = ({members: members, partners: partners}) => {
   const headerData = {
     title: 'The Team',
     content:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+      'A single umbrella portal that houses a complete ecosystem with data exchange, analytics, sources, app development, economy, and frameworks. This platform will also manage the directories of all data available in India. With a state-of-the-art search, discovery, and use mechanism.',
   };
 
   // const partners = [
@@ -44,7 +44,7 @@ const About = ({members: members, partners: partners}) => {
 
   // Use getStaticProps here instead of calling function OR useState
 
-  
+
 
   // const team = [
   //   {
@@ -129,7 +129,7 @@ export async function getStaticProps() {
 
   const memberReq = await fetch(`${process.env.STRAPI_URL}/members`);
   const memberRes = await memberReq.json();
-  
+
   let members = [];
 
   memberRes.map((item) => {

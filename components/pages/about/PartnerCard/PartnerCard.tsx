@@ -107,9 +107,6 @@ const PartnerCard = ({ card }) => {
         ))} */}
         <p>{card.desc}</p>
       </div>
-      <a className="partners__footer" href={`mailto:${card.email}`}>
-        {card.email}
-      </a>
     </PartnersCard>
   );
 };
