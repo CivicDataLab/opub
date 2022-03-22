@@ -93,9 +93,6 @@ const PartnerCard = ({ card }) => {
           <p key={`partner-content-${index}`}>{item}</p>
         ))}
       </div>
-      <a className="partners__footer" href={`mailto:${card.email}`}>
-        {card.email}
-      </a>
     </PartnersCard>
   );
 };

@@ -17,9 +17,7 @@ const headerData = {
   content: 'A list of all organizations under the Justice Hub Platform.',
 };
 
-const Orgs: React.FC<Props> = ({ data }) => {
-  console.log(data);
-  
+const Orgs: React.FC<Props> = ({ data }) => {  
   return (
     <>
       <Head>

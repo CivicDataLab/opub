@@ -8,7 +8,7 @@ const About = () => {
   const headerData = {
     title: 'The Team',
     content:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+      'A single umbrella portal that houses a complete ecosystem with data exchange, analytics, sources, app development, economy, and frameworks. This platform will also manage the directories of all data available in India. With a state-of-the-art search, discovery, and use mechanism.',
   };
 
   const partners = [
@@ -22,23 +22,22 @@ const About = () => {
         'We aim to grow data and tech literacy of governments, non-profits, think-tanks, media houses, universities, and more to enable data-driven decision making at scale.',
       ],
       email: 'info@civicdatalab.in',
-      github: '/',
-      linkedin: '/',
-      twitter: '/',
+      github: '#',
+      linkedin: '#',
+      twitter: '#',
       class: 'partners--dark-img',
     },
     {
-      name: 'Open Contracting Partnership',
+      name: 'National Informatics Centre',
       title: 'Platform Owner',
-      img: '/assets/images/ocp.png',
+      img: '/assets/images/NIC-logo.jpg',
       desc: [
-        'The Open Contracting Partnership is an independent non-profit public charity 501(c)(3) working in over 50 countries.',
-        'We are a silo-busting collaboration across governments, businesses, civil society, and technologists to open up and transform government contracting worldwide. Bringing open data and open government together, we make sure public money is spent openly, fairly and effectively on public contracts, the single biggest item of spending by most governments. They are a government’s number one corruption risk and they are vital to make sure citizens get the services that they deserve.',
+        'National Informatics Centre (NIC) under the Ministry of Electronics and Information Technology (MeitY) is the technology partner of the Government of India. NIC was established in the year 1976 with the objective to provide technology-driven solutions to Central and State Governments.',
       ],
       email: 'info@civicdatalab.in',
-      github: '/',
-      linkedin: '/',
-      twitter: '/',
+      github: '#',
+      linkedin: '#',
+      twitter: '#',
       class: 'partners--dark-img',
     },
   ];

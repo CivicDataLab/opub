@@ -23,16 +23,14 @@ const SimpleBarLineChartViz = dynamic(
   { ssr: false, loading: () => <p>...</p> }
 );
 
-const ExplorerViz = ({ data, fileDataTable }) => {
-  console.log(fileDataTable);
-  
+const ExplorerViz = ({ data, fileDataTable, vizData }) => {
   const [selectedIndicator, setSelectedIndicator] =
     useState('Budget Estimates');
   const [indicatorFiltered, setIndicatorFiltered] = useState([]);
   const [finalFiltered, setFinalFiltered] = useState([]);
   const [budgetTypes, setBudgetTypes] = useState([]);
   const [selectedBudgetType, setSelectedBudgetType] = useState('');
-  const [isTable, setIsTable] = useState(false);
+  const [isTable, setIsTable] = useState(true);
   const [currentViz, setCurrentViz] = useState('#barGraph');
 
   const barRef = useRef(null);
@@ -104,58 +102,58 @@ const ExplorerViz = ({ data, fileDataTable }) => {
   const vizItems = [
     {
       id: 'tableView',
-      graph: (
-        <></>
-        // <Table
-        //   headers={
-        //     fileDataTable[0]
-        //       ? Object.keys(fileDataTable[0])
-        //       : ['header1']
-        //   }
-        //   rows={fileDataTable.map(Object.values)}
-        //   caption="Table"
-        //   sortable
-        // />
-      ),
+      graph:
+        Object.keys(fileDataTable).length !== 0 ? (
+          <Table
+            headers={
+              fileDataTable[0] ? Object.keys(fileDataTable[0]) : ['header1']
+            }
+            rows={fileDataTable.map(Object.values)}
+            caption="Table"
+            sortable
+          />
+        ) : (
+          <></>
+        ),
     },
-    // {
-    //   id: 'barGraph',
-    //   graph: (
-    //     <SimpleBarLineChartViz
-    //       color={'#00ABB7'}
-    //       dataset={barLineTransformer(finalFiltered, selectedIndicator)}
-    //       type="bar"
-    //       smooth={true}
-    //       showSymbol={true}
-    //       Title={
-    //         selectedIndicator +
-    //         (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
-    //       }
-    //       subTitle={data.title}
-    //       unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
-    //     />
-    //   ),
-    //   ref: barRef,
-    // },
-    // {
-    //   id: 'lineChart',
-    //   graph: (
-    //     <SimpleBarLineChartViz
-    //       color={'#00ABB7'}
-    //       dataset={barLineTransformer(finalFiltered, selectedIndicator)}
-    //       type="line"
-    //       smooth={true}
-    //       showSymbol={true}
-    //       Title={
-    //         selectedIndicator +
-    //         (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
-    //       }
-    //       subTitle={data.title}
-    //       unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
-    //     />
-    //   ),
-    //   ref: lineRef,
-    // },
+    {
+      id: 'barGraph',
+      graph: (
+        <SimpleBarLineChartViz
+          color={'#00ABB7'}
+          dataset={barLineTransformer(vizData, selectedIndicator)}
+          type="bar"
+          smooth={true}
+          showSymbol={true}
+          Title={
+            selectedIndicator +
+            (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
+          }
+          subTitle={data.title}
+          unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
+        />
+      ),
+      ref: barRef,
+    },
+    {
+      id: 'lineChart',
+      graph: (
+        <SimpleBarLineChartViz
+          color={'#00ABB7'}
+          dataset={barLineTransformer(vizData, selectedIndicator)}
+          type="line"
+          smooth={true}
+          showSymbol={true}
+          Title={
+            selectedIndicator +
+            (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
+          }
+          subTitle={data.title}
+          unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
+        />
+      ),
+      ref: lineRef,
+    },
   ];
 
   useEffect(() => {
@@ -164,7 +162,7 @@ const ExplorerViz = ({ data, fileDataTable }) => {
     const panels = document.querySelectorAll('.viz__graph');
     tabbedInterface(tablist, panels);
 
-    handleNewVizData('Budget Estimates');
+    // handleNewVizData('Budget Estimates');
   }, [fileDataTable]);
 
   // Run whenever a new indicator is selected

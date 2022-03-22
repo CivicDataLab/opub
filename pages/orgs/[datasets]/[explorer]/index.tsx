@@ -10,23 +10,15 @@ import {
   ExplorerRelated,
   ExplorerViz,
 } from 'components/pages/explorer';
-import tempViz from 'data/tempViz.json'
+import tempViz from 'data/tempViz.json';
 
 type Props = {
   data: any;
-  meta: any;
-  fileData: any;
+  fileData;
   fileDataTable: any;
 };
 
-const Explorer: React.FC<Props> = ({
-  data,
-  meta,
-  fileData,
-  fileDataTable,
-}) => {
-  console.log(fileDataTable);
-
+const Explorer: React.FC<Props> = ({ data, fileDataTable, fileData }) => {
   return (
     <>
       <Head>
@@ -34,7 +26,11 @@ const Explorer: React.FC<Props> = ({
       </Head>
       <Wrapper>
         <ExplorerHeader data={data} />
-        {/* <ExplorerViz data={data} fileDataTable={fileDataTable} /> */}
+        <ExplorerViz
+          data={data}
+          fileDataTable={fileDataTable}
+          vizData={fileData}
+        />
         {/* <ExplorerRelated data={data} /> */}
       </Wrapper>
     </>
@@ -47,14 +43,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     explorerPopulation(res.result)
   );
 
-  // const vizData = explorerPopulation(tempViz)
-
   // fetch and parse metadata csv
-  // const metaRes = await resourceGetter(vizData.metaUrl);
-  // const meta = {};
-  // metaRes.forEach((elm) => {
-  //   meta[elm[0]] = elm[1] || '';
-  // });
+  const vizUrl = explorerPopulation(tempViz);
+  // fetch and parse data csv
+  const fileData = await resourceGetter(vizUrl.dataUrl, true);
 
   let fileDataTable = {};
   if (data.resUrls['CSV'] || data.resUrls['XLSX'] || data.resUrls['XLS']) {
@@ -67,8 +59,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       data,
-      // meta,
       fileDataTable,
+      fileData,
     },
   };
 };
