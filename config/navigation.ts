@@ -7,10 +7,6 @@ export const navList = {
       name: 'Organizations',
     },
     {
-      link: '/datasets',
-      name: 'Datasets',
-    },
-    {
       link: '/about',
       name: 'About',
     },
