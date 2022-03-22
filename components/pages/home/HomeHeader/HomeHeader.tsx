@@ -123,7 +123,7 @@ const HomeHeader = () => {
   return (
     <Header>
       <div className="container">
-        <h1>Explore Constituency-wise Fiscal Information for schemes</h1>
+        <h1>Search through Open and Private Datasets</h1>
         <HeaderControls>
           <Search newSearch={handleDatasetsChange} />
         </HeaderControls>
