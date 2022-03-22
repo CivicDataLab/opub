@@ -5,21 +5,12 @@ export const fetchDatasets = async (variables) => {
     else return key;
   }
 
-  variables.fq
-    ? (variables.fq = variables.fq.concat(
-        ` AND (tags:scheme-category AND groups:budgets-for-justice)`
-      ))
-    : (variables.fq = `(tags:scheme-category AND groups:budgets-for-justice)`);
-
   // creating a string of parameter from object of variables for CKAN API use
   const varArray = Object.keys(variables).map((key) => {
     return `${changeKeyName(key)}=${variables[key]}`;
   });
 
-  const varString =
-    varArray.length > 0
-      ? varArray.join('&')
-      : `fq=(tags:scheme-category AND groups:budgets-for-justice)`;
+  const varString = varArray.length > 0 ? varArray.join('&') : ``;
 
   const response = await fetch(
     `${process.env.CKAN_URL}/package_search?${varString}`

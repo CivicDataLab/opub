@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Button, Menu } from 'components/actions';
 import { MenuContent } from 'components/actions/Menu/MenuComp';
 import { LokSabha, VidhanSabha } from 'components/icons';
+import { Search } from 'components/data';
+import { useRouter } from 'next/router';
 
 const states = [
   {
@@ -45,8 +47,7 @@ const schemes = [
     id: 'icps',
   },
   {
-    name:
-      'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
+    name: 'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
     id: 'mgnregs',
   },
   {
@@ -62,7 +63,10 @@ const schemes = [
 const HomeHeader = () => {
   const [selectedState, setSelectedState] = useState(states[0]);
   const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
+  const [search, setSearch] = useState('');
   const [selectedSabha, setSelectedSabha] = useState('Lok Sabha');
+
+  const router = useRouter();
 
   const sabhaRef = useRef(null);
 
@@ -99,7 +103,21 @@ const HomeHeader = () => {
       scheme: selectedScheme.id,
       sabha: selectedSabha,
     };
-    console.log(obj);
+  }
+
+  useEffect(() => {
+    if (search.length > 0) {
+      router.push({
+        pathname: `/datasets`,
+        query: {
+          q: search,
+        },
+      });
+    }
+  }, [search]);
+
+  function handleDatasetsChange(val) {
+    setSearch(val.value);
   }
 
   return (
@@ -107,51 +125,7 @@ const HomeHeader = () => {
       <div className="container">
         <h1>Explore Constituency-wise Fiscal Information for schemes</h1>
         <HeaderControls>
-          <HeaderToggle ref={sabhaRef}>
-            <Button
-              aria-pressed="true"
-              data-value="lok-sabha"
-              onClick={handleSabhaClick}
-              icon={<LokSabha />}
-              iconSide="left"
-              kind="custom"
-            >
-              Lok Sabha
-            </Button>
-            <Button
-              aria-pressed="false"
-              data-value="vidhan-sabha"
-              onClick={handleSabhaClick}
-              icon={<VidhanSabha />}
-              iconSide="left"
-              kind="custom"
-            >
-              Vidhan Sabha
-            </Button>
-          </HeaderToggle>
-          <SchemeSelector>
-            <StateMenu className="fill">
-              <Menu
-                options={states}
-                handleChange={(e) => handleMenuChange(e, states)}
-                heading="Select State"
-                value={selectedState.name}
-                showLabel={false}
-              />
-            </StateMenu>
-            <div className="fill">
-              <Menu
-                options={schemes}
-                handleChange={(e) => handleMenuChange(e, schemes)}
-                heading="Select any Scheme"
-                value={selectedScheme.name}
-                showLabel={false}
-              />
-            </div>
-            <Button kind="primary" onClick={handleSubmitClick}>
-              Explore
-            </Button>
-          </SchemeSelector>
+          <Search newSearch={handleDatasetsChange} />
         </HeaderControls>
       </div>
     </Header>
