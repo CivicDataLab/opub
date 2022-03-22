@@ -10,14 +10,23 @@ import {
   ExplorerRelated,
   ExplorerViz,
 } from 'components/pages/explorer';
+import tempViz from 'data/tempViz.json'
 
 type Props = {
   data: any;
   meta: any;
   fileData: any;
+  fileDataTable: any;
 };
 
-const Explorer: React.FC<Props> = ({ data, meta, fileData }) => {
+const Explorer: React.FC<Props> = ({
+  data,
+  meta,
+  fileData,
+  fileDataTable,
+}) => {
+  console.log(fileDataTable);
+
   return (
     <>
       <Head>
@@ -25,8 +34,8 @@ const Explorer: React.FC<Props> = ({ data, meta, fileData }) => {
       </Head>
       <Wrapper>
         <ExplorerHeader data={data} />
-        <ExplorerViz data={data} meta={meta} fileData={fileData} />
-        <ExplorerRelated data={data} />
+        {/* <ExplorerViz data={data} fileDataTable={fileDataTable} /> */}
+        {/* <ExplorerRelated data={data} /> */}
       </Wrapper>
     </>
   );
@@ -38,41 +47,28 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     explorerPopulation(res.result)
   );
 
-  const vizData = await fetch(
-    'https://justicehub.in/api/3/action/package_show?id=union-budget-data-for-administration-of-justice'
-  )
-    .then((res) => res.json())
-    .then((res) => explorerPopulation(res.result));
+  // const vizData = explorerPopulation(tempViz)
 
   // fetch and parse metadata csv
-  const metaRes = await resourceGetter(vizData.metaUrl);
-  const meta = {};
-  metaRes.forEach((elm) => {
-    meta[elm[0]] = elm[1] || '';
-  });
+  // const metaRes = await resourceGetter(vizData.metaUrl);
+  // const meta = {};
+  // metaRes.forEach((elm) => {
+  //   meta[elm[0]] = elm[1] || '';
+  // });
 
-  // fetch and parse data csv
-  const fileData = await resourceGetter(vizData.dataUrl, true);
+  let fileDataTable = {};
+  if (data.resUrls['CSV'] || data.resUrls['XLSX'] || data.resUrls['XLS']) {
+    fileDataTable = await resourceGetter(
+      data.resUrls['CSV'] || data.resUrls['XLSX'] || data.resUrls['XLS'],
+      true
+    );
+  }
 
-  // fetch related schemes
-  const relatedSchemes = await fetchFromTags(data.tags, data.id);
-
-  // generate indicators
-  const indicators = [
-    ...Array.from(
-      new Set(
-        fileData.map((item: { indicators: any }) => item.indicators || null)
-      )
-    ),
-  ];
-
-  data.indicators = indicators;
-  data.relatedSchemes = relatedSchemes;
   return {
     props: {
       data,
-      meta,
-      fileData,
+      // meta,
+      fileDataTable,
     },
   };
 };

@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { fetchOrgs } from './orgs.helper';
+import { fetchOrgs } from 'utils/orgs.helper';
 import { Total } from 'components/data';
 import { OrgCard } from 'components/pages/orgs';
 import { Header } from 'components/layouts';

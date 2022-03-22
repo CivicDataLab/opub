@@ -23,7 +23,9 @@ const SimpleBarLineChartViz = dynamic(
   { ssr: false, loading: () => <p>...</p> }
 );
 
-const ExplorerViz = ({ data, meta, fileData }) => {
+const ExplorerViz = ({ data, fileDataTable }) => {
+  console.log(fileDataTable);
+  
   const [selectedIndicator, setSelectedIndicator] =
     useState('Budget Estimates');
   const [indicatorFiltered, setIndicatorFiltered] = useState([]);
@@ -37,13 +39,13 @@ const ExplorerViz = ({ data, meta, fileData }) => {
   const lineRef = useRef(null);
 
   // todo: make it dynamic lie scheme dashboard
-  const IndicatorDesc = [
-    meta['Indicator 1 - Description'],
-    meta['Indicator 2 - Description'],
-    meta['Indicator 3 - Description'],
-    meta['Indicator 4 - Description'],
-    meta['Indicator 5 - Description'],
-  ];
+  // const IndicatorDesc = [
+  //   meta['Indicator 1 - Description'],
+  //   meta['Indicator 2 - Description'],
+  //   meta['Indicator 3 - Description'],
+  //   meta['Indicator 4 - Description'],
+  //   meta['Indicator 5 - Description'],
+  // ];
 
   const vizToggle = [
     {
@@ -103,56 +105,57 @@ const ExplorerViz = ({ data, meta, fileData }) => {
     {
       id: 'tableView',
       graph: (
-        <Table
-          headers={
-            indicatorFiltered[0]
-              ? Object.keys(indicatorFiltered[0])
-              : ['header1']
-          }
-          rows={indicatorFiltered.map(Object.values)}
-          caption="Table"
-          sortable
-        />
+        <></>
+        // <Table
+        //   headers={
+        //     fileDataTable[0]
+        //       ? Object.keys(fileDataTable[0])
+        //       : ['header1']
+        //   }
+        //   rows={fileDataTable.map(Object.values)}
+        //   caption="Table"
+        //   sortable
+        // />
       ),
     },
-    {
-      id: 'barGraph',
-      graph: (
-        <SimpleBarLineChartViz
-          color={'#00ABB7'}
-          dataset={barLineTransformer(finalFiltered, selectedIndicator)}
-          type="bar"
-          smooth={true}
-          showSymbol={true}
-          Title={
-            selectedIndicator +
-            (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
-          }
-          subTitle={data.title}
-          unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
-        />
-      ),
-      ref: barRef,
-    },
-    {
-      id: 'lineChart',
-      graph: (
-        <SimpleBarLineChartViz
-          color={'#00ABB7'}
-          dataset={barLineTransformer(finalFiltered, selectedIndicator)}
-          type="line"
-          smooth={true}
-          showSymbol={true}
-          Title={
-            selectedIndicator +
-            (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
-          }
-          subTitle={data.title}
-          unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
-        />
-      ),
-      ref: lineRef,
-    },
+    // {
+    //   id: 'barGraph',
+    //   graph: (
+    //     <SimpleBarLineChartViz
+    //       color={'#00ABB7'}
+    //       dataset={barLineTransformer(finalFiltered, selectedIndicator)}
+    //       type="bar"
+    //       smooth={true}
+    //       showSymbol={true}
+    //       Title={
+    //         selectedIndicator +
+    //         (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
+    //       }
+    //       subTitle={data.title}
+    //       unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
+    //     />
+    //   ),
+    //   ref: barRef,
+    // },
+    // {
+    //   id: 'lineChart',
+    //   graph: (
+    //     <SimpleBarLineChartViz
+    //       color={'#00ABB7'}
+    //       dataset={barLineTransformer(finalFiltered, selectedIndicator)}
+    //       type="line"
+    //       smooth={true}
+    //       showSymbol={true}
+    //       Title={
+    //         selectedIndicator +
+    //         (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
+    //       }
+    //       subTitle={data.title}
+    //       unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
+    //     />
+    //   ),
+    //   ref: lineRef,
+    // },
   ];
 
   useEffect(() => {
@@ -162,7 +165,7 @@ const ExplorerViz = ({ data, meta, fileData }) => {
     tabbedInterface(tablist, panels);
 
     handleNewVizData('Budget Estimates');
-  }, [fileData]);
+  }, [fileDataTable]);
 
   // Run whenever a new indicator is selected
   useEffect(() => {
@@ -186,7 +189,7 @@ const ExplorerViz = ({ data, meta, fileData }) => {
 
   function handleNewVizData(val: any) {
     if (val) {
-      const filtered = filter_data_indicator(fileData, val);
+      const filtered = filter_data_indicator(fileDataTable, val);
       const budgetType = [
         ...Array.from(new Set(filtered.map((item) => item.budgetType))),
       ];
@@ -209,19 +212,19 @@ const ExplorerViz = ({ data, meta, fileData }) => {
 
   return (
     <>
-      <div className="container">
+      {/* <div className="container">
         <IndicatorMobile
           indicators={data.indicators}
           newIndicator={handleNewVizData}
           meta={IndicatorDesc}
         />
-      </div>
+      </div> */}
       <Wrapper className="container">
-        <Indicator
+        {/* <Indicator
           data={data.indicators}
           meta={IndicatorDesc}
           newIndicator={handleNewVizData}
-        />
+        /> */}
         <VizWrapper>
           <VizHeader>
             <VizTabs className="viz__tabs">
@@ -303,9 +306,9 @@ const ExplorerViz = ({ data, meta, fileData }) => {
 export default ExplorerViz;
 
 export const Wrapper = styled.section`
-  display: grid;
+  /* display: grid;
   gap: 2rem;
-  grid-template-columns: 312px minmax(0, 1fr);
+  grid-template-columns: 312px minmax(0, 1fr); */
   margin-top: 2.5rem;
 
   h3 {
@@ -317,7 +320,7 @@ export const Wrapper = styled.section`
   }
 
   @media (max-width: 980px) {
-    display: block;
+    /* display: block; */
     margin-top: 1.5rem;
   }
 `;
