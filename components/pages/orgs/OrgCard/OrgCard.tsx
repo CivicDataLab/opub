@@ -13,6 +13,7 @@ const DatasetCard: React.FC<{ data: any }> = ({ data }) => {
     <Link href={`${router.pathname}/${data.name}`} passHref>
       <OrgCard>
         <section>
+          <Count>{data.package_count}</Count>
           <figure>
             <Image
               src={data.image_display_url || placeholder}
@@ -51,6 +52,7 @@ const OrgCard = styled.a`
   height: 100%;
   border-radius: 4px;
   background-color: var(--color-background-lighter);
+  position: relative;
 
   figure {
     margin: 0 auto;
@@ -65,3 +67,16 @@ const OrgCard = styled.a`
     margin-top: 8px;
   }
 `;
+
+const Count = styled.small`
+  background-color: var(--color-primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--text-dark-high);
+  font-weight: 600;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: -4px;
+
+`

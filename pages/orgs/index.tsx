@@ -18,6 +18,8 @@ const headerData = {
 };
 
 const Orgs: React.FC<Props> = ({ data }) => {
+  console.log(data);
+  
   return (
     <>
       <Head>
