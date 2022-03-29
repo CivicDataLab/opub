@@ -15,14 +15,16 @@ interface Props {
    * Options to display in the menu
    */
   options: {
-    value: string;
-    title: string;
+    id: string;
+    name: string;
   }[];
 
   /**
    * current value of menu, it will change on selection
    */
   value?: string;
+
+  showLabel?: boolean;
 
   /**
    * Heading for the menu
@@ -44,7 +46,7 @@ interface Props {
   /**
    * return prop
    */
-  handleChange?: (event: string) => void;
+  handleChange: (event: string) => void;
 }
 
 const MenuContentID = uuidv4();
@@ -57,6 +59,7 @@ const Menu = ({
   value,
   top = false,
   position = 'right',
+  showLabel = true,
   className,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -244,7 +247,7 @@ const Menu = ({
 
   return (
     <MenuComp className={className}>
-      {heading && value && (
+      {heading && value && showLabel && (
         <MenuLabel id={menuLabelID}>{heading}&nbsp;&nbsp;</MenuLabel>
       )}
       <Wrapper>
@@ -256,8 +259,10 @@ const Menu = ({
           ref={MenuButtonRef}
           onClick={menuButtonHandle}
         >
-          {value ? value : heading}
-          <ArrowDown fill="#6C666E" />
+          <span>{value ? value : heading}</span>
+          <div>
+            <ArrowDown fill="#6C666E" />
+          </div>
         </MenuButton>
         <MenuContent
           id={MenuContentID}
@@ -269,14 +274,14 @@ const Menu = ({
         >
           {options.length > 0 ? (
             options.map((item, index) => (
-              <MenuItem key={item.value} role="none">
+              <MenuItem key={`menuItem-${index}`} role="none">
                 <button
                   onClick={(e) => menuItemHandle(e)}
-                  data-value={item.value}
+                  data-value={item.id}
                   role="menuitem"
                   tabIndex={index == 0 ? 0 : -1}
                 >
-                  {item.title}
+                  {item.name}
                 </button>
               </MenuItem>
             ))

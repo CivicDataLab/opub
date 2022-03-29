@@ -1,3 +1,4 @@
+import { MenuComp } from 'components/actions/Menu/MenuComp';
 import styled from 'styled-components';
 
 export const PaginationComp = styled.div`
@@ -20,9 +21,22 @@ export const PaginationComp = styled.div`
     }
   }
 
+  @media (max-width: 620px) {
+    font-size: 0.9rem;
+  }
+
   @media (max-width: 370px) {
     display: flex;
     flex-wrap: wrap;
+    font-size: 0.8rem;
+  }
+
+  ${MenuComp} {
+    max-width: 150px;
+
+    > span {
+      color: var(--color-primary);
+    }
   }
 `;
 
@@ -49,12 +63,12 @@ export const PaginationJump = styled.div`
 `;
 
 export const ButtonsLabel = styled.span`
-  color: var(--text-light-light);
+  color: var(--text-light-medium);
   font-weight: normal;
   line-height: 140%;
 
   span {
-    font-weight: 500;
+    font-weight: 700;
 
     @media (max-width: 620px) {
       margin: 0 5px;

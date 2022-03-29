@@ -52,6 +52,7 @@ export const FilterHeading = styled.button`
     margin-left: 0.5em;
     transition: transform 150ms ease;
     fill: var(--color-grey-300);
+    pointer-events: none;
   }
 
   &[aria-expanded='true'] svg {

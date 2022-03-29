@@ -37,7 +37,7 @@ const Nav = ({ data }) => {
                     height={46}
                   ></Image>
                 ) : (
-                  <h1>{data.site || 'Opub'}</h1>
+                  <h1>{data.site || 'Constituency Dashboard'}</h1>
                 )}
               </a>
             </Link>
@@ -170,6 +170,12 @@ export const NavbarWrapper = styled.header`
       vertical-align: bottom;
     }
   }
+
+  h1 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
 `;
 
 const Navlinks = styled.nav`
@@ -198,6 +204,7 @@ const Navitem = styled.a`
   color: var(--text-dark-high);
   transition: background-color 200ms ease;
   width: max-content;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--nav-bg-hover);

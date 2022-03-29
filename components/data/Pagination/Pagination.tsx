@@ -11,16 +11,16 @@ import { ArrowDown } from 'components/icons';
 
 const paginationItems = [
   {
-    title: '10',
-    value: '10',
+    name: '10',
+    id: '10',
   },
   {
-    title: '20',
-    value: '20',
+    name: '20',
+    id: '20',
   },
   {
-    title: '50',
-    value: '50',
+    name: '50',
+    id: '50',
   },
 ];
 
@@ -32,14 +32,14 @@ const Pagination: React.FC<{ total: number; newPage: any }> = ({
   const [current, setCurrent] = React.useState(1);
   const [page, setPage] = React.useState(1);
   const [resultSize, setResultSize] = React.useState('10');
-  const [maxPage, SetMaxPage] = React.useState(1);
+  const [maxPage, SetMaxPage] = React.useState(0);
 
   React.useEffect(() => {
     const from = router.query.from ? router.query.from : '0';
     const size = router.query.size ? router.query.size : '10';
-    SetMaxPage(Math.floor(total / parseInt(size as string)) + 1);
-
-    setResultSize(size as string);
+    SetMaxPage(Math.floor((total - 1) / parseInt(size as string)) + 1);
+    
+    setResultSize(size as string);    
 
     const pageNo = Math.floor(
       parseInt(from as string) / parseInt(size as string) + 1
@@ -48,7 +48,14 @@ const Pagination: React.FC<{ total: number; newPage: any }> = ({
       String(pageNo);
 
     setPage(pageNo);
-  }, [router.query.from, router.query.size, total]);
+  }, [router.query.from, page, resultSize, total]);
+
+  React.useEffect(() => {
+    const size = router.query.size ? router.query.size : '10';
+    setResultSize(size as string);
+    fetchNewResults(0, 'from');
+    setPage(1);
+  }, [router.query.size]);
 
   function fetchNewResults(val: any, type: string) {
     newPage({
@@ -123,7 +130,7 @@ const Pagination: React.FC<{ total: number; newPage: any }> = ({
           >
             Previous Page
           </Button>
-           <Button
+          <Button
             onClick={() => handleButton(1)}
             className="pagination__next"
             icon={<ArrowDown />}

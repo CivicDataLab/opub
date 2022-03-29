@@ -15,20 +15,24 @@ import { simplifyNaming } from 'utils/helper';
 
 const sort = [
   {
-    id: 'tender_bid_opening_date:asc',
-    name: 'Date',
-  },
-  {
-    id: 'tender_value_amount:asc',
-    name: 'Tender Value',
-  },
-  {
-    id: 'organization.title:desc',
-    name: 'Departments',
-  },
-  {
-    id: 'score:desc',
+    id: 'score:desc metadata_modified:desc',
     name: 'Relevance',
+  },
+  {
+    id: 'title_string:asc',
+    name: 'Name Ascending',
+  },
+  {
+    id: 'title_string:desc',
+    name: 'Name Descending',
+  },
+  {
+    id: 'metadata_modified:desc',
+    name: 'Last Modified',
+  },
+  {
+    id: 'views_recent:desc',
+    name: 'Popular',
   },
 ];
 
@@ -55,12 +59,8 @@ const MobileAlter: React.FC<{
   const router = useRouter();
   const [sortIsOpen, setSortIsOpen] = useState(false);
   const [filterIsOpen, setFilterIsOpen] = useState(false);
-  const [currentSort, setCurrentSort] = useState(
-    router.query.sort ? router.query.sort : 'tender_bid_opening_date:asc'
-  );
-  const [selectedSort, setSelectedSort] = useState(
-    router.query.sort ? router.query.sort : 'tender_bid_opening_date:asc'
-  );
+  const [currentSort, setCurrentSort] = useState(router.query.sort);
+  const [selectedSort, setSelectedSort] = useState(router.query.sort);
 
   function checkInput(selected) {
     const filterElement = document.getElementById(

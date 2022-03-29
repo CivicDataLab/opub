@@ -28,15 +28,15 @@ export const fetchDatasets = async (variables) => {
   return data;
 };
 
-export async function fetchFilters(list, variable, page) {
+export async function fetchFilters(list, variable) {
   try {
     // if filters and searc found in url, also use those
-    // const queryVars = `fq=${variable.fq ? `type:${page}` : `type:${page}`}&q=${
-    //   variable.q ? variable.q : ''
-    // }`;
+    const queryVars = `fq=${variable.fq ? variable.fq : ''}&q=${
+      variable.q ? variable.q : ''
+    }`;
 
     const fetchData = await fetch(
-      `${process.env.CKAN_URL}/package_search?facet.field=[${list}]&fq=(tags:scheme-category AND groups:budgets-for-justice)`
+      `${process.env.CKAN_URL}/package_search?facet.field=[${list}]&${queryVars}`
     ).then((res) => res.json());
     return fetchData.result.search_facets;
   } catch (error) {

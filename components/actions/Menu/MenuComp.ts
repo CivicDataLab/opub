@@ -20,12 +20,13 @@ export const MenuComp = styled.div`
 export const MenuLabel = styled.span`
   font-weight: var(--font-weight-medium);
   color: var(--text-light-light);
-  font-size: 14px;
+  min-width: fit-content;
 `;
 
 export const Wrapper = styled.div`
   position: relative;
   height: 100%;
+  width: 100%;
 `;
 
 export const MenuButton = styled.button`
@@ -33,13 +34,31 @@ export const MenuButton = styled.button`
   border: var(--border-1);
   border-radius: 4px;
   box-shadow: var(--box-shadow-inset);
-  padding: 4px 12px;
-  display: flex;
-  align-items: center;
-  line-height: 137%;
+  padding: 8px 12px;
+  line-height: 1.5;
+  position: relative;
+  text-align: start;
+  width: 100%;
+
+  > span {
+    width: 97%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+  }
+
+  > div {
+    background-color: var(--color-background-lighter);
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 0;
+  }
 
   svg {
-    margin-left: 17px;
     transition: transform 150ms ease;
   }
 
