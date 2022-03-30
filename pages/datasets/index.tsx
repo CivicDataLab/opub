@@ -84,7 +84,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
   return (
     <>
       <Head>
-        <title>HAQ | Datasets</title>
+        <title>Datasets | NDP</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header data={headerData} />
