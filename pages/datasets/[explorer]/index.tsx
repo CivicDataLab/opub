@@ -28,7 +28,7 @@ const Explorer: React.FC<Props> = ({
   return (
     <>
       <Head>
-        <title>OPub | Explorer</title>
+        <title>Explorer | NDP</title>
       </Head>
       <Wrapper>
         <ExplorerHeader data={data} />

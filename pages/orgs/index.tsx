@@ -21,7 +21,7 @@ const Orgs: React.FC<Props> = ({ data }) => {
   return (
     <>
       <Head>
-        <title>Organizations | OPub</title>
+        <title>Organizations | NDP</title>
       </Head>
       <Header data={headerData} />
 

@@ -22,7 +22,7 @@ const Explorer: React.FC<Props> = ({ data, fileDataTable, fileData }) => {
   return (
     <>
       <Head>
-        <title>OPub | Explorer</title>
+        <title>Explorer | NDP</title>
       </Head>
       <Wrapper>
         <ExplorerHeader data={data} />

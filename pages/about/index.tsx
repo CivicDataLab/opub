@@ -86,7 +86,7 @@ const About = () => {
   return (
     <div>
       <Head>
-        <title>About Us | OPub</title>
+        <title>About | NDP</title>
       </Head>
       <Header data={headerData} />
       <AboutPage>
