@@ -103,6 +103,7 @@ const MobileNav = ({ data }) => {
                           </ul>
                         )}
                       </SubMenu>
+                     
                     </>
                   ) : (
                     <MenuItem
@@ -116,10 +117,14 @@ const MobileNav = ({ data }) => {
                     >
                       {navItem.name}
                     </MenuItem>
+                    
                   )}
                 </li>
               ))}
+            <MenuItem 
+                    href='/optimus'><li>Optimus</li></MenuItem>    
           </ul>
+          
         </MobileNavWrapper>
       </Modal>
     </>

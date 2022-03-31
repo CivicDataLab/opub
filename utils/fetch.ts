@@ -1,3 +1,14 @@
+export const fetchTransformersList = async () => {
+  
+  const response = await fetch(
+    "http://13.233.49.245/transformer/trans_list"
+    );
+  const data = await response.json();
+  console.log(data)
+  return data;
+};
+
+
 export const fetchDatasets = async (variables) => {
   function changeKeyName(key) {
     if (key == 'size') return 'rows';
