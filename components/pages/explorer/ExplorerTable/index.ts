@@ -1,1 +1,1 @@
-export { default } from './Explorertable';
+export { default } from './ExplorerTable'
