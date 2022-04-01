@@ -23,10 +23,12 @@ const SimpleBarLineChartViz = dynamic(
   () => import('components/viz/SimpleBarLineChart'),
   { ssr: false, loading: () => <p>...</p> }
 );
+const ExplorerTable = dynamic(
+  () => import('../ExplorerTable'),
+  { ssr: false, loading: () => <p>Table is loading...</p> }
+);
 
-const ExplorerViz = ({ data, fileDataTable, vizData }) => {
-  console.log(data);
-
+const ExplorerViz = ({ data, vizData, resUrl }) => {
   const [selectedIndicator, setSelectedIndicator] =
     useState('Budget Estimates');
   const [indicatorFiltered, setIndicatorFiltered] = useState([]);
@@ -45,15 +47,11 @@ const ExplorerViz = ({ data, fileDataTable, vizData }) => {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
-
-  // todo: make it dynamic lie scheme dashboard
-  // const IndicatorDesc = [
-  //   meta['Indicator 1 - Description'],
-  //   meta['Indicator 2 - Description'],
-  //   meta['Indicator 3 - Description'],
-  //   meta['Indicator 4 - Description'],
-  //   meta['Indicator 5 - Description'],
-  // ];
+  const crData = [
+    'Budget Estimates',
+    'Revised Estimates',
+    'Actual Expenditure',
+  ];
 
   const vizToggle = [
     {
@@ -103,25 +101,12 @@ const ExplorerViz = ({ data, fileDataTable, vizData }) => {
     },
   ];
 
-  const crData = [
-    'Budget Estimates',
-    'Revised Estimates',
-    'Actual Expenditure',
-  ];
-
   const vizItems = [
     {
       id: 'tableView',
       graph:
-        Object.keys(fileDataTable).length !== 0 ? (
-          <Table
-            headers={
-              fileDataTable[0] ? Object.keys(fileDataTable[0]) : ['header1']
-            }
-            rows={fileDataTable.map(Object.values)}
-            caption="Table"
-            sortable
-          />
+      resUrl.length !== 0 ? (
+          <ExplorerTable resUrl={resUrl} />
         ) : (
           <Document
             file={{ url: data.resUrls['PDF'] }}
@@ -178,7 +163,7 @@ const ExplorerViz = ({ data, fileDataTable, vizData }) => {
     tabbedInterface(tablist, panels);
 
     // handleNewVizData('Budget Estimates');
-  }, [fileDataTable]);
+  }, [resUrl]);
 
   // Run whenever a new indicator is selected
   useEffect(() => {
@@ -198,23 +183,6 @@ const ExplorerViz = ({ data, fileDataTable, vizData }) => {
     setCurrentViz(e.target.getAttribute('href'));
     if (e.target.getAttribute('href') == '#tableView') setIsTable(true);
     else setIsTable(false);
-  }
-
-  function handleNewVizData(val: any) {
-    if (val) {
-      const filtered = filter_data_indicator(fileDataTable, val);
-      const budgetType = [
-        ...Array.from(new Set(filtered.map((item) => item.budgetType))),
-      ];
-
-      const budgetTypeArray = budgetType.map((item) => {
-        return { name: item, id: item };
-      });
-
-      setSelectedIndicator(val);
-      setIndicatorFiltered(filtered);
-      setBudgetTypes(budgetTypeArray);
-    }
   }
 
   function handleDropdownChange(val: any) {
