@@ -67,6 +67,12 @@ input {
 	border-radius: 4px;
 }
 
+.view{
+	margin-bottom: 1rem;
+    overflow-y: auto;
+}
+
+
 select {
 	font-size: 1rem;
 	line-height: 1.5;

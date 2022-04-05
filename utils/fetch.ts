@@ -8,6 +8,16 @@ export const fetchTransformersList = async () => {
   return data;
 };
 
+export const fetchpipelineList = async () => {
+  
+  const response = await fetch(
+    "http://13.233.49.245/transformer/pipe_list"
+    );
+  const data = await response.json();
+  console.log(data)
+  return data;
+};
+
 
 export const fetchDatasets = async (variables) => {
   function changeKeyName(key) {

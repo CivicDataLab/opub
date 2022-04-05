@@ -76,8 +76,12 @@ table {
 
 	tr:first-of-type th:not(:last-child) {
 		border-right-color: #fff;
+		
+		
 	}
-
+	tr:not(:first-of-type) td:last-child{
+		display: revert;
+	}
 	caption {
 		margin-bottom: 0.5rem;
 		font-style: italic;
