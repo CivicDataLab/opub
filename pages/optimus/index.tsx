@@ -1,4 +1,3 @@
-import React from "react";
 import Head from 'next/head'
 import Image from 'next/image'
 import OptPage from "./OptPage";
@@ -13,11 +12,12 @@ type Props = {
 	transformerslist: any;
   };
  
-const Pipeline: React.FC<Props> = ({ transformerslist }) => {
+const transformer: React.FC<Props> = ({ transformerslist }) => {
 	console.log(transformerslist)
-	const [transformList, SetTransform] = useState(["pipeline__transformation"]);
+	const [transformList, SetTransform] = useState([{"selected_transformer": "pipeline__transformation"}]);
+	
 	const handleServiceAdd = () => {
-		SetTransform([...transformList, "pipeline__transformation"]);
+		SetTransform([...transformList, {"selected_transformer": "pipeline__transformation"}]);
 	};
 
 	const handleServiceRemove = (index) => {
@@ -27,7 +27,25 @@ const Pipeline: React.FC<Props> = ({ transformerslist }) => {
 	};
 
 	const transformers = transformerslist.result;
-		
+	
+	const handletransformerselect =(value,index) =>{
+      console.log("abc",index,value);
+	  console.log(transformList);
+	 	  // 1. Make a shallow copy of the items
+	    
+	  let items = [...transformList];
+		// 2. Make a shallow copy of the item you want to mutate
+	  let item = {...items[index]};
+		// 3. Replace the property you're intested in
+	  item.selected_transformer = value;
+		// 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+	  items[index] = item;
+		// 5. Set the state to our new copy
+	  SetTransform(items);
+	  console.log(transformList);
+
+	};
+	
 	
 	function humanize(str) {
 		var i,
@@ -37,6 +55,8 @@ const Pipeline: React.FC<Props> = ({ transformerslist }) => {
 		}
 		return frags.join(' ')
 	}
+	 
+
 	
 	return (
     <div>
@@ -61,7 +81,7 @@ const Pipeline: React.FC<Props> = ({ transformerslist }) => {
 								</ul>
 					     </nav>
 
-					<form className="wrapper pipeline" id="main">
+				<form className="wrapper pipeline" id="main">
 								<label htmlFor="pipeline-name" className="pipeline__source pipeline__name">
 									<span>Name</span>
 									<input type="text" id="pipeline-name" required />
@@ -76,37 +96,44 @@ const Pipeline: React.FC<Props> = ({ transformerslist }) => {
 								<span className="pipeline__title">Transformation Pipeline</span>
 
 
-	  {transformList.map((singleTransform,index) => (
-
-		<div key={index} className="pipeline__transformation">
-			<div className="transform">
-				<div className="transform__item">
-					<button className="transform__remove" 
-							onClick={() => handleServiceRemove(index+1)}>&#10005;</button>
-								
-							<label htmlFor="transform_1" className="transform__selector">
-									<select name="transform_1" id="transform_1">
-									<option value=""  hidden>Select Transformer</option>
-								    {transformers.map((transformer,index) => (
-									<option value={transformer.name} key={index} >{humanize(transformer.name)}</option>
-									))}
-																				
-									</select>
-							</label>
 						
-
-							{(transformers.filter(x => x.name == "skip_column"))[0].context.map((input,index) => (
-							  	<input type={input.type} key={index} name={input.name} placeholder={input.desc} required/>
-							))}						
-
-						<div id="transform_data_1" className="transform__data"></div>
-						{transformList.length -1 === index && 
-						<button className="transform__new" onClick={handleServiceAdd}>
-							Add Step</button>}
-				</div>
-			</div>
-		</div>
-		))}
+							<div className="view">
+							<div  className="pipeline__transformation">
+								<div className="transform">
+								{transformList.map((singleTransform,index) => (
+									<div key={index} className="transform__item">
+										<button className="transform__remove" 
+												onClick={() => handleServiceRemove(index)}>&#10005;</button>
+													
+												<label htmlFor="transform_1" className="transform__selector">
+														<select name="transform_1" id="transform_1"  value={transformList[index].selected_transformer} 
+            											  onChange={(e) => handletransformerselect(e.target.value,index)}>
+														<option value=""  hidden >Select Transformer</option>
+														{transformers.map((transformer,index) => (
+														<option value={transformer.name} key={index} >{humanize(transformer.name)}</option>
+														))}
+																									
+														</select>
+														
+												</label>
+											
+											<div id="transform_data_1" className="transform__data">
+											{(transformers.filter(x => x.name == transformList[index].selected_transformer )).length > 0 &&
+											 (transformers.filter(x => x.name == transformList[index].selected_transformer ))[0].context.map((input,index) => (
+													<input type={input.type} key={index} name={input.name} placeholder={input.desc} required/>
+												))}	
+												
+											</div>
+											
+											{transformList.length -1 === index && 
+											<button className="transform__new" onClick={handleServiceAdd}>
+												Add Step</button>}
+									</div>
+										))}
+								</div>
+							</div>
+							</div>
+						
 
 							<button type="submit" className="pipeline__submit">Submit</button>
 		
@@ -127,8 +154,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	 },
 	};
   };
-export default Pipeline;
+export default transformer;
 
+
+function props(props: any) {
+	throw new Error("Function not implemented.");
+}
 /*export async function getServerSideProps() {
 	// Fetch data from external API
 	const res = await fetch(`http://13.233.49.245`)
