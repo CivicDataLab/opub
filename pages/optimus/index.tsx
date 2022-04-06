@@ -29,8 +29,8 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 	const transformers = transformerslist.result;
 	
 	const handletransformerselect =(value,index) =>{
-      console.log("abc",index,value);
-	  console.log(transformList);
+     // console.log("abc",index,value);
+	 // console.log(transformList);
 	 	  // 1. Make a shallow copy of the items
 	    
 	  let items = [...transformList];
@@ -42,11 +42,43 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 	  items[index] = item;
 		// 5. Set the state to our new copy
 	  SetTransform(items);
-	  console.log(transformList);
-
+	 // console.log(transformList);
+	// for creating final data
+	 finalData.transformers_list[index] = {"name":value,"order_no":index+1}
+	 console.log(finalData)
+	 console.log(index)
 	};
 	
+	//const url = "http://13.233.49.245/transformer/pipe_create"
+
+	let finalData= {
+		data_url: '',
+		name: '',
+		transformers_list: []
+	}
+    
 	
+	function handle(e){
+		const newdata ={...finalData}
+		newdata[e.target.id] = e.target.value
+		 finalData=newdata
+		console.log(newdata)
+	}
+
+	
+
+
+   /* function submit(e) {
+		e.preventDefault();
+		Axios.post(url,{
+			name: finalData.name,
+			------------
+		})
+		 .then(res =>{
+			 console.log(res.data)
+		 })
+	}*/
+
 	function humanize(str) {
 		var i,
 			frags = str.split('_')
@@ -56,7 +88,7 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 		return frags.join(' ')
 	}
 	 
-
+   
 	
 	return (
     <div>
@@ -84,12 +116,12 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 				<form className="wrapper pipeline" id="main">
 								<label htmlFor="pipeline-name" className="pipeline__source pipeline__name">
 									<span>Name</span>
-									<input type="text" id="pipeline-name" required />
+									<input onChange={(e) => handle(e)}  type="text" id="name" required />
 								</label>
 					
-								<label htmlFor="source" className="pipeline__source">
-									<span>Source URL</span>
-									<input type="url" id="source" required autoComplete="off" />
+								<label htmlFor="source" className="pipeline__source" >
+									<span >Source URL</span>
+									<input  onChange={(e) => handle(e)}  type="url" id="data_url" required autoComplete="off" />
 									<span className="pipeline__status"></span>
 								</label>
 								
@@ -106,9 +138,9 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 												onClick={() => handleServiceRemove(index)}>&#10005;</button>
 													
 												<label htmlFor="transform_1" className="transform__selector">
-														<select name="transform_1" id="transform_1"  value={transformList[index].selected_transformer} 
+														<select name="transform_1" id="transform_1"  value={transformList[index].selected_transformer}      
             											  onChange={(e) => handletransformerselect(e.target.value,index)}>
-														<option value=""  hidden >Select Transformer</option>
+														<option value="" hidden  >Select Transformer</option>
 														{transformers.map((transformer,index) => (
 														<option value={transformer.name} key={index} >{humanize(transformer.name)}</option>
 														))}
@@ -120,7 +152,7 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 											<div id="transform_data_1" className="transform__data">
 											{(transformers.filter(x => x.name == transformList[index].selected_transformer )).length > 0 &&
 											 (transformers.filter(x => x.name == transformList[index].selected_transformer ))[0].context.map((input,index) => (
-													<input type={input.type} key={index} name={input.name} placeholder={input.desc} required/>
+													<input  type={input.type} key={index} name={input.name} placeholder={input.desc} required/>
 												))}	
 												
 											</div>
