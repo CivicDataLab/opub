@@ -66,7 +66,7 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 	  let item = {...items[index]};
 
 		// 3. Replace the property you're intested in
-	  item.context = {...item.context, [e.target.id]:(e.target.value.split(',').length > 1 ? e.target.value.split(',') : e.target.value)};
+	  item.context = {...item.context, [e.target.id]:(item.name == 'skip_column' ? e.target.value.split(',') : e.target.value)};
 
 		// 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
 	  items[index] = item;
