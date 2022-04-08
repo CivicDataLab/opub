@@ -3,16 +3,15 @@ import Image from 'next/image'
 import OptPage from "./OptPage";
 import { useState, useRef } from "react";
 import { GetServerSideProps } from 'next';
-import {
-	fetchTransformersList,
-  } from 'utils/fetch';
+import {fetchTransformersList} from 'utils/fetch';
 
-type Props = {
-	variables: any;
-	transformerslist: any;
-  };
- 
-const transformer: React.FC<Props> = ({ transformerslist }) => {
+
+	type Props = {
+		variables: any;
+		transformerslist: any;
+	};
+	
+	const transformer: React.FC<Props> = ({ transformerslist }) => {
 	// console.log(transformerslist)
 	const [transformList, SetTransform] = useState([{"name": "pipeline__transformation"}]);
 
@@ -36,30 +35,27 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 	};
 
 	
-	const handletransformerselect =(value,index) =>{
-
-	  // 1. Make a shallow copy of the items
-	    
-	  let items = [...transformList];
-		// 2. Make a shallow copy of the item you want to mutate
-	  let item = {...items[index]};
-		// 3. Replace the property you're intested in
-	  item.name = value;
-          item.order_no = index+1;
-		// 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-	  items[index] = item;
-		// 5. Set the state to our new copy
-	  SetTransform(items);
-	  //console.log(transformList);
+	const handletransformerselect =(value,index) =>
+	{
+			// 1. Make a shallow copy of the items
+		let items = [...transformList];
+			// 2. Make a shallow copy of the item you want to mutate
+		let item = {...items[index]};
+			// 3. Replace the property you're intested in
+		item.name = value;
+		item.order_no = index+1;
+			// 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+		items[index] = item;
+			// 5. Set the state to our new copy
+		SetTransform(items);
+			//console.log(transformList);
 	};
 	
 	const post_url = "http://13.233.49.245"
 
-    
-
-	const handletransformerfill =(e,index) =>{
-
-	  // 1. Make a shallow copy of the item
+	const handletransformerfill =(e,index) =>
+	{
+		// 1. Make a shallow copy of the item
 	  let items = [...transformList];
 
 		// 2. Make a shallow copy of the item you want to mutate
@@ -77,24 +73,24 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 	  // console.log(transformList);
 	};
 
-       const handleSubmit = () => {
-           const form = nameForm.current;
-	   let postData= {
-			data_url: `${form['data_url'].value}`,
-			name:  `${form['name'].value}`,
-			transformers_list: []
-	   } 
-           console.log(postData);
-           console.log(transformList);
-           postData.transformers_list = transformList;
-           console.log(postData);
+    const handleSubmit = () => {
+		const form = nameForm.current;
+			let postData= {
+				data_url: `${form['data_url'].value}`,
+				name:  `${form['name'].value}`,
+				transformers_list: []
+			} 
+			console.log(postData);
+			console.log(transformList);
+			postData.transformers_list = transformList;
+			console.log(postData);
 
-		if (postData.transformers_list[0].name == 'pipeline__transformation') {
-			alert('Select atleast 1 transformer')
-		} else {
-			submitData(`${post_url}/transformer/pipe_create`, postData)
-		}
-       };
+			if (postData.transformers_list[0].name == 'pipeline__transformation') {
+				alert('Select atleast 1 transformer')
+			} else {
+				submitData(`${post_url}/transformer/pipe_create`, postData)
+			}
+    };
 
 	// post data to server
 	async function submitData(url, data) {
@@ -104,7 +100,7 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(data),
-		}).then((res) => {
+		    }).then((res) => {
 			if (res.status == 200) {
 				alert('Pipeline Created')
 			} else {
@@ -114,7 +110,7 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 	};
 
 
-      function humanize(str) {
+	function humanize(str) {
 		var i,
 			frags = str.split('_')
 		for (i = 0; i < frags.length; i++) {
@@ -122,8 +118,27 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 		}
 		return frags.join(' ')
 	}
-	 
-   
+	
+	
+  
+		const [errorMessage, setErrorMessage] = useState('')
+		  
+		const validate = (value) => {
+			//only for http,https
+			let Regex =/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+			//for http,https& www
+			// /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
+		    const ver=Regex.test(value)
+		if (ver) {
+			setErrorMessage('Success')
+		  } else {
+			setErrorMessage('Fail')
+		  }
+		}
+	
+
+ 
+  
 	
 	return (
     <div>
@@ -134,21 +149,15 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 					
 		<OptPage>
 				<div className="colo">
-					
-					<Image
-					src='/assets/images/cdl_logo.png'
-						alt="cdl"
-						width={100}
-						height={120}	/>
 
-					       <nav className="navbar">
-								<ul>
-									<li><a href='/optimus' className="active">Add New</a></li>
-									<li><a href='/optimus/history'>Pipelines</a></li>
-								</ul>
-					     </nav>
+					<nav className="navbar">
+						<ul>
+							<li><a href='/optimus' className="active">Add New</a></li>
+							<li><a href='/optimus/history'>Pipelines</a></li>
+						</ul>
+					</nav>
 
-				<form className="wrapper pipeline" id="main" ref={nameForm} onSubmit="event.preventDefault();">
+				    <form className="wrapper pipeline" id="main" ref={nameForm} >
 								<label htmlFor="pipeline-name" className="pipeline__source pipeline__name">
 									<span>Name</span>
 									<input type="text" id="name" name="name" required />
@@ -156,56 +165,53 @@ const transformer: React.FC<Props> = ({ transformerslist }) => {
 					
 								<label htmlFor="source" className="pipeline__source" >
 									<span >Source URL</span>
-									<input type="url" id="data_url" name="data_url" required autoComplete="off" />
+									<input type="url" id="data_url" name="data_url" onChange={(e) => validate(e.target.value)} 
+									required autoComplete="off" />
+									<p className={`status__${errorMessage}`}>{errorMessage}</p>
 									<span className="pipeline__status"></span>
 								</label>
 								
 								<span className="pipeline__title">Transformation Pipeline</span>
-
-
-						
+							
 							<div className="view">
-							<div  className="pipeline__transformation">
-								<div className="transform">
-								{transformList.map((singleTransform,index) => (
-									<div key={index} className="transform__item">
-										<button className="transform__remove" 
-												onClick={() => handleServiceRemove(index)}>&#10005;</button>
-													
-												<label htmlFor="transform_1" className="transform__selector">
-														<select name="transform_1" id="transform_1"  value={transformList[index].name}      
-            											  onChange={(e) => handletransformerselect(e.target.value,index)}>
-														<option value="" hidden  >Select Transformer</option>
-														{transformers.map((transformer,index) => (
-														<option value={transformer.name} key={index} >{humanize(transformer.name)}</option>
-														))}
-																									
-														</select>
+								<div  className="pipeline__transformation">
+									<div className="transform">
+									 {transformList.map((singleTransform,index) => (
+										<div key={index} className="transform__item">
+											<button className="transform__remove" 
+													onClick={() => handleServiceRemove(index+1)}>&#10005;</button>
 														
-												</label>
-											
-											<div id="transform_data_1" className="transform__data">
-											{(transformers.filter(x => x.name == transformList[index].name )).length > 0 &&
-											 (transformers.filter(x => x.name == transformList[index].name ))[0].context.map((input,index1) => (
-													<input  onChange={(e) => handletransformerfill(e, index)} id={input.name} type={input.type} key={index1} name={input.name} placeholder={input.desc} required/>
-												))}	
+													<label htmlFor="transform_1" className="transform__selector">
+														<select name="transform_1" id="transform_1"  value={transformList[index].name}      
+															onChange={(e) => handletransformerselect(e.target.value,index)}>
+															<option value="" hidden  >Select Transformer</option>
+															{transformers.map((transformer,index) => (
+															<option value={transformer.name} key={index} >{humanize(transformer.name)}</option>
+															))}
+														
+														</select>
+
+													</label>
 												
-											</div>
-											
-											{transformList.length -1 === index && 
-											<button className="transform__new" onClick={handleServiceAdd}>
-												Add Step</button>}
+												<div id="transform_data_1" className="transform__data">
+													{(transformers.filter(x => x.name == transformList[index].name )).length > 0 &&
+													(transformers.filter(x => x.name == transformList[index].name ))[0].context.map((input,index1) => (
+															<input  onChange={(e) => handletransformerfill(e, index)} id={input.name} type={input.type} key={index1} name={input.name} placeholder={input.desc} required/>
+													))}	
+													
+												</div>
+												
+												{transformList.length -1 === index && 
+												<button className="transform__new" onClick={handleServiceAdd}>
+													Add Step</button>}
+										</div>
+									  ))}
 									</div>
-										))}
 								</div>
 							</div>
-							</div>
-						
+						  <button type="button" className="pipeline__submit" onClick={() => handleSubmit()}>Submit</button>
+					</form>	
 
-							<button type="submit" className="pipeline__submit" onClick={() => handleSubmit()}>Submit</button>
-		
-					</form>				
-						
 				</div>
 		</OptPage>
     </div>
@@ -227,14 +233,6 @@ export default transformer;
 function props(props: any) {
 	throw new Error("Function not implemented.");
 }
-/*export async function getServerSideProps() {
-	// Fetch data from external API
-	const res = await fetch(`http://13.233.49.245`)
-	const data = await res.json()
-  
-	// Pass data to the page via props
-	
-	return { props: { data } }
-  }*/
-  
-    
+function data_url(data_url: any): import("react").FormEventHandler<HTMLInputElement> {
+	throw new Error('Function not implemented.');
+}

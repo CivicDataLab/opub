@@ -4,19 +4,16 @@ import Image from 'next/image'
 import HistPage from "./Histpage";
 import OptPage from "../OptPage";
 import {useEffect} from "react";
-
-import {
-	fetchpipelineList,
-  } from 'utils/fetch';
-  import { GetServerSideProps } from 'next';
-  import dateFormat, { masks } from "dateformat";
+import {fetchpipelineList} from 'utils/fetch';
+import { GetServerSideProps } from 'next';
+import dateFormat, { masks } from "dateformat";
  
 
-  type Props = {
+	type Props = {
 	variables: any;
 	pipelinelist: any;
-  };
- 
+	};
+
 	const pipeline: React.FC<Props> = ({ pipelinelist }) => {
 	console.log(pipelinelist)
 
@@ -33,6 +30,10 @@ import {
 		
 	}
 
+	function addClass(status) {
+		if (status.includes('Failed')) return 'failed'
+		else return status.toLowerCase().replace(/ /g, '')
+	}
 
 	
 
@@ -44,24 +45,16 @@ import {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <OptPage>
-				<HistPage>
+			<HistPage>
 				<div className="colo">
-					
-					<Image
-					src='/assets/images/cdl_logo.png'
-						alt="cdl"
-						width={100}
-						height={120}
-					/>
+						<nav className="navbar">
+									<ul>
+										<li><a href='/optimus' >Add New</a></li>
+										<li><a href='/optimus/history' className="active">Pipelines</a></li>
+									</ul>
+						</nav>
 
-					<nav className="navbar">
-								<ul>
-									<li><a href='/optimus' >Add New</a></li>
-									<li><a href='/optimus/history' className="active">Pipelines</a></li>
-								</ul>
-							</nav>
-
-							<div className="wrapper pipeline" id="main">
+						<div className="wrapper pipeline" id="main">
 								<span className="pipeline__title">Pipeline History</span>
 								<div
 									className="pipeline__history"
@@ -81,47 +74,45 @@ import {
 											<th>Status</th>
 											<th>Output</th>
                                        	</tr>
-										  	{Object.keys(Pipelines).map((key,Index) =>(
-												<tr>
-													<td>
-														<span>{dateFormat(Pipelines[key]["date"],"longDate",true)}</span>
-													</td>
-													<td>
-														<span >{humanize(Pipelines[key]["name"])}</span>
-													</td>
-													<td>
-														<span className="transform__done">{Pipelines[key]["pipeline"].map((value,index)=>(
-														    <p>
-																{humanize(value["name"])}
-																</p>
-														))}</span>
-													</td>
-													<td>
-														<span className="pipeline__Done">{Pipelines[key]["status"]}</span>
-													</td>
-													<td>
-														{Pipelines[key]["pipeline"].map((value,index)=>(
-															<a href={humanize(value["result"])} target='_blank' rel="noopener">
-															    <p>
+										   {Object.keys(Pipelines).map((key,Index) =>(
+													<tr>
+														<td>
+															<span>{dateFormat(Pipelines[key]["date"],"longDate",true)}</span>
+														</td>
+														<td>
+															<span >{humanize(Pipelines[key]["name"])}</span>
+														</td>
+														<td>
+															<span className={ `transform__${addClass(Pipelines[key]['status'])}`}>{Pipelines[key]["pipeline"].map((value,index)=>(
+																<p>
 																	{humanize(value["name"])}
-																</p>
-															</a>
-														))}
-													</td>
-												</tr>
-												
-											// use keyName to get current key's name
+																	</p>
+															))}</span>
+														</td>
+														<td>
+															<span className={ `pipeline__${addClass(Pipelines[key]['status'])}`}>{Pipelines[key]["status"]}</span>
+														</td>
+														<td>
+															{Pipelines[key]["pipeline"].map((value,index)=>(
+																<a href={humanize(value["result"])} target='_blank' rel="noopener">
+																	<p>
+																		{humanize(value["name"])}
+																	</p>
+																</a>
+															))}
+														</td>
+													</tr>
+												// use keyName to get current key's name
 												// and a[keyName] to get its value
 											  ))}
 										</tbody>
 									</table>
-								</div>
 							</div>
-							
 						</div>
-				</HistPage>
- 			</OptPage>
-    </div>
+					</div>
+			</HistPage>
+ 		</OptPage>
+   	 </div>
   )
 }
 
