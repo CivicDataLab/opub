@@ -1,13 +1,18 @@
+
+
 import styled from 'styled-components';
 import OptPage from '../OptPage';
 
 
 const HistPage = styled.main`
 .pipeline {
-	&__Done {
+	&__done {
 		color: green;
 	}
-
+	&__inprogress {
+		color: red;
+		
+	}
 	&__started {
 		color: rgb(118, 163, 28);
 	}
@@ -33,10 +38,8 @@ const HistPage = styled.main`
 	}
 
 	&__inprogress {
-		color: rgb(118, 163, 28);
-		border: 2px solid rgb(118, 163, 28);
-		border-radius: 4px;
-		padding: 4px;
+		color: red;
+				
 	}
 }
 
@@ -92,3 +95,4 @@ table {
 `;
 
 export default HistPage;
+

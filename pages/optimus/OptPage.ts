@@ -7,6 +7,16 @@ const OptPage = styled.main`
   width: 90%;
   hieght: 100%;
 }
+.status {
+	&__Success {
+		color: green;
+	}
+
+	&__Fail {
+		color: red;
+				
+	}
+}
 :root {
 	font-size: calc(1rem+0.5vw);
 	margin: 1rem;
@@ -135,12 +145,12 @@ select {
 		transition: background 100ms ease-in-out;
 
 		&:hover {
-			background-color: #71a8ec;
+			background-color: #222222;
 		}
 	}
 
 	.active {
-		background-color: #0069ed;
+		background-color:var(--nav-bg);
 	}
 }
 
@@ -276,3 +286,7 @@ select {
 `;
 
 export default OptPage;
+
+
+
+
