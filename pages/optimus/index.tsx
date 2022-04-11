@@ -18,6 +18,7 @@ import {fetchTransformersList} from 'utils/fetch';
 	let finalData= {
 		data_url: '',
 		name: '',
+		org_name: '',
 		transformers_list: []
 	}
 
@@ -78,6 +79,7 @@ import {fetchTransformersList} from 'utils/fetch';
 			let postData= {
 				data_url: `${form['data_url'].value}`,
 				name:  `${form['name'].value}`,
+				org_name:  `${form['org_name'].value}`,
 				transformers_list: []
 			} 
 			console.log(postData);
@@ -170,7 +172,12 @@ import {fetchTransformersList} from 'utils/fetch';
 									<p className={`status__${errorMessage}`}>{errorMessage}</p>
 									<span className="pipeline__status"></span>
 								</label>
-								
+
+								<label htmlFor="pipeline-name" className="pipeline__source pipeline__org_name">
+									<span>Organization Name</span>
+									<input type="text" id="org_name" name="org_name" required />
+								</label>
+
 								<span className="pipeline__title">Transformation Pipeline</span>
 							
 							<div className="view">
