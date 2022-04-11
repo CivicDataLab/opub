@@ -177,7 +177,17 @@ select {
 			}
 		}
 	}
-
+	&__org_name{
+		
+		input {
+			height: 1.8rem;
+			width: 100%;
+			padding: 0.5rem;
+			@media (min-width: 769px) {
+			width: calc(97% - 135px);
+			}
+	    }
+    }
 	&__name {
 		margin: 1rem 0;
 		input {
