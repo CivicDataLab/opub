@@ -82,9 +82,9 @@ const Nav = ({ data }) => {
                       </>
                     ) : (
                       <Link
-                        key={`navItemDesktop-${index}`}
-                        href={navItem.link}
-                        passHref
+                      key={`navItemDesktop-${index}`}
+                      href={navItem.link}
+                      passHref
                       >
                         <Navitem
                           className={
@@ -97,8 +97,11 @@ const Nav = ({ data }) => {
                     )}
                   </li>
                 ))}
+                 <Navitem 
+                    href='/optimus'><li>Optimus</li></Navitem>
                 {keycloak?.authenticated ? (
-                      <>
+                  <>
+                  
                       <Navitem
                       onClick={() => {
                         if(keycloak){
@@ -131,6 +134,8 @@ const Nav = ({ data }) => {
                       </Navitem>
                       </>
                     )}
+                   
+                    
             </ul>
           </Navlinks> 
         </div>
