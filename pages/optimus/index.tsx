@@ -30,8 +30,15 @@ import {fetchTransformersList} from 'utils/fetch';
 
 	const handleServiceRemove = (index) => {
 		const List = [...transformList];
-		List.splice(index, 1);
-		SetTransform(List)
+			
+		if (List.length<=1) {
+			alert('Atleast one transformer required!')
+			alert('Select atleast 1 transformer')
+		}
+		else{
+			List.splice(index, 1);
+			SetTransform(List)
+		}
 	};
 
 	
