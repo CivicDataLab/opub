@@ -1,7 +1,7 @@
 export const fetchTransformersList = async () => {
   
   const response = await fetch(
-    "http://13.233.49.245/transformer/trans_list"
+    "http://13.232.239.70/transformer/trans_list"
     );
   const data = await response.json();
   console.log(data)
@@ -11,7 +11,7 @@ export const fetchTransformersList = async () => {
 export const fetchpipelineList = async () => {
   
   const response = await fetch(
-    "http://13.233.49.245/transformer/pipe_list"
+    "http://13.232.239.70/transformer/pipe_list"
     );
   const data = await response.json();
   console.log(data)

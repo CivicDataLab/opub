@@ -2,80 +2,95 @@ import React, { useState, useRef } from 'react';
 import Head from 'next/head';
 import OptPage from './OptPage';
 import { GetServerSideProps } from 'next';
-import { fetchTransformersList } from 'utils/fetch';
-import Link from 'next/link';
+import {fetchTransformersList} from 'utils/fetch';
 
-type Props = {
-  variables: any;
-  transformerslist: any;
-};
 
-const Transformer: React.FC<Props> = ({ transformerslist }) => {
-  const [transformList, SetTransformList] = useState<any>([
-    { name: 'pipeline__transformation' },
-  ]);
+	type Props = {
+		variables: any;
+		transformerslist: any;
+	};
+	
+	const transformer: React.FC<Props> = ({ transformerslist }) => {
+	// console.log(transformerslist)
+	const [transformList, SetTransform] = useState([{"name": "pipeline__transformation"}]);
 
-  const transformers = transformerslist.result;
-  const nameForm = useRef(null);
+	let finalData= {
+		data_url: '',
+		name: '',
+		org_name: '',
+		transformers_list: []
+	}
 
-  const handleServiceAdd = () => {
-    SetTransformList([...transformList, { name: 'pipeline__transformation' }]);
-  };
+	const transformers = transformerslist.result;
+        const nameForm = useRef(null);
+	
+	const handleServiceAdd = () => {
+		SetTransform([...transformList, {"name": "pipeline__transformation"}]);
+	};
 
-  const handleServiceRemove = (index) => {
-    const List = [...transformList];
-    List.splice(index, 1);
-    SetTransformList(List);
-  };
+	const handleServiceRemove = (index) => {
+		const List = [...transformList];
+		List.splice(index, 1);
+		SetTransform(List)
+	};
 
-  const handletransformerselect = (value, index) => {
-    // 1. Make a shallow copy of the items
-    let items = [...transformList];
-    // 2. Make a shallow copy of the item you want to mutate
-    let item = { ...items[index] };
-    // 3. Replace the property you're intested in
-    item.name = value;
-    item.order_no = index + 1;
-    // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-    items[index] = item;
-    // 5. Set the state to our new copy
-    SetTransformList(items);
-  };
+	
+	const handletransformerselect =(value,index) =>
+	{
+			// 1. Make a shallow copy of the items
+		let items = [...transformList];
+			// 2. Make a shallow copy of the item you want to mutate
+		let item = {...items[index]};
+			// 3. Replace the property you're intested in
+		item.name = value;
+		item.order_no = index+1;
+			// 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+		items[index] = item;
+			// 5. Set the state to our new copy
+		SetTransform(items);
+			//console.log(transformList);
+	};
+	
+	const post_url = "http://13.232.239.70"
 
-  const post_url = 'http://13.233.49.245';
+	const handletransformerfill =(e,index) =>
+	{
+		// 1. Make a shallow copy of the item
+	  let items = [...transformList];
 
-  const handletransformerfill = (e, index) => {
-    // 1. Make a shallow copy of the item
-    let items = [...transformList];
+		// 2. Make a shallow copy of the item you want to mutate
+	  let item = {...items[index]};
 
-    // 2. Make a shallow copy of the item you want to mutate
-    let item = { ...items[index] };
+		// 3. Replace the property you're intested in
+	  item.context = {...item.context, [e.target.id]:(item.name == 'skip_column' ? e.target.value.split(',') : e.target.value)};
 
-    // 3. Replace the property you're intested in
-    item.context = {
-      ...item.context,
-      [e.target.id]:
-        item.name == 'skip_column'
-          ? e.target.value.split(',')
-          : e.target.value,
-    };
+		// 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+	  items[index] = item;
 
-    // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-    items[index] = item;
+		// 5. Set the state to our new copy
+	  SetTransform(items);
 
-    // 5. Set the state to our new copy
-    SetTransformList(items);
+	  // console.log(transformList);
+	};
 
-    // console.log(transformList);
-  };
+    const handleSubmit = () => {
+		const form = nameForm.current;
+			let postData= {
+				data_url: `${form['data_url'].value}`,
+				name:  `${form['name'].value}`,
+				org_name:  `${form['org_name'].value}`,
+				transformers_list: []
+			} 
+			console.log(postData);
+			console.log(transformList);
+			postData.transformers_list = transformList;
+			console.log(postData);
 
-  const handleSubmit = () => {
-    const form = nameForm.current;
-    let postData = {
-      data_url: `${form['data_url'].value}`,
-      name: `${form['name'].value}`,
-      org_name: `${form['org_name'].value}`,
-      transformers_list: [],
+			if (postData.transformers_list[0].name == 'pipeline__transformation') {
+				alert('Select atleast 1 transformer')
+			} else {
+				submitData(`${post_url}/transformer/pipe_create`, postData)
+			}
     };
     console.log(postData);
     console.log(transformList);
