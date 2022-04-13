@@ -52,7 +52,7 @@ import {fetchTransformersList} from 'utils/fetch';
 			//console.log(transformList);
 	};
 	
-	const post_url = "http://13.233.49.245"
+	const post_url = "http://13.232.239.70"
 
 	const handletransformerfill =(e,index) =>
 	{
