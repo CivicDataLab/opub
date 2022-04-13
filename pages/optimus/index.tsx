@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
-import Head from 'next/head';
-import OptPage from './OptPage';
+import Head from 'next/head'
+import Image from 'next/image'
+import OptPage from "./OptPage";
+import { useState, useRef } from "react";
 import { GetServerSideProps } from 'next';
 import {fetchTransformersList} from 'utils/fetch';
 
@@ -99,221 +100,154 @@ import {fetchTransformersList} from 'utils/fetch';
 				submitData(`${post_url}/transformer/pipe_create`, postData)
 			}
     };
-    console.log(postData);
-    console.log(transformList);
-    postData.transformers_list = transformList;
-    console.log(postData);
 
-    if (postData.transformers_list[0].name == 'pipeline__transformation') {
-      alert('Select atleast 1 transformer');
-    } else {
-      submitData(`${post_url}/transformer/pipe_create`, postData);
-    }
-  };
+	// post data to server
+	async function submitData(url, data) {
+		await fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		    }).then((res) => {
+			if (res.status == 200) {
+				alert('Pipeline Created')
+			} else {
+				alert('Error while creating Pipeline')
+			}
+		})
+	};
 
-  // post data to server
-  async function submitData(url, data) {
-    await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }).then((res) => {
-      if (res.status == 200) {
-        alert('Pipeline Created');
-      } else {
-        alert('Error while creating Pipeline');
-      }
-    });
-  }
 
-  function humanize(str) {
-    var i,
-      frags = str.split('_');
-    for (i = 0; i < frags.length; i++) {
-      frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
-    }
-    return frags.join(' ');
-  }
+	function humanize(str) {
+		var i,
+			frags = str.split('_')
+		for (i = 0; i < frags.length; i++) {
+			frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1)
+		}
+		return frags.join(' ')
+	}
+	
+	
+  
+		const [errorMessage, setErrorMessage] = useState('')
+		  
+		const validate = (value) => {
+			//only for http,https
+			let Regex =/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+			//for http,https& www
+			// /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
+		    const ver=Regex.test(value)
+		if (ver) {
+			setErrorMessage('Success')
+		  } else {
+			setErrorMessage('Fail')
+		  }
+		}
+	
 
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const validate = (value) => {
-    //only for http,https
-    let Regex =
-      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-    //for http,https& www
-    // /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
-    const ver = Regex.test(value);
-    if (ver) {
-      setErrorMessage('Success');
-    } else {
-      setErrorMessage('Fail');
-    }
-  };
-
-  return (
+ 
+  
+	
+	return (
     <div>
       <Head>
         <title>Optimus</title>
-        <meta
-          name="viewport"
-          content="initial-scale=1.0, width=device-width"
-        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+					
+		<OptPage>
+				<div className="colo">
 
-      <OptPage>
-        <div className="colo">
-          <nav className="navbar">
-            <ul>
-              <li>
-                <Link href="/optimus">
-                  <a className="active">Add New</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/optimus/history">
-                  <a>Pipelines</a>
-                </Link>
-              </li>
-            </ul>
-          </nav>
+					<nav className="navbar">
+						<ul>
+							<li><a href='/optimus' className="active">Add New</a></li>
+							<li><a href='/optimus/history'>Pipelines</a></li>
+						</ul>
+					</nav>
 
-          <form className="wrapper pipeline" id="main" ref={nameForm}>
-            <label
-              htmlFor="pipeline-name"
-              className="pipeline__source pipeline__name"
-            >
-              <span>Name</span>
-              <input type="text" id="name" name="name" required />
-            </label>
+				    <form className="wrapper pipeline" id="main" ref={nameForm} >
+								<label htmlFor="pipeline-name" className="pipeline__source pipeline__name">
+									<span>Name</span>
+									<input type="text" id="name" name="name" required />
+								</label>
+					
+								<label htmlFor="source" className="pipeline__source" >
+									<span >Source URL</span>
+									<input type="url" id="data_url" name="data_url" onChange={(e) => validate(e.target.value)} 
+									required autoComplete="off" />
+									<p className={`status__${errorMessage}`}>{errorMessage}</p>
+									<span className="pipeline__status"></span>
+								</label>
 
-            <label htmlFor="source" className="pipeline__source">
-              <span>Source URL</span>
-              <input
-                type="url"
-                id="data_url"
-                name="data_url"
-                onChange={(e) => validate(e.target.value)}
-                required
-                autoComplete="off"
-              />
-              <p className={`status__${errorMessage}`}>{errorMessage}</p>
-              <span className="pipeline__status"></span>
-            </label>
+								<label htmlFor="pipeline-name" className="pipeline__source pipeline__org_name">
+									<span>Organization Name</span>
+									<input type="text" id="org_name" name="org_name" required />
+									<span className="pipeline__title">Transformation Pipeline</span>
+								</label>
 
-            <label
-              htmlFor="pipeline-name"
-              className="pipeline__source pipeline__org_name"
-            >
-              <span>Organization Name</span>
-              <input type="text" id="org_name" name="org_name" required />
-            </label>
+								
+							
+							<div className="view">
+								<div  className="pipeline__transformation">
+									<div className="transform">
+									 {transformList.map((singleTransform,index) => (
+										<div key={index} className="transform__item">
+											<button className="transform__remove" 
+													onClick={() => handleServiceRemove(index)}>&#10005;</button>
+														
+													<label htmlFor="transform_1" className="transform__selector">
+														<select name="transform_1" id="transform_1"  value={transformList[index].name}      
+															onChange={(e) => handletransformerselect(e.target.value,index)}>
+															<option value="" hidden  >Select Transformer</option>
+															{transformers.map((transformer,index) => (
+															<option value={transformer.name} key={index} >{humanize(transformer.name)}</option>
+															))}
+														
+														</select>
 
-            <span className="pipeline__title">Transformation Pipeline</span>
+													</label>
+												
+												<div id="transform_data_1" className="transform__data">
+													{(transformers.filter(x => x.name == transformList[index].name )).length > 0 &&
+													(transformers.filter(x => x.name == transformList[index].name ))[0].context.map((input,index1) => (
+															<input  onChange={(e) => handletransformerfill(e, index)} id={input.name} type={input.type} key={index1} name={input.name} placeholder={input.desc} required/>
+													))}	
+													
+												</div>
+												
+												{transformList.length -1 === index && 
+												<button className="transform__new" onClick={handleServiceAdd}>
+													Add Step</button>}
+										</div>
+									  ))}
+									</div>
+								</div>
+							</div>
+						  <button type="button" className="pipeline__submit" onClick={() => handleSubmit()}>Submit</button>
+					</form>	
 
-            <div className="view">
-              <div className="pipeline__transformation">
-                <div className="transform">
-                  {transformList.map((singleTransform, index) => (
-                    <div key={index} className="transform__item">
-                      <button
-                        className="transform__remove"
-                        onClick={() => handleServiceRemove(index + 1)}
-                      >
-                        &#10005;
-                      </button>
-
-                      <label
-                        htmlFor="transform_1"
-                        className="transform__selector"
-                      >
-                        <select
-                          name="transform_1"
-                          id="transform_1"
-                          value={transformList[index].name}
-                          onChange={(e) =>
-                            handletransformerselect(e.target.value, index)
-                          }
-                        >
-                          <option value="" hidden>
-                            Select Transformer
-                          </option>
-                          {transformers.map((transformer, index) => (
-                            <option value={transformer.name} key={index}>
-                              {humanize(transformer.name)}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
-
-                      <div id="transform_data_1" className="transform__data">
-                        {transformers.filter(
-                          (x) => x.name == transformList[index].name
-                        ).length > 0 &&
-                          transformers
-                            .filter(
-                              (x) => x.name == transformList[index].name
-                            )[0]
-                            .context.map((input, index1) => (
-                              <input
-                                onChange={(e) =>
-                                  handletransformerfill(e, index)
-                                }
-                                id={input.name}
-                                type={input.type}
-                                key={index1}
-                                name={input.name}
-                                placeholder={input.desc}
-                                required
-                              />
-                            ))}
-                      </div>
-
-                      {transformList.length - 1 === index && (
-                        <button
-                          className="transform__new"
-                          onClick={handleServiceAdd}
-                        >
-                          Add Step
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <button
-              type="button"
-              className="pipeline__submit"
-              onClick={() => handleSubmit()}
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </OptPage>
+				</div>
+		</OptPage>
     </div>
-  );
-};
+  )
+}
+
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const transformerslist = await fetchTransformersList();
-  return {
-    props: {
-      transformerslist,
-    },
+	const transformerslist = await fetchTransformersList();
+	return {
+	  props: {
+		transformerslist,
+	 },
+	};
   };
-};
-export default Transformer;
+export default transformer;
+
 
 function props(props: any) {
-  throw new Error('Function not implemented.');
+	throw new Error("Function not implemented.");
 }
-function data_url(
-  data_url: any
-): import('react').FormEventHandler<HTMLInputElement> {
-  throw new Error('Function not implemented.');
+function data_url(data_url: any): import("react").FormEventHandler<HTMLInputElement> {
+	throw new Error('Function not implemented.');
 }
-
