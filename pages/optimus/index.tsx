@@ -317,5 +317,3 @@ function data_url(
   throw new Error('Function not implemented.');
 }
 
-
-// test
