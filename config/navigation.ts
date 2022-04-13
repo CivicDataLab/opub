@@ -15,6 +15,10 @@ export const navList = {
       name: 'About',
     },
     {
+      link: '/wiki',
+      name: 'Wiki',
+    },
+    {
       link: '#resources',
       name: 'Resources',
       submenu: [
