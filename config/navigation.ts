@@ -1,14 +1,14 @@
 export const navList = {
-  site: 'OPub',
+  site: 'National Data Platform',
   logo: '',
   links: [
     {
-      link: '/orgs',
-      name: 'Organizations',
-    },
-    {
       link: '/datasets',
       name: 'Datasets',
+    },
+    {
+      link: '/orgs',
+      name: 'Organizations',
     },
     {
       link: '/about',

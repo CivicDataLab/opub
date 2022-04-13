@@ -1,68 +1,72 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Button, Menu } from 'components/actions';
 import { MenuContent } from 'components/actions/Menu/MenuComp';
 import { LokSabha, VidhanSabha } from 'components/icons';
+import { Search } from 'components/data';
+import { useRouter } from 'next/router';
 
 const states = [
   {
-    title: 'Rajasthan',
-    value: 'rajasthan',
+    name: 'Rajasthan',
+    id: 'rajasthan',
   },
   {
-    title: 'Uttar Pradesh',
-    value: 'uttar_pradesh',
+    name: 'Uttar Pradesh',
+    id: 'uttar_pradesh',
   },
   {
-    title: 'Odisha',
-    value: 'odisha',
+    name: 'Odisha',
+    id: 'odisha',
   },
   {
-    title: 'Gujrat',
-    value: 'gujrat',
+    name: 'Gujrat',
+    id: 'gujrat',
   },
   {
-    title: 'Kerela',
-    value: 'kerela',
+    name: 'Kerela',
+    id: 'kerela',
   },
   {
-    title: 'Tamil Nadu',
-    value: 'tamil_nadu',
+    name: 'Tamil Nadu',
+    id: 'tamil_nadu',
   },
 ];
 
 const schemes = [
   {
-    title: 'Beti Bachao Beti Padhao (BBBP)',
-    value: 'bbbp',
+    name: 'Beti Bachao Beti Padhao (BBBP)',
+    id: 'bbbp',
   },
   {
-    title: 'Integrated Child Development Services (ICDS)',
-    value: 'icds',
+    name: 'Integrated Child Development Services (ICDS)',
+    id: 'icds',
   },
   {
-    title: 'Integrated Child Protection Scheme (ICPS)',
-    value: 'icps',
+    name: 'Integrated Child Protection Scheme (ICPS)',
+    id: 'icps',
   },
   {
-    title:
-      'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
-    value: 'mgnregs',
+    name: 'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
+    id: 'mgnregs',
   },
   {
-    title: 'National Health Mission (NHM)',
-    value: 'nhm',
+    name: 'National Health Mission (NHM)',
+    id: 'nhm',
   },
   {
-    title: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
-    value: 'pmkisan',
+    name: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
+    id: 'pmkisan',
   },
 ];
 
 const HomeHeader = () => {
   const [selectedState, setSelectedState] = useState(states[0]);
   const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
+  const [search, setSearch] = useState('');
   const [selectedSabha, setSelectedSabha] = useState('Lok Sabha');
+
+  const router = useRouter();
 
   const sabhaRef = useRef(null);
 
@@ -95,63 +99,33 @@ const HomeHeader = () => {
 
   function handleSubmitClick() {
     const obj = {
-      state: selectedState.value,
-      scheme: selectedScheme.value,
+      state: selectedState.id,
+      scheme: selectedScheme.id,
       sabha: selectedSabha,
     };
-    console.log(obj);
+  }
+
+  useEffect(() => {
+    if (search.length > 0) {
+      router.push({
+        pathname: `/datasets`,
+        query: {
+          q: search,
+        },
+      });
+    }
+  }, [search]);
+
+  function handleDatasetsChange(val) {
+    setSearch(val.value);
   }
 
   return (
     <Header>
       <div className="container">
-        <h1>Explore Constituency-wise Fiscal Information for schemes</h1>
+        <h1>Search through Open and Private Datasets</h1>
         <HeaderControls>
-          <HeaderToggle ref={sabhaRef}>
-            <Button
-              aria-pressed="true"
-              data-value="lok-sabha"
-              onClick={handleSabhaClick}
-              icon={<LokSabha />}
-              iconSide="left"
-              kind="custom"
-            >
-              Lok Sabha
-            </Button>
-            <Button
-              aria-pressed="false"
-              data-value="vidhan-sabha"
-              onClick={handleSabhaClick}
-              icon={<VidhanSabha />}
-              iconSide="left"
-              kind="custom"
-            >
-              Vidhan Sabha
-            </Button>
-          </HeaderToggle>
-          <SchemeSelector>
-            <StateMenu className="fill">
-              <Menu
-                options={states}
-                handleChange={(e) => handleMenuChange(e, states)}
-                heading="Select State"
-                value={selectedState.title}
-                showLabel={false}
-              />
-            </StateMenu>
-            <div className="fill">
-              <Menu
-                options={schemes}
-                handleChange={(e) => handleMenuChange(e, schemes)}
-                heading="Select any Scheme"
-                value={selectedScheme.title}
-                showLabel={false}
-              />
-            </div>
-            <Button kind="primary" onClick={handleSubmitClick}>
-              Explore
-            </Button>
-          </SchemeSelector>
+          <Search newSearch={handleDatasetsChange} />
         </HeaderControls>
       </div>
     </Header>

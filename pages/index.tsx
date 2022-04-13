@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Open Publishers</title>
+        <title>NDP</title>
       </Head>
       <HomePage>
         <HomeHeader />

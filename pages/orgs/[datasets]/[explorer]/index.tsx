@@ -1,32 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { fetchAPI, explorerPopulation, fetchFromTags } from 'utils/explorer';
 import { resourceGetter } from 'utils/resourceParser';
 
-import {
-  ExplorerHeader,
-  ExplorerRelated,
-  ExplorerViz,
-} from 'components/pages/explorer';
+import { ExplorerHeader, ExplorerViz } from 'components/pages/explorer';
+import tempViz from 'data/tempViz.json';
 
 type Props = {
   data: any;
-  meta: any;
-  fileData: any;
+  meta;
+  fileData;
 };
 
-const Explorer: React.FC<Props> = ({ data, meta, fileData }) => {
+const Explorer: React.FC<Props> = ({ data, fileData }) => {
+  const [resUrl, setResUrl] = useState(
+    data.resUrls['CSV'] ? data.resUrls['CSV'] : ''
+  );
+
   return (
     <>
       <Head>
-        <title>OPub | Explorer</title>
+        <title>Explorer | NDP</title>
       </Head>
       <Wrapper>
         <ExplorerHeader data={data} />
-        <ExplorerViz data={data} meta={meta} fileData={fileData} />
-        <ExplorerRelated data={data} />
+        <ExplorerViz
+          data={data}
+          vizData={fileData}
+          resUrl={resUrl}
+        />
+        {/* <ExplorerRelated data={data} /> */}
       </Wrapper>
     </>
   );
@@ -38,40 +43,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     explorerPopulation(res.result)
   );
 
-  const vizData = await fetch(
-    'https://justicehub.in/api/3/action/package_show?id=union-budget-data-for-administration-of-justice'
-  )
-    .then((res) => res.json())
-    .then((res) => explorerPopulation(res.result));
-
   // fetch and parse metadata csv
-  const metaRes = await resourceGetter(vizData.metaUrl);
-  const meta = {};
-  metaRes.forEach((elm) => {
-    meta[elm[0]] = elm[1] || '';
-  });
-
+  const vizUrl = explorerPopulation(tempViz);
   // fetch and parse data csv
-  const fileData = await resourceGetter(vizData.dataUrl, true);
+  const fileData = await resourceGetter(vizUrl.dataUrl, true);
 
-  // fetch related schemes
-  const relatedSchemes = await fetchFromTags(data.tags, data.id);
-
-  // generate indicators
-  const indicators = [
-    ...Array.from(
-      new Set(
-        fileData.map((item: { indicators: any }) => item.indicators || null)
-      )
-    ),
-  ];
-
-  data.indicators = indicators;
-  data.relatedSchemes = relatedSchemes;
   return {
     props: {
       data,
-      meta,
       fileData,
     },
   };

@@ -1,0 +1,138 @@
+{
+  "private": false,
+  "maintainer_email": null,
+  "num_tags": 5,
+  "end_month": "2021-",
+  "id": "df89453d-96f6-49e0-958c-5b8993bee75e",
+  "metadata_created": "2022-02-08T08:59:29.321501",
+  "start_month": "2016-",
+  "metadata_modified": "2022-02-14T11:30:39.633566",
+  "author": null,
+  "author_email": null,
+  "source": "Open Budgets India,Government Websites",
+  "state": "active",
+  "version": null,
+  "license_id": "CC-BY-4.0",
+  "type": "dataset",
+  "resources": [
+    {
+      "mimetype": "text/csv",
+      "cache_url": null,
+      "hash": "",
+      "description": "The dataset contains time series data of the union budgets for the scheme category - Administration of Justice. The dataset contains several indicators such as Budget Estimates, Revised Estimates, Actual Expenditure, Actual Expenditure as a % of Ministry, Fund Utilisation. The raw dataset have been sourced from OpenBudgetsIndia Platform.",
+      "name": "Datasheet",
+      "format": "CSV",
+      "url": "https://justicehub.in/dataset/df89453d-96f6-49e0-958c-5b8993bee75e/resource/c3ef4e9f-8d28-4dcc-8ef3-26abfe20c02e/download/datasheet.csv",
+      "datastore_active": true,
+      "cache_last_updated": null,
+      "package_id": "df89453d-96f6-49e0-958c-5b8993bee75e",
+      "created": "2022-02-08T08:59:32.679597",
+      "state": "active",
+      "mimetype_inner": null,
+      "last_modified": "2022-02-14T11:30:39.625304",
+      "position": 0,
+      "revision_id": "23889724-fc72-4f97-88b2-6022fbaa88e2",
+      "url_type": "upload",
+      "id": "c3ef4e9f-8d28-4dcc-8ef3-26abfe20c02e",
+      "resource_type": null,
+      "size": 5410
+    },
+    {
+      "mimetype": "text/csv",
+      "cache_url": null,
+      "hash": "",
+      "description": "All scheme related metadata which includes non-budget information such as scheme description, type of scheme, etc. The dataset has been sourced from the respective websites of the ministry and department.",
+      "name": "Metadata",
+      "format": "CSV",
+      "url": "https://justicehub.in/dataset/df89453d-96f6-49e0-958c-5b8993bee75e/resource/7721d5e4-1702-4f0d-bbc9-17fa7d432cf6/download/metadata.csv",
+      "datastore_active": true,
+      "cache_last_updated": null,
+      "package_id": "df89453d-96f6-49e0-958c-5b8993bee75e",
+      "created": "2022-02-08T08:59:33.279961",
+      "state": "active",
+      "mimetype_inner": null,
+      "last_modified": "2022-02-08T08:59:33.245445",
+      "position": 1,
+      "revision_id": "51f046fa-679a-463b-a5a2-a30d14abf8af",
+      "url_type": "upload",
+      "id": "7721d5e4-1702-4f0d-bbc9-17fa7d432cf6",
+      "resource_type": null,
+      "size": 2211
+    }
+  ],
+  "publisher_contacts": "[{\"website\": \"https://civicdatalab.in\", \"email\": \"info@civicdatalab.in\", \"name\": \"CivicDataLab\"}]",
+  "num_resources": 2,
+  "tags": [
+    {
+      "vocabulary_id": null,
+      "state": "active",
+      "display_name": "administration",
+      "id": "5dbb3479-63d2-42c2-8e56-dc7e9ffee22e",
+      "name": "administration"
+    },
+    {
+      "vocabulary_id": null,
+      "state": "active",
+      "display_name": "courts",
+      "id": "210e2f46-e825-4766-b8c4-bc7c28fe233e",
+      "name": "courts"
+    },
+    {
+      "vocabulary_id": null,
+      "state": "active",
+      "display_name": "justice",
+      "id": "4a3d7388-c2ea-4b72-8117-a127b34cf065",
+      "name": "justice"
+    },
+    {
+      "vocabulary_id": null,
+      "state": "active",
+      "display_name": "law",
+      "id": "5bd11994-66b8-4b95-9d61-dc7b5291d18d",
+      "name": "law"
+    },
+    {
+      "vocabulary_id": null,
+      "state": "active",
+      "display_name": "scheme-category",
+      "id": "675f9b74-3ecf-4f65-b6a2-ad9e182d0732",
+      "name": "scheme-category"
+    }
+  ],
+  "creator_email": null,
+  "language": "English",
+  "groups": [
+    {
+      "display_name": "Budgets for Justice",
+      "description": "The Budget for Justice  category contains key budget datasets around law and justice like budget data on courts, police, prison, legal aid, women & child protection, etc.",
+      "image_display_url": "https://justicehub.in/uploads/group/2022-01-12-055715.104399budget-1.svg",
+      "title": "Budgets for Justice",
+      "id": "d9be04c8-5e03-4b2c-8d07-8151f0798811",
+      "name": "budgets-for-justice"
+    },
+    {
+      "display_name": "Union Budget",
+      "description": "The Union Budget category contains links to all the datasets that have been sourced from the Union Budgets .",
+      "image_display_url": "https://justicehub.in/uploads/group/2022-01-12-052818.360911trending-up.svg",
+      "title": "Union Budget",
+      "id": "f576d288-ec18-402f-9f91-1eb7b3c19956",
+      "name": "union-budget"
+    }
+  ],
+  "creator_user_id": "252058b0-ce66-4519-82c4-0c083ff994df",
+  "publication_date": "8/February/2022",
+  "creator_username": "apoorv",
+  "relationships_as_subject": [],
+  "organization": null,
+  "name": "union-budget-data-for-administration-of-justice",
+  "isopen": true,
+  "url": null,
+  "notes": "This scheme category includes expenditure on Supreme Court, High Courts, Special Courts, Judicial Commissioners (Union Territories), Civil and Session Courts, Small Causes Courts, Presidency Magistrate's Courts, Criminal Courts, Coroners' Courts, Administrators General and Official Trustees, Official Assignees, Official Receivers, Sheriffs and Reporters, Legal Advisers and Counsels, Central Administrative Tribunal, State Administrative Tribunals, Family Courts, Computerization of District and Sub-ordinate Courts, Legal Aid Services, E-courts, etc.",
+  "owner_org": null,
+  "publisher_type": "organization",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "title": "Union budget data for Administration of Justice (2016-17 to 2022-23)",
+  "revision_id": "23889724-fc72-4f97-88b2-6022fbaa88e2",
+  "region": "All India",
+  "creator_name": "Apoorv Anand"
+}

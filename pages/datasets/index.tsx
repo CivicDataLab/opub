@@ -14,6 +14,7 @@ import { Header } from 'components/layouts';
 import { Search, Total, Filter, Sort, Pagination } from 'components/data';
 import { DatasetList } from 'components/pages/datasets';
 import MobileAlter from 'components/data/MobileAlter/MobileAlter';
+import { MenuComp } from 'components/actions/Menu/MenuComp';
 
 type Props = {
   data: any;
@@ -21,7 +22,7 @@ type Props = {
   variables: any;
 };
 
-const list = '"tags", "groups"';
+const list = '"tags", "res_format", "organization"';
 
 const Datasets: React.FC<Props> = ({ data, facets }) => {
   const router = useRouter();
@@ -71,7 +72,9 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
     e.preventDefault();
     setModalIsOpen(!modalIsOpen);
   }
-
+  const simplifyNames = {
+    res_format: 'Format',
+  };
   const headerData = {
     title: 'All Datasets',
     content:
@@ -81,7 +84,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
   return (
     <>
       <Head>
-        <title>HAQ | Datasets</title>
+        <title>Datasets | NDP</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header data={headerData} />
@@ -92,6 +95,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
               data={facets}
               newFilters={handleDatasetsChange}
               fq={datsetsFilters}
+              simpleNames={simplifyNames}
             />
             <DatasetRight>
               <DatasetSearch>
@@ -99,7 +103,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
               </DatasetSearch>
               <DatasetSort>
                 <Total text="datasets found" total={count} />
-                <Sort className="sort" newSort={handleDatasetsChange} />
+                <Sort className="fill" newSort={handleDatasetsChange} />
               </DatasetSort>
               <MobileAlter
                 data={facets}
@@ -120,7 +124,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query || {};
   const variables = convertToCkanSearchQuery(query);
-  const facets = await fetchFilters(list, variables, 'tender_dataset');
+  const facets = await fetchFilters(list, variables);
 
   const data = await fetchDatasets(variables);
   return {
@@ -145,13 +149,15 @@ const DatasetsComp = styled.div`
   margin-top: 2.5rem;
 
   .filters {
+    width: 312px;
     min-width: 312px;
   }
 
   @media (max-width: 1000px) {
     display: block;
 
-    .filters, .sort {
+    .filters,
+    .sort {
       display: none;
     }
   }
@@ -174,4 +180,8 @@ const DatasetSort = styled.div`
   padding-bottom: 12px;
   margin-top: 20px;
   border-bottom: var(--separator-5);
+
+  ${MenuComp} {
+    max-width: 250px;
+  }
 `;
