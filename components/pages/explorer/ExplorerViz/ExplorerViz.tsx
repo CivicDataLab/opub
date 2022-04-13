@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
-import { Document, Page } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 import {
   tabbedInterface,
   filter_data_indicator,
@@ -23,10 +24,10 @@ const SimpleBarLineChartViz = dynamic(
   () => import('components/viz/SimpleBarLineChart'),
   { ssr: false, loading: () => <p>...</p> }
 );
-const ExplorerTable = dynamic(
-  () => import('../ExplorerTable'),
-  { ssr: false, loading: () => <p>Table is loading...</p> }
-);
+const ExplorerTable = dynamic(() => import('../ExplorerTable'), {
+  ssr: false,
+  loading: () => <p>Table is loading...</p>,
+});
 
 const ExplorerViz = ({ data, vizData, resUrl }) => {
   const [selectedIndicator, setSelectedIndicator] =
@@ -39,7 +40,6 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
   const [currentViz, setCurrentViz] = useState('#barGraph');
 
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
 
   const barRef = useRef(null);
   const lineRef = useRef(null);
@@ -105,15 +105,20 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
     {
       id: 'tableView',
       graph:
-      resUrl.length !== 0 ? (
+        resUrl.length !== 0 ? (
           <ExplorerTable resUrl={resUrl} />
-        ) : (
+        ) : data.resUrls['PDF'] ? (
           <Document
-            file={{ url: data.resUrls['PDF'] }}
+            file={data.resUrls['PDF']}
             onLoadSuccess={onDocumentLoadSuccess}
+            onLoadError={(error) => console.log('Inside Error', error)}
           >
-            <Page pageNumber={pageNumber} />
+            {Array.from(new Array(numPages), (el, index) => (
+              <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+            ))}
           </Document>
+        ) : (
+          <p>Vizualisation load failed</p>
         ),
     },
     {
@@ -193,19 +198,7 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
 
   return (
     <>
-      {/* <div className="container">
-        <IndicatorMobile
-          indicators={data.indicators}
-          newIndicator={handleNewVizData}
-          meta={IndicatorDesc}
-        />
-      </div> */}
       <Wrapper className="container">
-        {/* <Indicator
-          data={data.indicators}
-          meta={IndicatorDesc}
-          newIndicator={handleNewVizData}
-        /> */}
         <VizWrapper>
           <VizHeader>
             <VizTabs className="viz__tabs">
