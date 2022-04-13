@@ -28,6 +28,7 @@ const PartnersCard = styled.div`
   .partners__image {
     object-fit: contain;
     border-radius: 4px;
+    background: black;
   }
 
   section {
@@ -53,10 +54,6 @@ const PartnersCard = styled.div`
     p {
       line-height: 137%;
       margin-bottom: 0.5rem;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
     }
   }
 
