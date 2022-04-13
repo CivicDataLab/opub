@@ -4,16 +4,16 @@ import OptPage from "./OptPage";
 import { useState, useRef } from "react";
 import { GetServerSideProps } from 'next';
 import {fetchTransformersList} from 'utils/fetch';
-
+import Link from 'next/link'
 
 	type Props = {
 		variables: any;
 		transformerslist: any;
 	};
 	
-	const transformer: React.FC<Props> = ({ transformerslist }) => {
+	const Transformer: React.FC<Props> = ({ transformerslist }) => {
 	// console.log(transformerslist)
-	const [transformList, SetTransform] = useState([{"name": "pipeline__transformation"}]);
+	const [transformList, setTransform] = useState([{"name": "pipeline__transformation"}]);
 
 	let finalData= {
 		data_url: '',
@@ -26,7 +26,7 @@ import {fetchTransformersList} from 'utils/fetch';
         const nameForm = useRef(null);
 	
 	const handleServiceAdd = () => {
-		SetTransform([...transformList, {"name": "pipeline__transformation"}]);
+		setTransform([...transformList, {"name": "pipeline__transformation"}]);
 	};
 
 	const handleServiceRemove = (index) => {
@@ -38,7 +38,7 @@ import {fetchTransformersList} from 'utils/fetch';
 		}
 		else{
 			List.splice(index, 1);
-			SetTransform(List)
+			setTransform(List)
 		}
 	};
 
@@ -51,11 +51,11 @@ import {fetchTransformersList} from 'utils/fetch';
 		let item = {...items[index]};
 			// 3. Replace the property you're intested in
 		item.name = value;
-		item.order_no = index+1;
+		item['order_no'] = index+1;
 			// 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
 		items[index] = item;
 			// 5. Set the state to our new copy
-		SetTransform(items);
+		setTransform(items);
 			//console.log(transformList);
 	};
 	
@@ -70,13 +70,13 @@ import {fetchTransformersList} from 'utils/fetch';
 	  let item = {...items[index]};
 
 		// 3. Replace the property you're intested in
-	  item.context = {...item.context, [e.target.id]:(item.name == 'skip_column' ? e.target.value.split(',') : e.target.value)};
+	  item['context'] = {...item['context'], [e.target.id]:(item.name == 'skip_column' ? e.target.value.split(',') : e.target.value)};
 
 		// 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
 	  items[index] = item;
 
 		// 5. Set the state to our new copy
-	  SetTransform(items);
+	  setTransform(items);
 
 	  // console.log(transformList);
 	};
@@ -161,8 +161,11 @@ import {fetchTransformersList} from 'utils/fetch';
 
 					<nav className="navbar">
 						<ul>
-							<li><a href='/optimus' className="active">Add New</a></li>
-							<li><a href='/optimus/history'>Pipelines</a></li>
+							<li>
+								<Link href='/optimus'><a className="active">Add New</a></Link></li>
+							<li>	<Link href='/optimus/history'><a className="active">Pipelines</a></Link></li>
+														
+							
 						</ul>
 					</nav>
 
@@ -242,7 +245,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	 },
 	};
   };
-export default transformer;
+export default Transformer;
 
 
 function props(props: any) {
