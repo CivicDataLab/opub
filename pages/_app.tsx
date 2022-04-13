@@ -11,7 +11,7 @@ import { SSRKeycloakProvider, SSRCookies } from "@react-keycloak/ssr";
 import type { AppProps, AppContext } from 'next/app';
 
 const keycloakCfg = {
-    url: 'http://localhost:8080/',
+    url: `${process.env.KEYCLOAK_URL}`,
     realm: 'external',
     clientId: 'opub'
 }

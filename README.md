@@ -2,15 +2,24 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Development Environment:
 
+- Run a local CKAN and KeyCloak instance to which you want to connect OPUB front-end. 
+
+- Create '.env.local' file in the OPUB project folder with the following:
+```
+CKAN_URL='[data instance URL]/api/3/action'
+KEYCLOAK_URL='http://localhost:8080'
+```
+
+- Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 

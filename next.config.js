@@ -9,7 +9,8 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['justicehub.in'],
+    domains: ['justicehub.in', '65.0.11.237', 'localhost'],
+    formats: ["image/webp"],
   },
 };
 

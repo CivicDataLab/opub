@@ -1,18 +1,31 @@
 import Image from 'next/image';
 import React from 'react';
 import PartnersCard from './PartnerComp';
+import placeholder from 'public/assets/images/placeholder.jpg';
 
 const PartnerCard = ({ card }) => {
   return (
     <PartnersCard>
       <div className="partners__header">
-        <Image
+        {card.img ? (
+          <Image
           src={card.img}
+          alt=""
+          background-color='black'
+          width={108}
+          height={108}
+          className={`partners__image ${card.class && card.class}`}
+        />
+        ) : (
+          <Image
+          src={placeholder}
           alt=""
           width={108}
           height={108}
           className={`partners__image ${card.class && card.class}`}
         />
+        )}
+        
         <section>
           <h4>{card.name}</h4>
           <small>{card.title}</small>
@@ -89,9 +102,10 @@ const PartnerCard = ({ card }) => {
         </section>
       </div>
       <div className="partners__body">
-        {card.desc.map((item, index) => (
+        {/* {card.desc.map((item, index) => (
           <p key={`partner-content-${index}`}>{item}</p>
-        ))}
+        ))} */}
+        <p>{card.desc}</p>
       </div>
       <a className="partners__footer" href={`mailto:${card.email}`}>
         {card.email}
