@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps, cookies }: AppProps & InitialProps) {
     >
         <Layout>        
             <NextNprogress
-                color={DEFAULT_THEME.tertiary}
+                // color={DEFAULT_THEME.tertiary}
                 startPosition={0.3}
                 stopDelayMs={100}
                 height={3}
