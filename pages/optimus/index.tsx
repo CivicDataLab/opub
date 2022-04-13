@@ -176,9 +176,10 @@ import {fetchTransformersList} from 'utils/fetch';
 								<label htmlFor="pipeline-name" className="pipeline__source pipeline__org_name">
 									<span>Organization Name</span>
 									<input type="text" id="org_name" name="org_name" required />
+									<span className="pipeline__title">Transformation Pipeline</span>
 								</label>
 
-								<span className="pipeline__title">Transformation Pipeline</span>
+								
 							
 							<div className="view">
 								<div  className="pipeline__transformation">
@@ -186,7 +187,7 @@ import {fetchTransformersList} from 'utils/fetch';
 									 {transformList.map((singleTransform,index) => (
 										<div key={index} className="transform__item">
 											<button className="transform__remove" 
-													onClick={() => handleServiceRemove(index+1)}>&#10005;</button>
+													onClick={() => handleServiceRemove(index)}>&#10005;</button>
 														
 													<label htmlFor="transform_1" className="transform__selector">
 														<select name="transform_1" id="transform_1"  value={transformList[index].name}      
