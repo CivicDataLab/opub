@@ -159,8 +159,6 @@ export async function getStaticProps() {
     })
   })
 
-  // console.log(partners);
-
   return {
     props: {
       members: members,

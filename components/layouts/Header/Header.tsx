@@ -11,7 +11,7 @@ const Header = ({ data }) => {
           </Link>
         )}
         <h2>{data.title}</h2>
-        <p>{data.content}</p>
+        <p>{data.content || ''}</p>
         {data.date && <p>{data.date}</p>}
       </div>
     </HeaderWrapper>
@@ -35,6 +35,7 @@ export const HeaderWrapper = styled.div`
     grid-column: 2/3;
     grid-row: 1/2;
     word-break: break-all;
+    text-transform: capitalize;
   }
 
   p {
