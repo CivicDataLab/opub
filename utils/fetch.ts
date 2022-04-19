@@ -1,11 +1,11 @@
 export const fetchTransformersList = async () => {
-  const response = await fetch('http://13.232.239.70/transformer/trans_list');
+  const response = await fetch('https://pipeline.ndp.civicdatalab.in/transformer/trans_list');
   const data = await response.json();
   return data;
 };
 
 export const fetchpipelineList = async () => {
-  const response = await fetch('http://13.232.239.70/transformer/pipe_list');
+  const response = await fetch('https://pipeline.ndp.civicdatalab.in/transformer/pipe_list');
   const data = await response.json();
   return data;
 };

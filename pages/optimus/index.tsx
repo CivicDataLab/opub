@@ -72,7 +72,7 @@ const Transformer: React.FC<Props> = ({ transformerslist }) => {
     //console.log(transformList);
   };
 
-  const post_url = 'http://13.232.239.70';
+  const post_url = 'https://pipeline.ndp.civicdatalab.in';
 
   const handletransformerfill = (e, index) => {
     // 1. Make a shallow copy of the item
