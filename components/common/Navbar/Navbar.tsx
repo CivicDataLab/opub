@@ -97,11 +97,12 @@ const Nav = ({ data }) => {
                     )}
                   </li>
                 ))}
-                 <Navitem 
-                    href='/optimus'><li>Optimus</li></Navitem>
+                 
                 {keycloak?.authenticated ? (
                   <>
-                  
+                    <Navitem 
+                      href='/optimus'><li>Optimus</li>
+                    </Navitem>  
                       <Navitem
                       onClick={() => {
                         if(keycloak){

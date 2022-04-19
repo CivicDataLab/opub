@@ -11,7 +11,7 @@ import { SSRKeycloakProvider, SSRCookies } from "@react-keycloak/ssr";
 import type { AppProps, AppContext } from 'next/app';
 
 const keycloakCfg = {
-    url: `${process.env.KEYCLOAK_URL}`,
+    url: `https://kc.ndp.civicdatalab.in/auth`,
     realm: 'external',
     clientId: 'opub'
 }

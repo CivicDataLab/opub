@@ -1,10 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import OptPage from "./OptPage";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { GetServerSideProps } from 'next';
 import {fetchTransformersList} from 'utils/fetch';
 import Link from 'next/link'
+
+import { useKeycloak } from '@react-keycloak/ssr'
+import type { KeycloakInstance } from 'keycloak-js'
+import { useRouter } from 'next/router';
 
 	type Props = {
 		variables: any;
@@ -12,6 +16,16 @@ import Link from 'next/link'
 	};
 	
 	const Transformer: React.FC<Props> = ({ transformerslist }) => {
+		const router = useRouter();
+		const { keycloak } = useKeycloak<KeycloakInstance>()
+
+		// shows and hides the submenu on hover and focus
+		useEffect(() => {
+		  if(!keycloak.authenticated){
+			router.replace(keycloak.createLoginUrl());
+		  }
+		}, []);
+
 	// console.log(transformerslist)
 	const [transformList, setTransform] = useState([{"name": "pipeline__transformation"}]);
 
