@@ -21,9 +21,9 @@ import { useRouter } from 'next/router';
 
 		// shows and hides the submenu on hover and focus
 		useEffect(() => {
-		  if(!keycloak.authenticated){
-			router.replace(keycloak.createLoginUrl());
-		  }
+		//   if(keycloak.authenticated === false){
+		// 	router.replace(keycloak.createLoginUrl());
+		//   }
 		}, []);
 
 	// console.log(transformerslist)
@@ -169,8 +169,8 @@ import { useRouter } from 'next/router';
         <title>Optimus</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-					
-		<OptPage>
+		{ keycloak?.authenticated ? (
+			<OptPage>
 				<div className="colo">
 
 					<nav className="navbar">
@@ -246,6 +246,10 @@ import { useRouter } from 'next/router';
 
 				</div>
 		</OptPage>
+		) : (
+			<p> Please login . . . .</p>
+		)}			
+		
     </div>
   )
 }
