@@ -90,7 +90,7 @@ const WikiDoc = styled.main`
     }
 
     img {
-        height: 35vw;
+        width: 50vw;
     }
 
 `;
