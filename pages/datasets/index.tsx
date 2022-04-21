@@ -77,7 +77,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
   };
   const headerData = {
     title: 'All Datasets',
-    content:
+    description:
       'An overview of datasets published by all the organizations on the platform.',
   };
 

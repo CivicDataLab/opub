@@ -7,7 +7,7 @@ import { Header } from 'components/layouts';
 const Wiki = (wikis) => {
     const headerData = {
         title: 'Wiki',
-        content:
+        description:
           'The collection of public documents regarding the consultations, design and development of the ecosystem',
     };
       

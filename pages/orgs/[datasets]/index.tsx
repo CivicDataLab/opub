@@ -75,11 +75,16 @@ const Datasets: React.FC<Props> = ({ data, facets, query, variables }) => {
         break;
     }
   }
+  // console.log(results);
+
 
   const headerData = {
     title: results.length
       ? results[0].organization.title
       : query.datasets.replaceAll('-', ' '),
+    description: results.length
+      ? results[0].organization.description
+      : undefined,
   };
   const simplifyNames = {
     res_format: 'Format',

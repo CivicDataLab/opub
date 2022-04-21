@@ -11,15 +11,10 @@ import {
 
 import { barLineTransformer } from 'components/viz';
 
-import {
-  DownloadViz,
-  Indicator,
-  IndicatorMobile,
-  Table,
-} from 'components/data';
-import { ExternalLink } from 'components/icons';
+import { Download, ExternalLink } from 'components/icons';
 import { Button, Menu } from 'components/actions';
 import { MenuComp } from 'components/actions/Menu/MenuComp';
+import { downloadPackage } from 'utils/downloadPackage';
 const SimpleBarLineChartViz = dynamic(
   () => import('components/viz/SimpleBarLineChart'),
   { ssr: false, loading: () => <p>...</p> }
@@ -235,15 +230,7 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
             <SourceText>
               <strong>Data Source: </strong>
               <p>
-                Union Budget documents (2016-17 to 2021-22) sourced from{' '}
-                <a
-                  href="https://openbudgetsindia.org/"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Open Budgets India
-                  <span className="sr-only"> :opens in new window</span>
-                </a>
+                {data.organization}
               </p>
             </SourceText>
 
@@ -259,7 +246,7 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
                 Data Guidebook
                 <span className="sr-only"> :opens in new window</span>
               </Button> */}
-              <DownloadViz
+              {/* <DownloadViz
                 viz={currentViz}
                 type={selectedBudgetType}
                 indicator={
@@ -268,7 +255,17 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
                     : 'Budget Estimates'
                 }
                 name={data.title}
-              />
+              /> */}
+              <Button
+                kind="primary"
+                size="sm"
+                icon={<Download />}
+                onClick={() =>
+                  downloadPackage(data.allRes, 'Dataset')
+                }
+              >
+                Download Data Package
+              </Button>
             </SourceButtons>
           </ExplorerSource>
         </VizWrapper>
@@ -406,7 +403,7 @@ export const SourceText = styled.div`
 `;
 
 export const SourceButtons = styled.div`
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1rem; */
 `;

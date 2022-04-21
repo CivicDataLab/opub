@@ -7,7 +7,7 @@ import AboutPage from './AboutPage';
 const About = ({members: members, partners: partners}) => {
   const headerData = {
     title: 'The Team',
-    content:
+    description:
       'A single umbrella portal that houses a complete ecosystem with data exchange, analytics, sources, app development, economy, and frameworks. This platform will also manage the directories of all data available in India. With a state-of-the-art search, discovery, and use mechanism.',
   };
 
