@@ -14,7 +14,7 @@ type Props = {
 
 const headerData = {
   title: 'All Organizations',
-  content: 'A list of all organizations under the Justice Hub Platform.',
+  content: 'A list of all organizations under the National Data Platform.',
 };
 
 const Orgs: React.FC<Props> = ({ data }) => {  

@@ -11,15 +11,10 @@ import {
 
 import { barLineTransformer } from 'components/viz';
 
-import {
-  DownloadViz,
-  Indicator,
-  IndicatorMobile,
-  Table,
-} from 'components/data';
-import { ExternalLink } from 'components/icons';
+import { Download, ExternalLink } from 'components/icons';
 import { Button, Menu } from 'components/actions';
 import { MenuComp } from 'components/actions/Menu/MenuComp';
+import { downloadPackage } from 'utils/downloadPackage';
 const SimpleBarLineChartViz = dynamic(
   () => import('components/viz/SimpleBarLineChart'),
   { ssr: false, loading: () => <p>...</p> }
@@ -248,7 +243,7 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
             </SourceText>
 
             <SourceButtons>
-              <Button
+              {/* <Button
                 href="https://docs.google.com/document/d/1PlnurMmjyzKdIZ5ktHbQZxYmI0XWKdd0NAW1OHtvhe8/preview"
                 rel="noreferrer"
                 target="_blank"
@@ -258,8 +253,8 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
               >
                 Data Guidebook
                 <span className="sr-only"> :opens in new window</span>
-              </Button>
-              <DownloadViz
+              </Button> */}
+              {/* <DownloadViz
                 viz={currentViz}
                 type={selectedBudgetType}
                 indicator={
@@ -268,7 +263,17 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
                     : 'Budget Estimates'
                 }
                 name={data.title}
-              />
+              /> */}
+              <Button
+                kind="primary"
+                size="sm"
+                icon={<Download />}
+                onClick={() =>
+                  downloadPackage(Object.values(data.resUrls), 'Datasets')
+                }
+              >
+                Download Data Package <Download />
+              </Button>
             </SourceButtons>
           </ExplorerSource>
         </VizWrapper>
@@ -406,7 +411,7 @@ export const SourceText = styled.div`
 `;
 
 export const SourceButtons = styled.div`
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1rem; */
 `;
