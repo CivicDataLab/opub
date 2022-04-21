@@ -2,9 +2,8 @@ import React from "react";
 import Head from "next/head";
 import styled from 'styled-components';
 
-import {unified} from 'unified';
-import remarkParse from 'remark-parse';
-import remarkHtml from 'remark-html';
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const WikiPageId = (props) => {
 
@@ -17,9 +16,11 @@ const WikiPageId = (props) => {
             <h1 className="center"> {props.wiki.title} </h1>
             <br /><br />
 
-            <div 
-            dangerouslySetInnerHTML={{ __html: props.content }}>
-            </div>
+            <ReactMarkdown
+            transformImageUri={uri =>
+                uri.startsWith("http") ? uri : `${process.env.STRAPI_URL}${uri}`
+              }
+            >{props.wiki.content}</ReactMarkdown>
         </WikiDoc>
         
         </>
@@ -31,17 +32,8 @@ export async function getStaticProps(context) {
     const contentReq = await fetch(`${process.env.STRAPI_URL}/wikis/${context.params.wikiPage}`);
     const wiki = await contentReq.json();
 
-    const renderHTML = await unified()
-    .use(remarkParse)
-    .use(remarkHtml)
-    .process(wiki.content);
-
-    const content = await renderHTML.toString();
-
-    // console.log(content);
-    
     return{
-        props: { wiki, content }
+        props: { wiki }
     }
 }
 
@@ -87,8 +79,18 @@ const WikiDoc = styled.main`
 
     li {
         display: list-item;
-        margin-left: 10px;
+        margin-left: 30px;
+        list-style-type: disc;
+    }
+
+    li li {
+        display: list-item;
+        margin-left: 30px;
         list-style-type: circle;
+    }
+
+    img {
+        width: 50vw;
     }
 
 `;
