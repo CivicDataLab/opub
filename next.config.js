@@ -9,7 +9,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['justicehub.in', '65.0.11.237', 'strapi.ndp.civicdatalab.in'],
+    domains: ['justicehub.in', 'ndp.ckan.civicdatalab.in', 'strapi.ndp.civicdatalab.in'],
     formats: ["image/webp"],
   },
 };
