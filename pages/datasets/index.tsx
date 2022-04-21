@@ -78,7 +78,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
   const headerData = {
     title: 'All Datasets',
     content:
-      'An overview of the budget allocated and the expenditure incurred under Education related accounting heads by the Government of Uttar Pradesh for in the across various fiscal years.',
+      'An overview of datasets published by all the organizations on the platform.',
   };
 
   return (

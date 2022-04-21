@@ -248,7 +248,7 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
             </SourceText>
 
             <SourceButtons>
-              <Button
+              {/* <Button
                 href="https://docs.google.com/document/d/1PlnurMmjyzKdIZ5ktHbQZxYmI0XWKdd0NAW1OHtvhe8/preview"
                 rel="noreferrer"
                 target="_blank"
@@ -258,7 +258,7 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
               >
                 Data Guidebook
                 <span className="sr-only"> :opens in new window</span>
-              </Button>
+              </Button> */}
               <DownloadViz
                 viz={currentViz}
                 type={selectedBudgetType}
