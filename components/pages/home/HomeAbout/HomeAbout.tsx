@@ -19,13 +19,10 @@ const HomeAbout = () => {
         <div>
           <h2>About the platform</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-            ut totam cupiditate iusto architecto mollitia fugiat esse nam.
-            Beatae sequi, omnis maxime accusantium perferendis id nesciunt eum
-            inventore amet dignissimos.
+            National Data Platform is to be an open source data exchange to authorize organizations to securely Exchange data and possibly monetizing while maintaining control over visibility, access and distribution through Private APIs. It would enable creating data pricing models that will facilitate easy and efficient Exchange of data among various stakeholders and data providers by interconnecting with data in silos and enabling co–creation initiatives and innovations.
           </p>
           <Button kind="primary-outline" size="sm">
-            Know More About Us
+            Know More
           </Button>
         </div>
       </div>

@@ -107,10 +107,10 @@ const Transformer: React.FC<Props> = ({ transformerslist }) => {
       org_name: `${form['org_name'].value}`,
       transformers_list: [],
     };
-    console.log(postData);
-    console.log(transformList);
+    // console.log(postData);
+    // console.log(transformList);
     postData.transformers_list = transformList;
-    console.log(postData);
+    // console.log(postData);
 
     if (postData.transformers_list[0].name == 'pipeline__transformation') {
       alert('Select atleast 1 transformer');

@@ -18,23 +18,23 @@ export const navList = {
       link: '/wiki',
       name: 'Wiki',
     },
-    {
-      link: '#resources',
-      name: 'Resources',
-      submenu: [
-        {
-          link: '#',
-          name: 'Budget Summary',
-        },
-        {
-          link: '#',
-          name: 'Summary',
-        },
-        {
-          link: '#',
-          name: 'Data Story',
-        },
-      ],
-    },
+    // {
+    //   link: '#resources',
+    //   name: 'Resources',
+    //   submenu: [
+    //     {
+    //       link: '#',
+    //       name: 'Budget Summary',
+    //     },
+    //     {
+    //       link: '#',
+    //       name: 'Summary',
+    //     },
+    //     {
+    //       link: '#',
+    //       name: 'Data Story',
+    //     },
+    //   ],
+    // },
   ],
 };

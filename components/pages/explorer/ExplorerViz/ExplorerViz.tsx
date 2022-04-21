@@ -230,15 +230,7 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
             <SourceText>
               <strong>Data Source: </strong>
               <p>
-                Union Budget documents (2016-17 to 2021-22) sourced from{' '}
-                <a
-                  href="https://openbudgetsindia.org/"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Open Budgets India
-                  <span className="sr-only"> :opens in new window</span>
-                </a>
+                {data.organization}
               </p>
             </SourceText>
 
@@ -269,10 +261,10 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
                 size="sm"
                 icon={<Download />}
                 onClick={() =>
-                  downloadPackage(Object.values(data.resUrls), 'Datasets')
+                  downloadPackage(data.allRes, 'Dataset')
                 }
               >
-                Download Data Package <Download />
+                Download Data Package
               </Button>
             </SourceButtons>
           </ExplorerSource>

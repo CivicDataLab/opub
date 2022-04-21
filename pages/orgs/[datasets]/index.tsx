@@ -75,7 +75,7 @@ const Datasets: React.FC<Props> = ({ data, facets, query, variables }) => {
         break;
     }
   }
-  console.log(results);
+  // console.log(results);
 
 
   const headerData = {

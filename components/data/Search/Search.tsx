@@ -40,7 +40,7 @@ const Search: React.FC<{ text?: string; newSearch: any }> = ({
           value={q}
           id="searchInput"
           onChange={(e) => handleChange(e.target.value)}
-          placeholder={text ? text : 'Try COVID, Hospital, Construction'}
+          placeholder={text ? text : 'Try a search term...'}
           aria-label="Search"
         />
         <SearchClear

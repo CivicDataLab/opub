@@ -27,9 +27,15 @@ export function explorerPopulation(obj) {
   let newObj = {};
   const resources = {};
   const resUrls = {};
+
+  const allRes = [];
+  
   obj.resources &&
     obj.resources.forEach((res) => {
       resUrls[res.format] = res.url;
+
+      allRes.push(res.url);
+
       if (res.name == 'Datasheet') resources.dataUrl = res.url;
       if (res.name == 'Metadata') resources.metaUrl = res.url;
     });
@@ -42,6 +48,8 @@ export function explorerPopulation(obj) {
     dataUrl: resources.dataUrl || '',
     metaUrl: resources.metaUrl || '',
     resUrls,
+    allRes,
+    organization: obj.organization ? obj.organization.title : '',
   };
 
   return newObj;
