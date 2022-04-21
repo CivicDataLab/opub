@@ -15,7 +15,6 @@ type Props = {
 };
 
 const pipeline: React.FC<Props> = ({ pipelinelist }) => {
-  console.log(pipelinelist);
 
   const Pipelines = pipelinelist.result;
 

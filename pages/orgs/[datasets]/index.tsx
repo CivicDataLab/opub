@@ -27,12 +27,13 @@ import { DatasetCardComp } from 'components/data/Cards/DatasetCard/CardComp';
 type Props = {
   data: any;
   facets: any;
+  query: any;
   variables: any;
 };
 
 const list = '"tags", "res_format"';
 
-const Datasets: React.FC<Props> = ({ data, facets, variables }) => {
+const Datasets: React.FC<Props> = ({ data, facets, query, variables }) => {
   const router = useRouter();
   const { q, sort, size, fq, from } = router.query;
   const [search, setSearch] = useState(q);
@@ -42,7 +43,6 @@ const Datasets: React.FC<Props> = ({ data, facets, variables }) => {
   const [pages, setPages] = useState(from);
 
   const { results, count } = data.result;
-
   useEffect(() => {
     router.push({
       pathname: `/orgs/${router.query.datasets}`,
@@ -77,13 +77,9 @@ const Datasets: React.FC<Props> = ({ data, facets, variables }) => {
   }
 
   const headerData = {
-    title: results.length ? results[0].organization.title : 'Header Title',
-    content: results.length
-      ? truncate(results[0].organization.description || '', 300)
-      : truncate(
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores delectus quam aut quo labore exercitationem itaque soluta earum dicta, dolore ab velit nulla perspiciatis porro, adipisci ipsum eligendi! Deserunt, suscipit.',
-          300
-        ),
+    title: results.length
+      ? results[0].organization.title
+      : query.datasets.replaceAll('-', ' '),
   };
   const simplifyNames = {
     res_format: 'Format',
@@ -170,6 +166,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       data,
       facets,
       variables,
+      query,
     },
   };
 };
