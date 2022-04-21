@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 const Header = ({ data }) => {
+  
   return (
     <HeaderWrapper>
       <div className="container">
@@ -11,7 +12,7 @@ const Header = ({ data }) => {
           </Link>
         )}
         <h2>{data.title}</h2>
-        <p>{data.content || ''}</p>
+        <p>{data.description || ''}</p>
         {data.date && <p>{data.date}</p>}
       </div>
     </HeaderWrapper>
