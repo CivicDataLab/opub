@@ -91,14 +91,14 @@ const WikiDoc = styled.main`
     }
 
     img {
-        width: 50vw;
+        width: 80%;
     }
 
     table {
         margin-top: 2vh;
         margin-bottom: 2vh;
         border-collapse: collapse;
-        width: 85vw;
+        width: 100%;
     }
 
     table th {
