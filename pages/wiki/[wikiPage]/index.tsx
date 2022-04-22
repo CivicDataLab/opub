@@ -17,6 +17,7 @@ const WikiPageId = (props) => {
             <br /><br />
 
             <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
             transformImageUri={uri =>
                 uri.startsWith("http") ? uri : `${process.env.STRAPI_URL}${uri}`
               }
@@ -90,7 +91,38 @@ const WikiDoc = styled.main`
     }
 
     img {
-        width: 50vw;
+        width: 80%;
+    }
+
+    table {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #2d523f;
+        color: white;
+    }
+
+    table th, table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    table tr:nth-child(even){
+        background-color: #f2f2f2;
+    }
+
+    blockquote {
+        color: #666;
+        margin: 0;
+        padding-left: 3em;
+        border-left: 0.5em #eee solid;
     }
 
 `;
