@@ -6,56 +6,56 @@ import { LokSabha, VidhanSabha } from 'components/icons';
 
 const states = [
   {
-    title: 'Rajasthan',
-    value: 'rajasthan',
+    id: 'Rajasthan',
+    name: 'rajasthan',
   },
   {
-    title: 'Uttar Pradesh',
-    value: 'uttar_pradesh',
+    id: 'Uttar Pradesh',
+    name: 'uttar_pradesh',
   },
   {
-    title: 'Odisha',
-    value: 'odisha',
+    id: 'Odisha',
+    name: 'odisha',
   },
   {
-    title: 'Gujrat',
-    value: 'gujrat',
+    id: 'Gujrat',
+    name: 'gujrat',
   },
   {
-    title: 'Kerela',
-    value: 'kerela',
+    id: 'Kerela',
+    name: 'kerela',
   },
   {
-    title: 'Tamil Nadu',
-    value: 'tamil_nadu',
+    id: 'Tamil Nadu',
+    name: 'tamil_nadu',
   },
 ];
 
 const schemes = [
   {
-    title: 'Beti Bachao Beti Padhao (BBBP)',
-    value: 'bbbp',
+    id: 'Beti Bachao Beti Padhao (BBBP)',
+    name: 'bbbp',
   },
   {
-    title: 'Integrated Child Development Services (ICDS)',
-    value: 'icds',
+    id: 'Integrated Child Development Services (ICDS)',
+    name: 'icds',
   },
   {
-    title: 'Integrated Child Protection Scheme (ICPS)',
-    value: 'icps',
+    id: 'Integrated Child Protection Scheme (ICPS)',
+    name: 'icps',
   },
   {
-    title:
+    id:
       'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
-    value: 'mgnregs',
+    name: 'mgnregs',
   },
   {
-    title: 'National Health Mission (NHM)',
-    value: 'nhm',
+    id: 'National Health Mission (NHM)',
+    name: 'nhm',
   },
   {
-    title: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
-    value: 'pmkisan',
+    id: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
+    name: 'pmkisan',
   },
 ];
 
@@ -95,8 +95,8 @@ const HomeHeader = () => {
 
   function handleSubmitClick() {
     const obj = {
-      state: selectedState.value,
-      scheme: selectedScheme.value,
+      state: selectedState.name,
+      scheme: selectedScheme.name,
       sabha: selectedSabha,
     };
     console.log(obj);
@@ -135,7 +135,7 @@ const HomeHeader = () => {
                 options={states}
                 handleChange={(e) => handleMenuChange(e, states)}
                 heading="Select State"
-                value={selectedState.title}
+                value={selectedState.id}
                 showLabel={false}
               />
             </StateMenu>
@@ -144,7 +144,7 @@ const HomeHeader = () => {
                 options={schemes}
                 handleChange={(e) => handleMenuChange(e, schemes)}
                 heading="Select any Scheme"
-                value={selectedScheme.title}
+                value={selectedScheme.id}
                 showLabel={false}
               />
             </div>
