@@ -8,7 +8,10 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 ##Copy new files or directories into the filesystem of the container
-COPY . /usr/src/app
+# COPY . /usr/src/app
+RUN apk add --no-cache git
+RUN git clone https://github.com/CivicDataLab/opub.git 
+WORKDIR /usr/src/app/opub
 
 #Execute commands in a new layer on top of the current image and commit the results
 RUN npm install
