@@ -13,6 +13,8 @@ RUN apk add --no-cache git
 RUN git clone https://github.com/CivicDataLab/opub.git 
 WORKDIR /usr/src/app/opub
 
+RUN git checkout docker
+
 #Execute commands in a new layer on top of the current image and commit the results
 RUN npm install
 RUN npm run build
