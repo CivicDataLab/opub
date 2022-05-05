@@ -8,8 +8,8 @@ import { useRouter } from 'next/router';
 
 const states = [
   {
-    name: 'Rajasthan',
-    id: 'rajasthan',
+    name: 'All',
+    id: 'all',
   },
   {
     name: 'Uttar Pradesh',
@@ -123,9 +123,22 @@ const HomeHeader = () => {
   return (
     <Header>
       <div className="container">
-        <h1>Search through Open and Private Datasets</h1>
+        <h1>One Stop Solution for Nationwide Data Needs</h1>
+        <p>A platform that serves for data seekers, publishers and change makers.</p>
         <HeaderControls>
-          <Search newSearch={handleDatasetsChange} />
+          <SchemeSelector>
+            <StateMenu className="fill">
+              <Menu
+                options={states}
+                handleChange={(e) => handleMenuChange(e, states)}
+                heading="All"
+                value={selectedState.name}
+                showLabel={false}
+              />
+            </StateMenu>
+            <Search newSearch={handleDatasetsChange} />
+          </SchemeSelector>
+          
         </HeaderControls>
       </div>
     </Header>
@@ -138,7 +151,7 @@ const Header = styled.header`
   padding: 64px 0;
   min-height: calc(100vh - 182px);
   background-color: var(--color-background-light);
-  background-image: url('/assets/images/background.svg');
+  // background-image: url('/assets/images/background.svg');
   z-index: -1;
 
   display: flex;
@@ -150,8 +163,14 @@ const Header = styled.header`
     margin: 0 auto;
   }
 
-  h1 {
+  h1, p {
     text-align: center;
+  }
+  h1 {
+    font-size: 2vw;
+  }
+  p {
+    font-size: 1.5vw;
   }
 `;
 
