@@ -11,8 +11,8 @@ export default function Home() {
       </Head>
       <HomePage>
         <HomeHeader />
-        <HomeHighlight />
         <HomeAbout />
+        <HomeHighlight />
         <HomeStates />
         <HomeQuiz />
       </HomePage>
