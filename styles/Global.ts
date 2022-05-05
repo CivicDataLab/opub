@@ -12,7 +12,7 @@ ${cssReset}
 ${cssNormalise}
 
 html {
-  --color-primary: ${theme.color_amazon_100};
+  --color-primary: ${theme.primary};
   --color-secondary : ${theme.color_maple_100};
   --color-tertiary : ${theme.color_olive_100};
 

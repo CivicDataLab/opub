@@ -1,5 +1,5 @@
 export const DEFAULT_THEME = {
-  primary: '#28A062',
+  primary: '#092CB3',
   secondary: '#E9B840',
   tertiary: '#CCBE72',
 
@@ -24,9 +24,9 @@ export const DEFAULT_THEME = {
   color_olive_500: '#56502F',
   color_olive_600: '#3E3A22',
 
-  background_dark: '#2D523F',
+  background_dark: '#8496D9',
   background_darker: '#172920',
-  background_light: '#EBF0EE',
+  background_light: '#DFE6ED',
   background_lighter: '#FFFFFF',
 
   color_violet: '#B881C7',
@@ -55,7 +55,7 @@ export const DEFAULT_THEME = {
   grey_500: '#D1CDD1',
   grey_600: '#F2EFF2',
 
-  text_dark_high: 'rgba(255, 255, 255, 1)',
+  text_dark_high: 'rgb(9, 44, 179)',
   text_dark_medium: 'rgba(255, 255, 255, 0.72)',
   text_dark_light: 'rgba(255, 255, 255, 0.36)',
   text_dark_disabled: 'rgba(255, 255, 255, 0.16)',
