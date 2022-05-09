@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { dataList } from 'data/datasetdata/datasetlist';
 
 import {
   fetchFilters,
@@ -14,7 +15,7 @@ import { Header } from 'components/layouts';
 import { Search, Total, Filter, Sort, Pagination } from 'components/data';
 import { DatasetList } from 'components/pages/datasets';
 import MobileAlter from 'components/data/MobileAlter/MobileAlter';
-import DataCatalogue from 'components/icons/DataCatalogue';
+
 type Props = {
   data: any;
   facets: any;
@@ -24,29 +25,52 @@ type Props = {
 const list = '"tags", "groups"';
 
 const Datasets: React.FC<Props> = ({ data, facets }) => {
+
   const router = useRouter();
-  const { q, sort, size, fq, from } = router.query;
+  const { q, sort, size, fq, from , datasets } = router.query;
   const [search, setSearch] = useState(q);
   const [sorts, setSorts] = useState(sort);
   const [items, setItems] = useState(size);
   const [datsetsFilters, setDatasetsFilters] = useState(fq);
   const [pages, setPages] = useState(from);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [headerData,setHeaderDta] = useState({})
 
   const { results, count } = data.result;
+  const pageTitle = ['dataset','budget','scheme','story'];
+
   useEffect(() => {
+    let result = pageTitle.includes(datasets.toString())? datasets.toString() : pageTitle[0];
     router.push({
-      pathname: router.pathname,
+      pathname: '/[datasets]',
       query: {
         fq: datsetsFilters,
         q: search,
         sort: sorts,
         size: items,
         from: pages,
+        datasets: result,
       },
     });
   }, [datsetsFilters, search, sorts, pages, items]);
 
+  useEffect(() => {
+    switch (datasets) {
+      case 'dataset':
+        setHeaderDta(dataList.dataset);
+        break;
+      case 'scheme':
+        setHeaderDta(dataList.scheme);
+        break;
+      case 'budget':
+        setHeaderDta(dataList.budget);
+        break;
+      case 'story':
+        setHeaderDta(dataList.story);
+        break;
+    }
+  },[])
+  
   function handleDatasetsChange(val: any) {
     switch (val.query) {
       case 'q':
@@ -71,13 +95,6 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
     e.preventDefault();
     setModalIsOpen(!modalIsOpen);
   }
-
-  const headerData = {
-    title: 'All Datasets',
-    content:
-      'An overview of the budget allocated and the expenditure incurred under Education related accounting heads by the Government of Uttar Pradesh for in the across various fiscal years.',
-    logo: <DataCatalogue />,
-  };
 
   return (
     <>
@@ -119,7 +136,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const query = context.query || {};
+  const query = context.query.datasets || {};
   const variables = convertToCkanSearchQuery(query);
   const facets = await fetchFilters(list, variables, 'tender_dataset');
 
