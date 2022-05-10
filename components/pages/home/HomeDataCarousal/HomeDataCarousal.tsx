@@ -30,7 +30,7 @@ const HomeDataCarousel = () => {
 
   const data = [
     {
-      text: 'Beti Bachao Beti Padhao',
+      text: 'National Highways Data - A Placeholder text for Headings',
       content:
         'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.',
       link: 'k',
@@ -92,6 +92,7 @@ export default HomeDataCarousel;
 
 const Wrapper = styled.div`
 padding-block-end: 10%;
+background: #f7f9fa;
 
 .placeholder{
   border: 1px solid #D1CDD1 !important;

@@ -6,3 +6,4 @@ export { default as HomeQuiz } from './HomeQuiz';
 export { default as HomeExplore } from './HomeExplore';
 export { default as HomeBanner } from './HomeBanner';
 export { default as HomeDataCarousal } from './HomeDataCarousal';
+export { default as HomeFooter } from './HomeFooter';
