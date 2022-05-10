@@ -57,7 +57,7 @@ const Search: React.FC<{ text?: string; newSearch: any }> = ({
 
         <Button
             onClick={handleSubmit}
-            className="search__submit postrans"
+            className="postrans"
             icon={<Arrow />}
             iconOnly={true}
           >
