@@ -33,7 +33,7 @@ const HomeAbout = () => {
 export default HomeAbout;
 
 const About = styled.section`
-  background-color: #dfe6ed;
+  background-color: #f7f9fa;
 
   > .container {
     display: flex;
