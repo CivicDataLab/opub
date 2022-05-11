@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { Button } from 'components/actions';
+import { ArrowTail } from 'components/icons';
 
 const data = [
   {
@@ -37,38 +38,43 @@ const data = [
 ];
 
 const HomeBanner = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
+  function updateSchemes(pos) {
+    const len = data.length - 1;
+    if (pos == -1 && currentSlide == 0) {
+      setCurrentSlide(len);
+    } else if (pos == 1 && currentSlide == len) {
+      setCurrentSlide(0);
+    } else setCurrentSlide((prevState) => prevState + pos);
+  }
 
   return (
     <section className="container FeaturedCarousal">
-      <h1>Featured Datasets</h1>
-      <div className='CardItems'>
-      {data.map((item, index) => (
-          <a key={`FeaturedItem-${index}`}>
-            <div className='itemCard'>
-              <h2>{item.text}</h2>
-              <p>{item.content}</p>
-              <div className="datePublisher">
-                <h4>{item.pubDate}</h4>
-                <h4>.</h4>
-                <h4>{item.org}</h4>
+      {/* <h1>Featured Datasets</h1>
+      <div>
+        <button>
+          <ArrowTail />
+        </button>
+        <div className='CardItems'>
+        {data[currentSlide].map((item, index) => (
+            <a key={`FeaturedItem-${index}`}>
+              <div className='itemCard'>
+                <h2>{item.text}</h2>
+                <p>{item.content}</p>
+                <div className="datePublisher">
+                  <h4>{item.pubDate}</h4>
+                  <h4>.</h4>
+                  <h4>{item.org}</h4>
+                </div>
               </div>
-            </div>
-          </a>
-          // <div key={`carousel-${index}`}>
-          //   <div className="content">
-          //     <h2>{item.text}</h2>
-          //     <p>{item.content}</p>
-          //     <div className="datePublisher">
-          //       <h4>{item.pubDate}</h4>
-          //       <h4>.</h4>
-          //       <h4>{item.org}</h4>
-          //     </div>
-          //   </div>
-          // </div>
-        ))}
-      </div>
-      
+            </a>
+          ))}
+        </div>
+        <button>
+          <ArrowTail />
+        </button>
+      </div>       */}
     </section>
   );
 };
