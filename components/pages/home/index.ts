@@ -7,3 +7,5 @@ export { default as HomeExplore } from './HomeExplore';
 export { default as HomeBanner } from './HomeBanner';
 export { default as HomeDataCarousal } from './HomeDataCarousal';
 export { default as HomeFooter } from './HomeFooter';
+export { default as HomeFeaturedCarousal } from './HomeFeaturedCarousal';
+export { default as HomePartners } from './HomePartners';
