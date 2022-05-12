@@ -50,61 +50,103 @@ const HomeBanner = () => {
   }
 
   return (
-    <section className="container FeaturedCarousal">
-      {/* <h1>Featured Datasets</h1>
-      <div>
-        <button>
-          <ArrowTail />
-        </button>
-        <div className='CardItems'>
-        {data[currentSlide].map((item, index) => (
-            <a key={`FeaturedItem-${index}`}>
-              <div className='itemCard'>
-                <h2>{item.text}</h2>
-                <p>{item.content}</p>
-                <div className="datePublisher">
-                  <h4>{item.pubDate}</h4>
-                  <h4>.</h4>
-                  <h4>{item.org}</h4>
+    <section className="container">
+      <FeaturedCarousalMain>
+        <h1>Featured Datasets</h1>
+        <div className='datasets__container'>
+          <button>
+            <ArrowTail className='reverseArrow'/>
+          </button>
+          <div className='dataset__cardItems'>
+          {data.map((item, index) => (
+              <a key={`FeaturedItem-${index}`}>
+                <div className='itemCard'>
+                  <p>Category Dataset</p>
+                  <h3>{item.text}</h3>
+                  <div className="datePublisher">
+                    <h4>{item.pubDate}</h4>
+                    <h4>.</h4>
+                    <h4>{item.org}</h4>
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))}
-        </div>
-        <button>
-          <ArrowTail />
-        </button>
-      </div>       */}
+              </a>
+            ))}
+          </div>
+          <button>
+            <ArrowTail />
+          </button>
+        </div>    
+      </FeaturedCarousalMain>        
     </section>
   );
 };
 
 export default HomeBanner;
 
-const FeaturedCarousal = styled.div`
+const FeaturedCarousalMain = styled.div`
   text-align: center;
-`;
+  position: absolute;
+  left:0;
+  right:0;
+  margin-top: -8%;
+  
 
-const CardItems = styled.div`
-  display: flex;
+  .datasets__container{
+    display: flex;
 
-  .carousel__content {
-    flex-basis: 50%;
-    padding: 2%;
-    
+    justify-content: center;
+    padding-left: 10vw;
+    padding-right: 10vw;
+  }
+
+  .reverseArrow {
+    transform: rotate(180deg);
+  }
+
+  .dataset__cardItems{
+    display: flex;
+
+    justify-content: space-between;
+    text-align: left;
+    width: 100%;
+
     .itemCard {
-      padding-top: 1%;
-      padding-bottom: 1%;
+      padding: 1%;
       margin: 2%;
-      border: 2px solid #dfe6ed;
+      border: 2px solid #c3cfd9;
       background: white;
-      display: flex;
       align-items: center;
+      width: 20vw;
+      height: 15vh;
+      align-content: space-between;
     }
     
     @media (max-width: 980px) {
       width: 90%;
     }
+
+    .datePublisher {
+      display: flex;
+      margin-right: 2px;
+      color: #788896;
+    }
+  }
+`;
+
+const CardItems = styled.div`
+  display: flex;
+    
+  .itemCard {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin: 2%;
+    border: 2px solid #dfe6ed;
+    background: white;
+    align-items: center;
+  }
+  
+  @media (max-width: 980px) {
+    width: 90%;
   }
 `;
 
@@ -141,72 +183,6 @@ const Card = styled.div`
 
     figure {
       display: none;
-    }
-  }
-`;
-
-const Options = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 16px;
-  gap: 16px;
-
-  > label {
-    min-width: 45%;
-  }
-`;
-
-const Item = styled.label`
-  display: grid;
-  grid-template-columns: 1em auto;
-  gap: 0.5em;
-
-  input {
-    /* Remove native radio style */
-    appearance: none;
-    background-color: #fff;
-    margin: 0;
-
-    font: inherit;
-    color: currentColor;
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid currentColor;
-    border-radius: 50%;
-    transform: translateY(0.2em);
-
-    display: grid;
-    place-content: center;
-
-    &::before {
-      content: '';
-      width: 0.65em;
-      height: 0.65em;
-      border-radius: 50%;
-      transform: scale(0);
-      transition: 120ms transform ease-in-out;
-      box-shadow: inset 1em 1em var(--color-grey-200);
-
-      /* Windows High Contrast Mode */
-      background-color: CanvasText;
-    }
-
-    &:checked::before {
-      transform: scale(1);
-    }
-
-    &:focus-visible {
-      outline: max(2px, 0.15em) solid currentColor;
-      outline-offset: max(2px, 0.15em);
-    }
-  }
-
-  &.quiz-wrong {
-    color: var(--color-error);
-
-    input::before {
-      box-shadow: inset 1em 1em var(--color-error);
-      transform: scale(1);
     }
   }
 `;

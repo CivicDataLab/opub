@@ -39,7 +39,7 @@ const About = styled.section`
     display: flex;
     flex-wrap: wrap;
     gap: 42px;
-    padding-block: 48px;
+    padding-block: 150px;
 
     > div {
       flex-basis: 0;
