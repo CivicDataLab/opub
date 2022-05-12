@@ -161,8 +161,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const variables = convertToCkanSearchQuery(query);
 
   variables.fq = variables.fq
-    ? variables.fq.concat(` AND (organization:${query.datasets})`)
-    : (variables.fq = `(organization:${query.datasets})`);
+    ? variables.fq.concat(`AND private:false AND (organization:${query.datasets})`)
+    : (variables.fq = `private:false AND (organization:${query.datasets})`);
 
   const facets = await fetchFilters(list, variables);
   const data = await fetchOrgDatasets(query.datasets, variables);
