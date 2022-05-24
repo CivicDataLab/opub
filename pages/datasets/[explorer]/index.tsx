@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { fetchAPI, explorerPopulation, fetchFromTags } from 'utils/explorer';
 import { resourceGetter } from 'utils/resourceParser';
 
-import { ExplorerHeader, ExplorerViz } from 'components/pages/explorer';
+import { ExplorerHeader, ExplorerInfo, ExplorerRelated, ExplorerViz } from 'components/pages/explorer';
 import tempViz from 'data/tempViz.json';
 
 type Props = {
@@ -26,12 +26,15 @@ const Explorer: React.FC<Props> = ({ data, fileData }) => {
       </Head>
       <Wrapper>
         <ExplorerHeader data={data} />
-        <ExplorerViz
+        {/* <ExplorerViz
           data={data}
           vizData={fileData}
           resUrl={resUrl}
-        />
+        /> */}
         {/* <ExplorerRelated data={data} /> */}
+        <ExplorerInfo data={data} 
+          vizData={fileData}
+          resUrl={resUrl} />
       </Wrapper>
     </>
   );
