@@ -349,7 +349,7 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
                             <DataStoryWrapper>
 
                               {item.content['stories'].map((story, index) => (
-                                <DataStoryCard id={`DataStoryCard-${index}`}>
+                                <DataStoryCard key={`DataStoryCard-${index}`}>
                                   <Image src={story.image} width={500} height={300} />
                                   <p>{`By ${story.author} | ${story.publishDate}`}</p>
                                   <h3>{story.title}</h3>
@@ -400,7 +400,7 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
                               </tr>
 
                               {pricingTableData.map((priceItem, index) => (
-                                <tr id={`priceItem-${index}`}>
+                                <tr key={`priceItem-${index}`}>
                                   <td>{priceItem.feature}</td>
                                   <td>{priceItem.free ? 'Yes' : 'No'}</td>
                                   <td>{priceItem.upgraded ? 'Yes' : 'No'}</td>
