@@ -3,63 +3,6 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import { Button } from 'components/actions';
 
-const questions = [
-  {
-    question:
-      'Do you know this question about Rajasthan state which is like really weird?',
-    options: [
-      {
-        id: 'huey',
-        text: 'Huey',
-      },
-      {
-        id: 'dewey',
-        text: 'Dewey',
-      },
-      {
-        id: 'louie',
-        text: 'Louie',
-      },
-      {
-        id: 'pixel',
-        text: 'Pixel',
-      },
-    ],
-    answer: 'pixel',
-    url: '#',
-    image: '/assets/images/placeholder.jpg',
-    kind: 'state',
-    name: 'quiz1',
-  },
-  {
-    question:
-      'Do you know what was the Opening Balance of MGNREGA Scheme in Beejapur - Rajasthan?',
-    options: [
-      {
-        id: 'huey',
-        text: 'Huey',
-      },
-      {
-        id: 'dewey',
-        text: 'Dewey',
-      },
-      {
-        id: 'louie',
-        text: 'Louie',
-      },
-      {
-        id: 'pixel',
-        text: 'Pixel',
-      },
-    ],
-    answer: 'pixel',
-    url: '#',
-    image: '/assets/images/placeholder.jpg',
-    kind: 'scheme',
-    name: 'quiz2',
-  },
-];
-
 const bannerData = {
     heading: 'A banner section for any kind of exclusive CTA or Announcements',
     img: '/assets/images/placeholder.jpg',
@@ -69,44 +12,6 @@ const bannerData = {
 }
 
 const HomeBanner = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentQuiz, setCurrentQuiz] = useState(questions[0]);
-  const submitRef = useRef(null);
-  const answeredRef = useRef(null);
-
-  function handleSubmitClick() {
-    const selectedAns = document.querySelector(
-      `input[name="${currentQuiz.name}"]:checked`
-    ) as HTMLInputElement;
-    if (selectedAns) {
-      const correct = currentQuiz.answer;
-      submitRef.current.setAttribute('hidden', 'true');
-      answeredRef.current.removeAttribute('hidden');
-
-      if (selectedAns.value != correct) {
-        document
-          .querySelector(`[data-id="${selectedAns.value}"]`)
-          .classList.add('quiz-wrong');
-      }
-      document
-        .querySelector(`[data-id="${correct}"]`)
-        .classList.add('quiz-correct');
-    } else {
-      alert('select an option');
-    }
-  }
-
-  function playAgain() {
-    if (currentIndex == questions.length - 1) {
-      setCurrentQuiz(questions[0]);
-      setCurrentIndex(0);
-    } else {
-      setCurrentQuiz(questions[currentIndex + 1]);
-      setCurrentIndex((prev) => prev + 1);
-    }
-    answeredRef.current.setAttribute('hidden', 'true');
-    submitRef.current.removeAttribute('hidden');
-  }
 
   return (
     <section className="container">
