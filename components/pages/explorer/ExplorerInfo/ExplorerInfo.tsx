@@ -272,31 +272,6 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
 
 export default ExplorerInfo;
 
-const DataStoryWrapper = styled.div`
-  
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
-  // padding-top: 2%;
-`;
-
-const DataStoryCard = styled.div`
-  border: 2px solid #c3cfd9;
-  padding: 10px;
-  background: white;
-  margin-right: 20px;
-  margin-bottom: 20px;
-`;
-
-const NewStoryCard = styled.div`
-  border: 2px solid #9eadba;
-  padding: 40px;
-  background: #dfe6ed;
-
-  p, Button{
-    margin-top: 1vh;
-  }
-`;
-
 const Footer = styled.div`
   background-color: #c3cfd9;
   text-align: center;
@@ -589,30 +564,6 @@ export const TabbedWrapper = styled.div`
     margin-bottom: 1%;
   }
 
-  .AboutDataContainer{
-    h2 {
-      margin-top: 1%;
-      margin-bottom: 1%;
-    }
-    .publisherContainer {
-      display: flex;
-  
-      div {
-        margin-left: 1%;
-      }
-      p {
-        color: #788896;
-      }
-      a {
-        color: #0e5cf2;  
-      }
-    }
-    .morePublisher{
-      list-style: none;
-      color: #0e5cf2;
-      text-decoration: none;
-    }
-  }
 
   .FeaturedVizContainer{
     .smallViz{
