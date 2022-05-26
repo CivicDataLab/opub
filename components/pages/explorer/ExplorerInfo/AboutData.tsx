@@ -1,91 +1,88 @@
-import React from "react";
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const aboutDataItem = {
-    name: 'About Data',
-    id: 'AboutData',
-    ico: '/assets/images/placeholder.jpg',
-    content: {
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo!',
-      publisher: 'Name of the Publisher',
-      publisherSubtitle: 'Placeholder for any subtitle',
-      publisherLink: '',
-      publisherDescription:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum!',
-      publisherImage: '/assets/images/placeholder.jpg',
-      publisherMore: [
-        {
-          title: 'Placeholder text with dataset with two line name',
-          link: "https://localhost:3000",
-        },
-        {
-          title: 'Placeholder text with dataset',
-          link: "https://localhost:3000",
-        },
-        {
-          title: 'Placeholder text',
-          link: "https://localhost:3000",
-        },
-        {
-          title: 'Placeholder text with two line name',
-          link: "https://localhost:3000",
-        },
-      ],
-    },
-  }
+  name: 'About Data',
+  id: 'AboutData',
+  ico: '/assets/images/placeholder.jpg',
+  content: {
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo!',
+    publisher: 'Name of the Publisher',
+    publisherSubtitle: 'Placeholder for any subtitle',
+    publisherLink: '',
+    publisherDescription:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum!',
+    publisherImage: '/assets/images/placeholder.jpg',
+    publisherMore: [
+      {
+        title: 'Placeholder text with dataset with two line name',
+        link: 'https://localhost:3000',
+      },
+      {
+        title: 'Placeholder text with dataset',
+        link: 'https://localhost:3000',
+      },
+      {
+        title: 'Placeholder text',
+        link: 'https://localhost:3000',
+      },
+      {
+        title: 'Placeholder text with two line name',
+        link: 'https://localhost:3000',
+      },
+    ],
+  },
+};
 
 const AboutData = () => {
-    return (
-        <div className='AboutDataContainer'>
-            <h2>Description</h2>
-            <p>{aboutDataItem.content.description}</p>
-            <h2>About Publisher</h2>
-            <div className='publisherContainer'>
-                <Image
-                alt="Logo"
-                src={aboutDataItem.content.publisherImage}
-                width={200}
-                height={100}
-                />
-                <div>
-                <h3>{aboutDataItem.content.publisher}</h3>
-                <p>{aboutDataItem.content.publisherSubtitle}</p>
-                <a href={aboutDataItem.content.publisherLink}>
-                    Publisher Page
-                </a>
-                </div>
-            </div>
-            <p>{aboutDataItem.content.publisherDescription}</p>
-            <div>
-                <h2>More by this Publisher</h2>
-                {aboutDataItem.content.publisherMore.map(
-                (article, index) => (
-                    <li className='morePublisher' key={`LinkItem-${index}`}>
-                    <Link href={article.link}>
-                        {article.title}
-                    </Link>
-                    </li>
-                ))}
-            </div>
-            </div>
-    )
-}
+  return (
+    <AboutDataWrapper>
+      <div className="AboutDataContainer">
+        <h2>Description</h2>
+        <p>{aboutDataItem.content.description}</p>
+        <h2>About Publisher</h2>
+        <div className="publisherContainer">
+          <Image
+            alt="Logo"
+            src={aboutDataItem.content.publisherImage}
+            width={200}
+            height={100}
+          />
+          <div>
+            <h3>{aboutDataItem.content.publisher}</h3>
+            <p>{aboutDataItem.content.publisherSubtitle}</p>
+            <a href={aboutDataItem.content.publisherLink}>Publisher Page</a>
+          </div>
+        </div>
+        <p>{aboutDataItem.content.publisherDescription}</p>
+        <div>
+          <h2>More by this Publisher</h2>
+          {aboutDataItem.content.publisherMore.map((article, index) => (
+            <li className="morePublisher" key={`LinkItem-${index}`}>
+              <Link href={article.link}>{article.title}</Link>
+            </li>
+          ))}
+        </div>
+      </div>
+    </AboutDataWrapper>
+  );
+};
 
 export default AboutData;
 
 const AboutDataWrapper = styled.div`
-    .AboutDataContainer{
+  .AboutDataContainer {
     h2 {
       margin-top: 1%;
       margin-bottom: 1%;
     }
-    
+
     .publisherContainer {
       display: flex;
-  
+
       div {
         margin-left: 1%;
       }
@@ -93,11 +90,11 @@ const AboutDataWrapper = styled.div`
         color: #788896;
       }
       a {
-        color: #0e5cf2;  
+        color: #0e5cf2;
       }
     }
-    
-    .morePublisher{
+
+    .morePublisher {
       list-style: none;
       color: #0e5cf2;
       text-decoration: none;
