@@ -12,6 +12,7 @@ import { MenuComp } from 'components/actions/Menu/MenuComp';
 
 import AboutData from './AboutData';
 import DataStories from './DataStories';
+import Pricing from './Pricing';
 
 const relatedDatasets = [
   {
@@ -81,72 +82,14 @@ let ExplorerData = {
     },
     {
       name: 'Pricing',
-      id: 'EDM6',
+      id: 'Pricing',
       ico: '/assets/images/placeholder.jpg',
-      content: 'Pricing',
     },
   ],
 };
 
 let metadataArray = [...Array(20)].fill('');
 let schemeInfoArray = [...Array(15)].fill('');
-
-let pricingTableData = [
-  {
-    feature: 'Sample Data',
-    free: true,
-    upgraded: true,
-    premium: true
-  },
-  {
-    feature: 'APIs',
-    free: true,
-    upgraded: true,
-    premium: true
-  },
-  {
-    feature: 'PDF Files',
-    free: true,
-    upgraded: true,
-    premium: true
-  },
-  {
-    feature: 'CSV Files',
-    free: true,
-    upgraded: true,
-    premium: true
-  },
-  {
-    feature: 'XLSM File',
-    free: true,
-    upgraded: true,
-    premium: true
-  },
-  {
-    feature: '01 Month',
-    free: true,
-    upgraded: true,
-    premium: true
-  },
-  {
-    feature: '03 Month',
-    free: true,
-    upgraded: true,
-    premium: true
-  },
-  {
-    feature: '06 Month',
-    free: true,
-    upgraded: true,
-    premium: true
-  },
-  {
-    feature: '12 Month',
-    free: true,
-    upgraded: true,
-    premium: true
-  },
-];
 
 const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: any }> = ({ data, meta, vizData, resUrl }) => {
   const TabbedRef = useRef(null);
@@ -273,58 +216,7 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
                         );
                       case 'Pricing':
                         return (
-                          <div>
-                            <h2>Pricing Modal - This is subjected to change in the future</h2>
-                            <table className='pricingTable'>
-                              <tr>
-                                <th>Features</th>
-                                <th>Free</th>
-                                <th>Upgraded</th>
-                                <th>Premium</th>
-                              </tr>
-
-                              {pricingTableData.map((priceItem, index) => (
-                                <tr key={`priceItem-${index}`}>
-                                  <td>{priceItem.feature}</td>
-                                  <td>{priceItem.free ? 'Yes' : 'No'}</td>
-                                  <td>{priceItem.upgraded ? 'Yes' : 'No'}</td>
-                                  <td>{priceItem.premium ? 'Yes' : 'No'}</td>
-                                </tr>
-                              ))}
-                              
-                              <tr>
-                                <td></td>
-                                <td>
-                                  <Button
-                                    size='sm'>
-                                    Get This Plan
-                                  </Button>
-                                </td>
-                                <td>
-                                  <Button
-                                    size='sm'>
-                                    Get This Plan
-                                  </Button>
-                                </td>
-                                <td>
-                                  <Button
-                                    size='sm'>
-                                    Get This Plan
-                                  </Button>
-                                </td>
-                              </tr>
-                            </table>
-
-                            <NewPriceCard>
-                              <h3>Still need more clarity on the pricing model ?</h3>
-                              <p>Let us help you and make your life easier.</p>
-                              <Button
-                                kind='primary'
-                              >
-                                Contact Us
-                              </Button>
-                            </NewPriceCard>
-                          </div>
+                          <Pricing />
                         );
                     }
                   })()}
@@ -399,16 +291,6 @@ const NewStoryCard = styled.div`
   border: 2px solid #9eadba;
   padding: 40px;
   background: #dfe6ed;
-
-  p, Button{
-    margin-top: 1vh;
-  }
-`;
-
-const NewPriceCard = styled.div`
-  border: 2px solid #9eadba;
-  padding: 40px;
-  background: white;
 
   p, Button{
     margin-top: 1vh;
@@ -705,42 +587,6 @@ export const TabbedWrapper = styled.div`
     text-align: center;
     margin-top: 1%;
     margin-bottom: 1%;
-  }
-
-  .pricingTable {
-    background: white;
-    border: 2px solid #c3cfd9;
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-
-    tr:first-child {
-      border-bottom: 2px solid #dfe6ed;
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-
-    tr:last-child {
-      border-top: 2px solid #dfe6ed;
-    }
-
-    td, th {
-      text-align: center;
-      padding: 10px;
-      border-right: 2px solid #dfe6ed;
-
-      Button {
-        margin: 0 auto;
-      }
-    }
-
-    td:first-child, th:first-child {
-      text-align: left;
-    }
-
-    tr {
-      padding: 10px;
-    }
   }
 
   .AboutDataContainer{
