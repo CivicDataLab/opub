@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const aboutDataItem = {
     name: 'About Data',
-    id: 'EDM1',
+    id: 'AboutData',
     ico: '/assets/images/placeholder.jpg',
     content: {
       description:

@@ -11,6 +11,7 @@ import ExplorerViz from '../ExplorerViz';
 import { MenuComp } from 'components/actions/Menu/MenuComp';
 
 import AboutData from './AboutData';
+import DataStories from './DataStories';
 
 const relatedDatasets = [
   {
@@ -69,44 +70,8 @@ let ExplorerData = {
     },
     {
       name: 'Data Stories',
-      id: 'EDM4',
+      id: 'DataStories',
       ico: '/assets/images/placeholder.jpg',
-      content: {
-        stories: [
-          {
-            title: "Name of the featured Data Story",
-            image: "/assets/images/placeholder.jpg",
-            author: "Arpit Arora",
-            publishDate: "02 June 2022",
-            tags: ['data', 'social', 'technology', 'research'],
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur in corrupti nam harum facilis officiis dolores odit saepe excepturi quibusdam, itaque iure, aliquam minima obcaecati maiores veniam? Dolorem, facere temporibus."
-          },
-          {
-            title: "Name of the featured Data Story",
-            image: "/assets/images/placeholder.jpg",
-            author: "Arpit Arora",
-            publishDate: "02 June 2022",
-            tags: ['data', 'social', 'technology', 'research'],
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur in corrupti nam harum facilis officiis dolores odit saepe excepturi quibusdam, itaque iure, aliquam minima obcaecati maiores veniam? Dolorem, facere temporibus."
-          },
-          {
-            title: "Name of the featured Data Story",
-            image: "/assets/images/placeholder.jpg",
-            author: "Arpit Arora",
-            publishDate: "02 June 2022",
-            tags: ['data', 'social', 'technology', 'research'],
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur in corrupti nam harum facilis officiis dolores odit saepe excepturi quibusdam, itaque iure, aliquam minima obcaecati maiores veniam? Dolorem, facere temporibus."
-          },
-          {
-            title: "Name of the featured Data Story",
-            image: "/assets/images/placeholder.jpg",
-            author: "Arpit Arora",
-            publishDate: "02 June 2022",
-            tags: ['data', 'social', 'technology', 'research'],
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur in corrupti nam harum facilis officiis dolores odit saepe excepturi quibusdam, itaque iure, aliquam minima obcaecati maiores veniam? Dolorem, facere temporibus."
-          },
-        ],
-      }
     },
     {
       name: 'Rating & Reviews',
@@ -287,31 +252,7 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
                         );
                       case 'Data Stories':
                         return (
-                          <div>
-                            <h2>Other data-stories for this dataset</h2>
-                            <DataStoryWrapper>
-
-                              {item.content['stories'].map((story, index) => (
-                                <DataStoryCard key={`DataStoryCard-${index}`}>
-                                  <Image src={story.image} width={500} height={300} />
-                                  <p>{`By ${story.author} | ${story.publishDate}`}</p>
-                                  <h3>{story.title}</h3>
-                                  <p>{story.description}</p>
-                                </DataStoryCard>
-                              ))}
-                            </DataStoryWrapper>
-
-                            <NewStoryCard>
-                              <h3>Something worthy enough to make a noise using data ?</h3>
-                              <p>Write something impactful</p>
-                              <Button
-                                kind='primary-outline'
-                              >
-                                Create a Data Story
-                              </Button>
-                            </NewStoryCard>
-
-                          </div>
+                          <DataStories />
                         );
                       case 'Rating & Reviews':
                         return (
