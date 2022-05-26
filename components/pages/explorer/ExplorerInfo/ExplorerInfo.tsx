@@ -10,6 +10,8 @@ import Link from 'next/link';
 import ExplorerViz from '../ExplorerViz';
 import { MenuComp } from 'components/actions/Menu/MenuComp';
 
+import AboutData from './AboutData';
+
 const relatedDatasets = [
   {
     text: 'National Highways Data - A Placeholder text for Headings',
@@ -47,36 +49,8 @@ let ExplorerData = {
   tabs: [
     {
       name: 'About Data',
-      id: 'EDM1',
+      id: 'AboutData',
       ico: '/assets/images/placeholder.jpg',
-      content: {
-        description:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo!',
-        publisher: 'Name of the Publisher',
-        publisherSubtitle: 'Placeholder for any subtitle',
-        publisherLink: '',
-        publisherDescription:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum! Saepe laudantium officia placeat omnis vero totam qui, illum quo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo accusantium dicta aperiam? Tenetur voluptatum distinctio at voluptas vitae quam rerum!',
-        publisherImage: '/assets/images/placeholder.jpg',
-        publisherMore: [
-          {
-            title: 'Placeholder text with dataset with two line name',
-            link: "https://localhost:3000",
-          },
-          {
-            title: 'Placeholder text with dataset',
-            link: "https://localhost:3000",
-          },
-          {
-            title: 'Placeholder text',
-            link: "https://localhost:3000",
-          },
-          {
-            title: 'Placeholder text with two line name',
-            link: "https://localhost:3000",
-          },
-        ],
-      },
     },
     {
       name: 'Scheme Info.',
@@ -239,38 +213,7 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
                     switch (item.name) {
                       case 'About Data':
                         return (
-                          <div className='AboutDataContainer'>
-                            <h2>Description</h2>
-                            <p>{item.content['description']}</p>
-                            <h2>About Publisher</h2>
-                            <div className='publisherContainer'>
-                              <Image
-                                alt="Logo"
-                                src={item.content['publisherImage']}
-                                width={200}
-                                height={100}
-                              />
-                              <div>
-                                <h3>{item.content['publisher']}</h3>
-                                <p>{item.content['publisherSubtitle']}</p>
-                                <a href={item.content['publisherLink']}>
-                                  Publisher Page
-                                </a>
-                              </div>
-                            </div>
-                            <p>{item.content['publisherDescription']}</p>
-                            <div>
-                              <h2>More by this Publisher</h2>
-                              {item.content['publisherMore'].map(
-                                (article, index) => (
-                                  <li className='morePublisher' key={`LinkItem-${index}`}>
-                                    <Link href={article.link}>
-                                      {article.title}
-                                    </Link>
-                                  </li>
-                                ))}
-                            </div>
-                          </div>
+                          <AboutData />
                         );
                       case 'Scheme Info.':
                         return (
@@ -281,7 +224,7 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
                             <h2>Scheme Info.</h2>
                             <table className='schemeInfoTable'>
                               {schemeInfoArray.map((schemeItem, index) => (
-                                <tr id={`schemeItem-${index}`}>
+                                <tr key={`schemeItem-${index}`}>
                                   <td>{schemeItem}</td>
                                   <td>{schemeItem}</td>
                                 </tr>
@@ -454,7 +397,7 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
                 <tbody>
                   {/* {console.log(metadataArray)} */}
                   {metadataArray.map((metaItem, index) => (
-                    <tr id={`MetadataItem-${index}`}>
+                    <tr key={`MetadataItem-${index}`}>
                       <td>{metaItem}</td>
                     </tr>
                   ))}
