@@ -14,6 +14,7 @@ import AboutData from './AboutData';
 import DataStories from './DataStories';
 import Pricing from './Pricing';
 import Visualizations from './Visualizations';
+import RatingsReviews from './RatingsReviews';
 
 const relatedDatasets = [
   {
@@ -57,7 +58,7 @@ let ExplorerData = {
     },
     {
       name: 'Scheme Info.',
-      id: 'EDM2',
+      id: 'SchemeInfo',
       ico: '/assets/images/placeholder.jpg',
       content: {
         description:
@@ -67,9 +68,8 @@ let ExplorerData = {
     },
     {
       name: 'Visualizations',
-      id: 'EDM3',
+      id: 'Visualizations',
       ico: '/assets/images/placeholder.jpg',
-      content: 'Visualizations',
     },
     {
       name: 'Data Stories',
@@ -78,9 +78,8 @@ let ExplorerData = {
     },
     {
       name: 'Rating & Reviews',
-      id: 'EDM5',
+      id: 'RatingsReviews',
       ico: '/assets/images/placeholder.jpg',
-      content: 'Rating & Reviews',
     },
     {
       name: 'Pricing',
@@ -153,20 +152,7 @@ const ExplorerInfo: React.FC<{
                         return <DataStories />;
                       case 'Rating & Reviews':
                         return (
-                          <div>
-                            <h2>Add your Ratings and Reviews</h2>
-                            <div className="newReviewContainer">
-                              <p>Add your Ratings and Reviews</p>
-                            </div>
-                            <h2>Ratings</h2>
-                            <div className="ratingsContainer">
-                              <p>Placeholder for Rating Details</p>
-                            </div>
-                            <h2>Reviews</h2>
-                            <div className="ratingsContainer">
-                              <p>All Reviews listed here</p>
-                            </div>
-                          </div>
+                          <RatingsReviews />
                         );
                       case 'Pricing':
                         return <Pricing />;
