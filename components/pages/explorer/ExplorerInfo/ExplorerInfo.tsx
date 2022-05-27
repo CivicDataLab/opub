@@ -15,6 +15,7 @@ import DataStories from './DataStories';
 import Pricing from './Pricing';
 import Visualizations from './Visualizations';
 import RatingsReviews from './RatingsReviews';
+import SchemeInfo from './SchemeInfo';
 
 const relatedDatasets = [
   {
@@ -60,11 +61,6 @@ let ExplorerData = {
       name: 'Scheme Info.',
       id: 'SchemeInfo',
       ico: '/assets/images/placeholder.jpg',
-      content: {
-        description:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus.',
-        schemeInfo: '',
-      },
     },
     {
       name: 'Visualizations',
@@ -90,7 +86,6 @@ let ExplorerData = {
 };
 
 let metadataArray = [...Array(20)].fill('');
-let schemeInfoArray = [...Array(15)].fill('');
 
 const ExplorerInfo: React.FC<{
   data: any;
@@ -128,32 +123,13 @@ const ExplorerInfo: React.FC<{
                       case 'About Data':
                         return <AboutData />;
                       case 'Scheme Info.':
-                        return (
-                          <div>
-                            <h2>Small Description</h2>
-                            <p>{item.content['description']}</p>
-
-                            <h2>Scheme Info.</h2>
-                            <table className="schemeInfoTable">
-                              {schemeInfoArray.map((schemeItem, index) => (
-                                <tr key={`schemeItem-${index}`}>
-                                  <td>{schemeItem}</td>
-                                  <td>{schemeItem}</td>
-                                </tr>
-                              ))}
-                            </table>
-                          </div>
-                        );
+                        return <SchemeInfo />;
                       case 'Visualizations':
-                        return (
-                          <Visualizations />
-                        );
+                        return <Visualizations />;
                       case 'Data Stories':
                         return <DataStories />;
                       case 'Rating & Reviews':
-                        return (
-                          <RatingsReviews />
-                        );
+                        return <RatingsReviews />;
                       case 'Pricing':
                         return <Pricing />;
                     }
@@ -413,21 +389,6 @@ export const TabbedWrapper = styled.div`
         tr {
           border-bottom: 2px solid #c3cfd9;
         }
-      }
-    }
-
-    .schemeInfoTable {
-      border: 2px solid #c3cfd9;
-      background: white;
-      width: 100%;
-
-      td {
-        padding: 15px;
-        border-right: 2px solid #c3cfd9;
-      }
-
-      tr {
-        border-bottom: 2px solid #c3cfd9;
       }
     }
   }
