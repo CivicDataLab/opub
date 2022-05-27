@@ -228,72 +228,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const HeaderContent = styled.div`
-  display: flex;
-  gap: 1.5rem;
-
-  figure {
-    background-color: #fff;
-    max-width: 72px;
-    max-height: 72px;
-    display: grid;
-    place-content: center;
-    padding: 22px;
-    border-radius: 16px;
-    border: 1px solid #cdd1d1;
-  }
-
-  svg {
-    width: 29px;
-    height: 29px;
-  }
-
-  h2 {
-    font-size: 1.75rem;
-    font-weight: 800;
-    line-height: 130%;
-    margin-bottom: 20px;
-  }
-
-  .orgName {
-    color: #788896;
-  }
-`;
-
-const HeaderText = styled.p`
-  font-weight: 500;
-  line-height: 175%;
-`;
-
-const HeaderMeta = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
-
-  span {
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 130%;
-    color: hsla(0, 0%, 0%, 0.6);
-    background-color: hsla(0, 0%, 0%, 0.08);
-    padding: 4px 6px;
-  }
-
-  strong {
-    color: #02838b;
-    font-weight: bold;
-  }
-`;
-
-const Seperator = styled.div`
-  border-bottom: 2px solid #dfe6ed;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-
 export const TabbedWrapper = styled.div`
   // * {
   //   color: inherit;
@@ -332,33 +266,7 @@ export const TabbedWrapper = styled.div`
     //   margin-top: 0.75rem;
     // }
   }
-  .categoryGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
-    padding-top: 2%;
-  }
-  .categoryCard {
-    padding-top: 1%;
-    padding-bottom: 1%;
-    margin: 2%;
-    border: 2px solid #dfe6ed;
-    background: white;
-    display: flex;
-    align-items: center;
-    div {
-      width: 10%;
-      height: 10%;
-      margin: 3%;
-    }
-    h3 {
-      margin-right: 5%;
-    }
-    .leadingArrow {
-      fill: #788896;
-      margin-left: auto;
-    }
-  }
-
+  
   .tabdetailsContainer {
     display: flex;
     padding-top: 2.5rem;
@@ -391,24 +299,6 @@ export const TabbedWrapper = styled.div`
         }
       }
     }
-  }
-
-  .newReviewContainer {
-    border: 2px dashed #9eadba;
-    background: #dfe6ed;
-    padding: 50px;
-    text-align: center;
-    margin-top: 1%;
-    margin-bottom: 1%;
-  }
-
-  .ratingsContainer {
-    border: 2px solid #9eadba;
-    background: white;
-    padding: 50px;
-    text-align: center;
-    margin-top: 1%;
-    margin-bottom: 1%;
   }
 
   @media (max-width: 550px) {
