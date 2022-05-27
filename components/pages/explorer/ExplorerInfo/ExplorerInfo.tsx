@@ -13,6 +13,7 @@ import { MenuComp } from 'components/actions/Menu/MenuComp';
 import AboutData from './AboutData';
 import DataStories from './DataStories';
 import Pricing from './Pricing';
+import Visualizations from './Visualizations';
 
 const relatedDatasets = [
   {
@@ -23,7 +24,7 @@ const relatedDatasets = [
     image: '/assets/images/placeholder.jpg',
     pubDate: '12 Apr, 2022',
     org: 'PhonePe',
-    tag: 'Category Tag'
+    tag: 'Category Tag',
   },
   {
     text: 'Beti Bachao ',
@@ -33,7 +34,7 @@ const relatedDatasets = [
     image: '/assets/images/placeholder.jpg',
     pubDate: '13 Jun, 2022',
     org: 'NIC',
-    tag: 'Category Tag'
+    tag: 'Category Tag',
   },
   {
     text: 'Beti Bachao ',
@@ -43,7 +44,7 @@ const relatedDatasets = [
     image: '/assets/images/placeholder.jpg',
     pubDate: '13 Jun, 2022',
     org: 'NPCI',
-    tag: 'Category Tag'
+    tag: 'Category Tag',
   },
 ];
 
@@ -59,8 +60,9 @@ let ExplorerData = {
       id: 'EDM2',
       ico: '/assets/images/placeholder.jpg',
       content: {
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus.",
-        schemeInfo: ""
+        description:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta recusandae, doloribus maiores sit laudantium temporibus totam reiciendis consectetur cum vero officia. Quas molestias qui recusandae in provident excepturi vero possimus.',
+        schemeInfo: '',
       },
     },
     {
@@ -91,7 +93,12 @@ let ExplorerData = {
 let metadataArray = [...Array(20)].fill('');
 let schemeInfoArray = [...Array(15)].fill('');
 
-const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: any }> = ({ data, meta, vizData, resUrl }) => {
+const ExplorerInfo: React.FC<{
+  data: any;
+  meta?: any;
+  vizData?: any;
+  resUrl?: any;
+}> = ({ data, meta, vizData, resUrl }) => {
   const TabbedRef = useRef(null);
 
   useEffect(() => {
@@ -113,16 +120,14 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
             ))}
           </ul>
 
-          <div className='tabdetailsContainer'>
-            <div className='tabDetails'>
+          <div className="tabdetailsContainer">
+            <div className="tabDetails">
               {ExplorerData.tabs.map((item, index) => (
                 <section key={`CategoryMenu-${index}`} id={item.id}>
                   {(() => {
                     switch (item.name) {
                       case 'About Data':
-                        return (
-                          <AboutData />
-                        );
+                        return <AboutData />;
                       case 'Scheme Info.':
                         return (
                           <div>
@@ -130,7 +135,7 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
                             <p>{item.content['description']}</p>
 
                             <h2>Scheme Info.</h2>
-                            <table className='schemeInfoTable'>
+                            <table className="schemeInfoTable">
                               {schemeInfoArray.map((schemeItem, index) => (
                                 <tr key={`schemeItem-${index}`}>
                                   <td>{schemeItem}</td>
@@ -138,95 +143,42 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
                                 </tr>
                               ))}
                             </table>
-
                           </div>
                         );
                       case 'Visualizations':
                         return (
-                          <div className='FeaturedVizContainer'>
-                            <h2>Featured Visualizations</h2>
-                            <div>
-                              <VizContainer>
-                                <VizHeader>
-                                  <h3>Visualization Type 01</h3>
-                                </VizHeader>
-                                <VizBody>
-
-                                </VizBody>
-                                <VizSource>
-                                  <Link href={''}>
-                                    Explore More
-                                  </Link>
-                                </VizSource>
-                              </VizContainer>
-
-                              <div className='smallViz'>
-                                <VizContainer>
-                                  <VizHeader>
-                                    <h3>Visualization Type 02</h3>
-                                  </VizHeader>
-                                  <VizBody>
-
-                                  </VizBody>
-                                  <VizSource>
-                                    <Link href={''}>
-                                      Explore More
-                                    </Link>
-                                  </VizSource>
-                                </VizContainer>
-
-                                <VizContainer>
-                                  <VizHeader>
-                                    <h3>Visualization Type 03</h3>
-                                  </VizHeader>
-                                  <VizBody>
-
-                                  </VizBody>
-                                  <VizSource>
-                                    <Link href={''}>
-                                      Explore More
-                                    </Link>
-                                  </VizSource>
-                                </VizContainer>
-                              </div>
-
-                            </div>
-                          </div>
+                          <Visualizations />
                         );
                       case 'Data Stories':
-                        return (
-                          <DataStories />
-                        );
+                        return <DataStories />;
                       case 'Rating & Reviews':
                         return (
                           <div>
                             <h2>Add your Ratings and Reviews</h2>
-                            <div className='newReviewContainer'>
+                            <div className="newReviewContainer">
                               <p>Add your Ratings and Reviews</p>
                             </div>
                             <h2>Ratings</h2>
-                            <div className='ratingsContainer'>
+                            <div className="ratingsContainer">
                               <p>Placeholder for Rating Details</p>
                             </div>
                             <h2>Reviews</h2>
-                            <div className='ratingsContainer'>
+                            <div className="ratingsContainer">
                               <p>All Reviews listed here</p>
                             </div>
                           </div>
                         );
                       case 'Pricing':
-                        return (
-                          <Pricing />
-                        );
+                        return <Pricing />;
                     }
                   })()}
                 </section>
               ))}
             </div>
 
-            <div className='metadataContainer'>
+            <div className="metadataContainer">
               <h2>Meta data</h2>
-              <table className='metadataTable'>
+              <table className="metadataTable">
                 <tbody>
                   {/* {console.log(metadataArray)} */}
                   {metadataArray.map((metaItem, index) => (
@@ -238,18 +190,15 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
               </table>
             </div>
           </div>
-
-
         </TabbedWrapper>
-
       </div>
       <RelatedDatasets>
-        <div className='container'>
+        <div className="container">
           <h2>Related Datasets</h2>
-          <div className='relatedDataContainer'>
+          <div className="relatedDataContainer">
             {relatedDatasets.map((dataset, index) => (
               <a key={`FeaturedItem-${index}`}>
-                <div className='itemCard'>
+                <div className="itemCard">
                   <p>Category Dataset</p>
                   <h4>{dataset.text}</h4>
                   <div className="datePublisher">
@@ -261,7 +210,6 @@ const ExplorerInfo: React.FC<{ data: any; meta?: any, vizData?: any, resUrl?: an
               </a>
             ))}
           </div>
-
         </div>
       </RelatedDatasets>
 
@@ -291,7 +239,7 @@ const RelatedDatasets = styled.div`
     a {
       width: 33%;
     }
-      
+
     .itemCard {
       padding: 2%;
       margin: 2% 2% 2% 0;
@@ -306,51 +254,6 @@ const RelatedDatasets = styled.div`
       color: #788896;
     }
   }
-  
-`;
-
-const VizContainer = styled.div`
-  border: 2px solid #c3cfd9;
-  background: white;
-  margin-bottom: 20px;
-`;
-
-const VizHeader = styled.div`
-  border-bottom: 2px solid #cdd1d1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem 0;
-  gap: 1.5rem;
-  margin: 0 1.5rem;
-
-  // ${MenuComp} {
-  //   flex-basis: 270px;
-  // }
-`;
-
-const VizBody = styled.div`
-  padding: 3rem;
-`;
-
-const VizSource = styled.div`
-border-top: 1px solid #cdd1d1;
-display: flex;
-flex-wrap: wrap;
-gap: 2rem;
-justify-content: flex-end;
-align-items: flex-start;
-padding: 1rem 0;
-margin: 0 1.5rem;
-
-button,
-a {
-  svg {
-    width: 10px;
-    margin-left: 8px;
-  }
-}
 `;
 
 const Wrapper = styled.div`
@@ -494,16 +397,16 @@ export const TabbedWrapper = styled.div`
     }
   }
 
-  .tabdetailsContainer{
+  .tabdetailsContainer {
     display: flex;
     padding-top: 2.5rem;
 
-    .tabDetails{
-      width:80%;
+    .tabDetails {
+      width: 80%;
       padding-right: 20px;
     }
-    
-    .metadataContainer{
+
+    .metadataContainer {
       width: 20%;
       margin-top: 2rem;
 
@@ -512,41 +415,38 @@ export const TabbedWrapper = styled.div`
         margin-bottom: 1%;
       }
 
-      .metadataTable{
+      .metadataTable {
         border: 2px solid #c3cfd9;
         background: white;
         width: 100%;
 
-        td{
+        td {
           padding: 15px;
         }
 
-        tr{
+        tr {
           border-bottom: 2px solid #c3cfd9;
-          
         }
       }
     }
 
-    .schemeInfoTable{
+    .schemeInfoTable {
       border: 2px solid #c3cfd9;
       background: white;
       width: 100%;
 
-      td{
+      td {
         padding: 15px;
         border-right: 2px solid #c3cfd9;
       }
 
-      tr{
+      tr {
         border-bottom: 2px solid #c3cfd9;
-        
       }
     }
-    
   }
 
-  .newReviewContainer{
+  .newReviewContainer {
     border: 2px dashed #9eadba;
     background: #dfe6ed;
     padding: 50px;
@@ -555,30 +455,13 @@ export const TabbedWrapper = styled.div`
     margin-bottom: 1%;
   }
 
-  .ratingsContainer{
+  .ratingsContainer {
     border: 2px solid #9eadba;
     background: white;
     padding: 50px;
     text-align: center;
     margin-top: 1%;
     margin-bottom: 1%;
-  }
-
-
-  .FeaturedVizContainer{
-    .smallViz{
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-
-      div {
-        flex-grow: 1;
-      }
-
-      div:first-child {
-        margin-right: 10px;
-      }
-    }
   }
 
   @media (max-width: 550px) {
