@@ -1,11 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
-import {
-  tabbedInterface,
-  filter_data_indicator,
-  filter_data_budgettype,
-} from 'utils/explorer';
+import { filter_data_indicator, filter_data_budgettype } from 'utils/explorer';
+import { tabbedInterface } from 'utils/helper';
 
 import { barLineTransformer } from 'components/viz';
 

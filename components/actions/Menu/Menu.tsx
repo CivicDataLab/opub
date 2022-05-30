@@ -15,8 +15,8 @@ interface Props {
    * Options to display in the menu
    */
   options: {
-    id: string;
-    name: string;
+    value: string;
+    title: string;
   }[];
 
   /**
@@ -246,7 +246,7 @@ const Menu = ({
   }
 
   return (
-    <MenuComp className={className}>
+    <MenuComp showLabel={showLabel} className={className}>
       {heading && value && showLabel && (
         <MenuLabel id={menuLabelID}>{heading}&nbsp;&nbsp;</MenuLabel>
       )}
@@ -261,7 +261,7 @@ const Menu = ({
         >
           <span>{value ? value : heading}</span>
           <div>
-            <ArrowDown fill="#6C666E" />
+            <ArrowDown fill="#ABB0AD" />
           </div>
         </MenuButton>
         <MenuContent
@@ -274,14 +274,14 @@ const Menu = ({
         >
           {options.length > 0 ? (
             options.map((item, index) => (
-              <MenuItem key={`menuItem-${index}`} role="none">
+              <MenuItem key={item.value} role="none">
                 <button
                   onClick={(e) => menuItemHandle(e)}
-                  data-value={item.id}
+                  data-value={item.value}
                   role="menuitem"
                   tabIndex={index == 0 ? 0 : -1}
                 >
-                  {item.name}
+                  {item.title}
                 </button>
               </MenuItem>
             ))

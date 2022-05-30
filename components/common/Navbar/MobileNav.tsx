@@ -38,13 +38,17 @@ const MobileNav = ({ data }) => {
           <div className={data.logo && 'header__logo'}>
             <Link href="/">
               <a>
-                <Image
-                  className="img-contain"
-                  src="/assets/images/oci_logo.png"
-                  alt="oci logo"
-                  width={166}
-                  height={40}
-                ></Image>
+                {data.logo ? (
+                  <Image
+                    className="logo"
+                    src={data.logo}
+                    alt={`${data.site} logo`}
+                    width={220}
+                    height={46}
+                  ></Image>
+                ) : (
+                  <h1>{data.site || 'Constituency Dashboard'}</h1>
+                )}
               </a>
             </Link>
           </div>
@@ -93,7 +97,7 @@ const MobileNav = ({ data }) => {
                                 className="submenu-item"
                               >
                                 <Link href={item.link}>
-                                  <a>
+                                  <a onClick={mobileNavHandler}>
                                     {item.name}
                                     <ArrowTail width={24} height={24} />
                                   </a>
@@ -133,7 +137,7 @@ export const MobileHeader = styled.header`
   align-items: center;
   background-color: var(--nav-bg);
 
-  @media (max-width: 800px) {
+  @media (max-width: 1096px) {
     display: block;
   }
 
@@ -141,6 +145,11 @@ export const MobileHeader = styled.header`
     display: flex;
     padding-block: 16px;
     justify-content: flex-start;
+    align-items: center;
+  }
+
+  a {
+    text-decoration: none;
   }
 
   .header__logo {
@@ -150,6 +159,12 @@ export const MobileHeader = styled.header`
       object-fit: contain;
       vertical-align: bottom;
     }
+  }
+
+  h1 {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-dark-high);
   }
 
   button {
@@ -257,5 +272,6 @@ export const SubMenu = styled.ul`
 
   svg {
     fill: var(--text-dark-high);
+    transform: rotate(180deg);
   }
 `;

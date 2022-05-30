@@ -145,3 +145,8 @@ export function swrFetch(id) {
     isError: error,
   };
 }
+
+export function simplifyNaming(key, obj) {
+  if (obj[key]) return obj[key];
+  else return key;
+}
