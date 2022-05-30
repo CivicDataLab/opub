@@ -234,6 +234,7 @@ const Navitem = styled.a`
     border-radius: 4px;
     min-width: 210px;
     display: none;
+    z-index: 100;
 
     &::before {
       content: '';

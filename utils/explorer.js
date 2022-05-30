@@ -95,7 +95,7 @@ export function filter_data_budgettype(mainData, budgetType) {
 export async function fetchFromTags(tags, id) {
   const tagsString = tags.map((i) => `"${i}"`).join(' OR ');
   const response = await fetch(
-    `${process.env.CKAN_URL}/package_search?fq=tags:(${tagsString})`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=tags:(${tagsString})`
   ).then((res) => res.json());
   const data = response.result.results;
   let filteredData = data.filter((item) => item.name != id).splice(0, 2);
@@ -183,7 +183,7 @@ export function getDate(time) {
 // fetch particular dataset
 export async function fetchAPI(path) {
   const response = await fetch(
-    `${process.env.CKAN_URL}/package_show?id=${path}`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_show?id=${path}`
   );
   const data = await response.json();
   return data;
@@ -197,7 +197,7 @@ export async function getFilters(list, variable, page) {
     }&q=${variable.q ? variable.q : ''}`;
 
     const fetchData = await fetch(
-      `${process.env.CKAN_URL}/package_search?facet.field=[${list}]&facet.limit=6&${queryVars}`
+      `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?facet.field=[${list}]&facet.limit=6&${queryVars}`
     ).then((res) => res.json());
     return fetchData.result.search_facets;
   } catch (error) {
