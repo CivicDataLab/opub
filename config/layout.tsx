@@ -7,7 +7,7 @@ const Layout: React.FC = ({ children }) => {
       <Skiplink />
       <Navbar data={navList} />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

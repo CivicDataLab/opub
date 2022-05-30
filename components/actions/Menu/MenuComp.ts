@@ -48,6 +48,7 @@ export const MenuButton = styled.button`
   line-height: 1.5;
   position: relative;
   text-align: start;
+  width: 100%;
 
   > span {
     width: 97%;

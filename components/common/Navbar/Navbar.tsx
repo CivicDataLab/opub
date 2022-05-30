@@ -37,22 +37,6 @@ const Nav = ({ data }) => {
                 )}
               </a>
             </Link>
-
-            <Separator />
-
-            <a
-              className="obi"
-              rel="noopener noreferrer"
-              href="https://openbudgetsindia.org/"
-            >
-              <Image
-                src="/assets/icons/obi_header.png"
-                alt="Open Budgets India"
-                layout="fixed"
-                width={201}
-                height={28}
-              />
-            </a>
           </Logo>
 
           <Navlinks>

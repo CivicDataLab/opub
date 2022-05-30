@@ -274,7 +274,7 @@ const Menu = ({
         >
           {options.length > 0 ? (
             options.map((item, index) => (
-              <MenuItem key={item.value} role="none">
+              <MenuItem key={`${item.value}-${index}`} role="none">
                 <button
                   onClick={(e) => menuItemHandle(e)}
                   data-value={item.value}
