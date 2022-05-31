@@ -49,6 +49,10 @@ const HomeBanner = () => {
     } else setCurrentSlide((prevState) => prevState + pos);
   }
 
+  const randomColor = () => {
+    return "#" + ((1<<24)*Math.random() | 0).toString(16)
+  }
+
   return (
     <section className="container">
       <FeaturedCarousalMain>
@@ -61,7 +65,7 @@ const HomeBanner = () => {
           {data.map((item, index) => (
               <a key={`FeaturedItem-${index}`}>
                 <div className='itemCard'>
-                  <p>Category Dataset</p>
+                  <p style={{color : `${randomColor()}`}}>Category Dataset</p>
                   <h3>{item.text}</h3>
                   <div className="datePublisher">
                     <h4>{item.pubDate}</h4>
@@ -106,7 +110,7 @@ const FeaturedCarousalMain = styled.div`
   .dataset__cardItems{
     display: flex;
 
-    justify-content: space-between;
+    justify-content: space-around;
     text-align: left;
     width: 100%;
 
@@ -127,8 +131,12 @@ const FeaturedCarousalMain = styled.div`
 
     .datePublisher {
       display: flex;
-      margin-right: 2px;
+      
       color: #788896;
+
+      h4{
+        margin-right: 5px;
+      }
     }
   }
 `;
