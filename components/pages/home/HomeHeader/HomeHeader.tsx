@@ -220,6 +220,7 @@ const HeaderToggle = styled.div`
 `;
 
 const StateMenu = styled.div`
-  flex-basis: 20%;
-  flex-grow: 1;
+  flex: 1 0 0;
+  /* flex-basis: 20%;
+  flex-grow: 1; */
 `;
