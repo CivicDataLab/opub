@@ -6,36 +6,36 @@ import { LokSabha, VidhanSabha } from 'components/icons';
 import { Search } from 'components/data';
 import { useRouter } from 'next/router';
 
-const schemes = [
-  {
-    name: 'Beti Bachao Beti Padhao (BBBP)',
-    id: 'bbbp',
-  },
-  {
-    name: 'Integrated Child Development Services (ICDS)',
-    id: 'icds',
-  },
-  {
-    name: 'Integrated Child Protection Scheme (ICPS)',
-    id: 'icps',
-  },
-  {
-    name: 'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
-    id: 'mgnregs',
-  },
-  {
-    name: 'National Health Mission (NHM)',
-    id: 'nhm',
-  },
-  {
-    name: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
-    id: 'pmkisan',
-  },
-];
+// const schemes = [
+//   {
+//     name: 'Beti Bachao Beti Padhao (BBBP)',
+//     id: 'bbbp',
+//   },
+//   {
+//     name: 'Integrated Child Development Services (ICDS)',
+//     id: 'icds',
+//   },
+//   {
+//     name: 'Integrated Child Protection Scheme (ICPS)',
+//     id: 'icps',
+//   },
+//   {
+//     name: 'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
+//     id: 'mgnregs',
+//   },
+//   {
+//     name: 'National Health Mission (NHM)',
+//     id: 'nhm',
+//   },
+//   {
+//     name: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
+//     id: 'pmkisan',
+//   },
+// ];
 
 const HomeHeader = ({ orgs }) => {
   const [selectedOrg, setSelectedOrg] = useState(orgs[0]);
-  const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
+  // const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
   const [search, setSearch] = useState('');
   // const [selectedSabha, setSelectedSabha] = useState('Lok Sabha');
 
