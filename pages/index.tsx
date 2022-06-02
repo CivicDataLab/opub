@@ -21,7 +21,7 @@ export default function Home() {
       </Head>
       <HomePage>
         <HomeHeader />
-        <HomeFeaturedCarousal />
+        {/* <HomeFeaturedCarousal /> */}
         <HomeAbout />
         <HomeHighlight />
         <HomeExplore />
