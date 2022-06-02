@@ -6,33 +6,6 @@ import { LokSabha, VidhanSabha } from 'components/icons';
 import { Search } from 'components/data';
 import { useRouter } from 'next/router';
 
-const states = [
-  {
-    name: 'All',
-    id: 'all',
-  },
-  {
-    name: 'Uttar Pradesh',
-    id: 'uttar_pradesh',
-  },
-  {
-    name: 'Odisha',
-    id: 'odisha',
-  },
-  {
-    name: 'Gujrat',
-    id: 'gujrat',
-  },
-  {
-    name: 'Kerela',
-    id: 'kerela',
-  },
-  {
-    name: 'Tamil Nadu',
-    id: 'tamil_nadu',
-  },
-];
-
 const schemes = [
   {
     name: 'Beti Bachao Beti Padhao (BBBP)',
@@ -60,50 +33,66 @@ const schemes = [
   },
 ];
 
-const HomeHeader = () => {
-  const [selectedState, setSelectedState] = useState(states[0]);
+const HomeHeader = ({ orgs }) => {
+  const [selectedOrg, setSelectedOrg] = useState(orgs[0]);
   const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
   const [search, setSearch] = useState('');
-  const [selectedSabha, setSelectedSabha] = useState('Lok Sabha');
+  // const [selectedSabha, setSelectedSabha] = useState('Lok Sabha');
 
   const router = useRouter();
 
-  const sabhaRef = useRef(null);
+  orgs.map((org) => {
+    org.name = org.title;
+    org.requestId = org.name
+      .toLowerCase()
+      .replace(/ /g, '-')
+      .replace(/[^\w-]+/g, '');
+  });
+
+  // const sabhaRef = useRef(null);
 
   function handleMenuChange(val, array) {
-    const setState = array === states ? setSelectedState : setSelectedScheme;
+    // const setOrg = array === orgs ? setSelectedOrg : setSelectedScheme;
 
-    for (let i = 0; i < array.length; i++) {
-      if (val === array[i].value) {
-        setState(array[i]);
-        return;
-      }
-    }
-    setState(array[0]);
+    // for (let i = 0; i < array.length; i++) {
+    //   if (val === array[i].value) {
+    //     setOrg(array[i]);
+    //     return;
+    //   }
+    // }
+    // setOrg(array[0]);
+
+    // console.log(val, array);
+
+    const selectedOpt = array.findIndex((orgOpt) => {
+      return orgOpt.id === val;
+    });
+
+    setSelectedOrg(array[selectedOpt]);
   }
 
-  function handleSabhaClick(e) {
-    const btn = e.target;
-    const value = btn.dataset.value;
-    setSelectedSabha(value);
+  // function handleSabhaClick(e) {
+  //   const btn = e.target;
+  //   const value = btn.dataset.value;
+  //   // setSelectedSabha(value);
 
-    const selectedBtn = sabhaRef.current.querySelector(
-      '[aria-pressed="true"]'
-    ) as HTMLElement;
+  //   const selectedBtn = sabhaRef.current.querySelector(
+  //     '[aria-pressed="true"]'
+  //   ) as HTMLElement;
 
-    if (btn !== selectedBtn) {
-      selectedBtn.setAttribute('aria-pressed', 'false');
-      btn.setAttribute('aria-pressed', 'true');
-    }
-  }
+  //   if (btn !== selectedBtn) {
+  //     selectedBtn.setAttribute('aria-pressed', 'false');
+  //     btn.setAttribute('aria-pressed', 'true');
+  //   }
+  // }
 
-  function handleSubmitClick() {
-    const obj = {
-      state: selectedState.id,
-      scheme: selectedScheme.id,
-      sabha: selectedSabha,
-    };
-  }
+  // function handleSubmitClick() {
+  //   const obj = {
+  //     state: selectedOrg.id,
+  //     scheme: selectedScheme.id,
+  //     // sabha: selectedSabha,
+  //   };
+  // }
 
   useEffect(() => {
     if (search.length > 0) {
@@ -111,6 +100,10 @@ const HomeHeader = () => {
         pathname: `/datasets`,
         query: {
           q: search,
+          fq:
+            selectedOrg.id === 'all'
+              ? ''
+              : `organization:(${selectedOrg.requestId})`,
         },
       });
     }
@@ -124,21 +117,23 @@ const HomeHeader = () => {
     <Header>
       <div className="container">
         <h1>One Stop Solution for Nationwide Data Needs</h1>
-        <p>A platform that serves for data seekers, publishers and change makers.</p>
+        <p>
+          A platform that serves for data seekers, publishers and change
+          makers.
+        </p>
         <HeaderControls>
           <SchemeSelector>
             <StateMenu className="fill">
               <Menu
-                options={states}
-                handleChange={(e) => handleMenuChange(e, states)}
+                options={orgs}
+                handleChange={(e) => handleMenuChange(e, orgs)}
                 heading="All"
-                value={selectedState.name}
+                value={selectedOrg.name}
                 showLabel={false}
               />
             </StateMenu>
             <Search newSearch={handleDatasetsChange} />
           </SchemeSelector>
-          
         </HeaderControls>
       </div>
     </Header>
@@ -163,7 +158,8 @@ const Header = styled.header`
     margin: 0 auto;
   }
 
-  h1, p {
+  h1,
+  p {
     text-align: center;
   }
   h1 {

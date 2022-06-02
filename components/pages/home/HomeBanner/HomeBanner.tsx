@@ -14,7 +14,7 @@ const bannerData = {
 const HomeBanner = () => {
 
   return (
-    <section className="container">
+    <div className="container">
       {/* <h2 className="sr-only">Quiz</h2> */}
       <Card style={{backgroundColor: bannerData.bgColor}} >
         <div>
@@ -44,7 +44,7 @@ const HomeBanner = () => {
           />
         </figure>
       </Card>
-    </section>
+    </div>
   );
 };
 

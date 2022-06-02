@@ -12,15 +12,24 @@ import {
   HomeFeaturedCarousal, 
   HomePartners 
 } from 'components/pages/home';
+import { GetStaticProps } from 'next';
+import { fetchOrgs } from 'utils/orgs.helper';
 
-export default function Home() {
+const Home = (data?) => {
+  // console.log(data);
+
+  const HeaderData = [{
+    id: 'all',
+    name: 'All',
+    title: 'All'
+  }, ...data.data]
   return (
     <>
       <Head>
         <title>NDP</title>
       </Head>
       <HomePage>
-        <HomeHeader />
+        <HomeHeader orgs={HeaderData}/>
         {/* <HomeFeaturedCarousal /> */}
         <HomeAbout />
         <HomeHighlight />
@@ -35,5 +44,18 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await fetchOrgs();
+
+  return {
+    props: {
+      data: data.result,
+    },
+  };
+};
+
 
 const HomePage = styled.main``;
