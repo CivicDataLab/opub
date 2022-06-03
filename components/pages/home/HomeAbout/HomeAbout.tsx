@@ -2,6 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'components/actions';
 import Image from 'next/image';
+import Link from 'next/link';
+
+const AboutPlatform = {
+  description: "National Data Platform is to be an open source data exchange to authorize organizations to securely Exchange data and possibly monetizing while maintaining control over visibility, access and distribution through Private APIs. It would enable creating data pricing models that will facilitate easy and efficient Exchange of data among various stakeholders and data providers by interconnecting with data in silos and enabling co–creation initiatives and innovations.",
+  moreDetailsLink: '/about'
+}
 
 const HomeAbout = () => {
   return (
@@ -19,10 +25,11 @@ const HomeAbout = () => {
         <div>
           <h2>About the platform</h2>
           <p>
-            National Data Platform is to be an open source data exchange to authorize organizations to securely Exchange data and possibly monetizing while maintaining control over visibility, access and distribution through Private APIs. It would enable creating data pricing models that will facilitate easy and efficient Exchange of data among various stakeholders and data providers by interconnecting with data in silos and enabling co–creation initiatives and innovations.
+            {AboutPlatform.description}
           </p>
-          <Button kind="primary-outline" size="sm">
-            Know More
+
+          <Button kind="primary-outline" size="sm" className='knowMoreButton'>
+            <Link href={AboutPlatform.moreDetailsLink}>Know More</Link>
           </Button>
         </div>
       </div>
@@ -61,4 +68,8 @@ const About = styled.section`
     line-height: 0;
     flex-basis: 480px;
   }
+  
+  Link {
+      text-decoration: none;
+    }
 `;
