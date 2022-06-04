@@ -6,7 +6,7 @@ import { Button } from 'components/actions';
 import { CarouselWrapper } from 'components/layouts/Carousel/Carousel';
 import { registerPostUpdate } from 'echarts';
 
-const HomeDataCarousel = () => {
+const HomeDataCarousel = (featuredData) => {
   const svgIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -28,26 +28,11 @@ const HomeDataCarousel = () => {
     </svg>
   );
 
-  const data = [
-    {
-      text: 'National Highways Data - A Placeholder text for Headings',
-      content:
-        'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.',
-      link: 'k',
-      image: '/assets/images/placeholder.jpg',
-      pubDate: '12 Apr, 2022',
-      org: 'PhonePe',
-    },
-    {
-      text: 'Beti Bachao ',
-      content:
-        'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.',
-      link: 'k',
-      image: '/assets/images/placeholder.jpg',
-      pubDate: '13 Jun, 2022',
-      org: 'NIC',
-    },
-  ];
+  const convertDateFormat = (toBeConverted) => {
+    const date = new Date(toBeConverted);
+    return `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear().toString().substr(-2)}`;
+  }
+
   return (
     <Wrapper>
       <div className="container">
@@ -56,24 +41,24 @@ const HomeDataCarousel = () => {
           nextBtn={svgIcon}
           prevBtn={svgIcon}
         >
-          {data.map((item, index) => (
+          {featuredData.featuredData.map((item, index) => (
             <div key={`carousel-${index}`}>
               <div className="image">
                 <Image
                   alt=""
                   className="placeholder"
-                  src={item.image}
-                  height={350}
+                  src={'/assets/images/placeholder.jpg'}
+                  height={400}
                   width={540}
                 />
               </div>
               <div className="carousel__content">
-                <h2>{item.text}</h2>
-                <p>{item.content}</p>
+                <h2>{item.title}</h2>
+                <p>{item.notes}</p>
                 <div className="datePublisher">
-                  <h4>{item.pubDate}</h4>
+                  <h4>{convertDateFormat(item.metadata_created)}</h4>
                   <h4>.</h4>
-                  <h4>{item.org}</h4>
+                  <h4>{item.organization.title}</h4>
                 </div>
                 <div className='buttonsAlign'>
                   <Button kind="primary" size='sm'> Explore Viz. </Button>
@@ -133,7 +118,7 @@ background: #f7f9fa;
 
 .carousel__content {
   flex-basis: 50%;
-  padding: 2%;
+  padding: 0% 2% 2% 2%;
   
   h2 {
     font-weight: var(--font-weight-bold);
@@ -185,7 +170,6 @@ background: #f7f9fa;
       filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.08));
     }
   }
- }
 `;
 
 const CarouselHeading = styled.div`

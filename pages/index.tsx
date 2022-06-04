@@ -14,15 +14,17 @@ import {
 } from 'components/pages/home';
 import { GetStaticProps } from 'next';
 import { fetchOrgs } from 'utils/orgs.helper';
+import { fetchFeaturedDatasets } from 'utils/fetch';
 
 const Home = (data?) => {
-  // console.log(data);
+  console.log(data.featuredData);
 
   const HeaderData = [{
     id: 'all',
     name: 'All',
     title: 'All'
-  }, ...data.data]
+  }, ...data.data];
+
   return (
     <>
       <Head>
@@ -38,7 +40,7 @@ const Home = (data?) => {
         {/* <HomeStates /> */}
         {/* <HomeQuiz /> */}
         <HomeBanner />
-        <HomeDataCarousal/>
+        <HomeDataCarousal featuredData={data.featuredData}/>
         <HomeFooter />
       </HomePage>
     </>
@@ -50,9 +52,14 @@ export default Home;
 export const getStaticProps: GetStaticProps = async () => {
   const data = await fetchOrgs();
 
+  const featuredDatasets = await fetchFeaturedDatasets();
+
+  console.log("Get Static Props :::::>>>>> ", featuredDatasets);
+
   return {
     props: {
       data: data.result,
+      featuredData: featuredDatasets.result.results,
     },
   };
 };
