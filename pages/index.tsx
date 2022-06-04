@@ -9,6 +9,7 @@ import {
   HomeStates,
 } from 'components/pages/home';
 import { Seo } from 'components/common';
+import HomeCarousel from 'components/pages/home/HomeCarousel';
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <HomeAbout />
         <HomeStates />
         <HomeQuiz />
+        <HomeCarousel />
       </HomePage>
     </>
   );
