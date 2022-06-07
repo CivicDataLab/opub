@@ -117,52 +117,47 @@ let data = {
   ],
 };
 
-const HomeExplore = () => {
+const HomeExplore = (sectorData) => {
   const TabbedRef = useRef(null);
 
-  useEffect(() => {
-    // ceating tabbed interface for viz selector
-    const tablist = TabbedRef.current.querySelector('ul');
-    const panels = TabbedRef.current.querySelectorAll('section');
-    tabbedInterface(tablist, panels);
-  }, []);
   return (
     <Wrapper>
       <div className="container">
-        <h1>Explore by Category</h1>
+        <h1>Explore by Sector</h1>
+        <p>Sector wise categorization of Datasets and APIs</p>
         <TabbedWrapper ref={TabbedRef}>
-          <ul>
-            {data.tabs.map((item, index) => (
-              <li key={`toggleItem-${index}`}>
-                <a href={`#${item.id}`}>{item.name}</a>
-              </li>
-            ))}
-          </ul>
-
           <div>
-            {data.items.map((item, index) => (
-              <section key={`CategoryMenu-${index}`} id={item.id}>
-                <div className="categoryGrid">
-                  {item.content.map((categoryItem, index) => (
-                    <a key={`CategoryItem-${index}`}>
-                      <div className="categoryCard">
-                        <div>
-                          <Image 
-                            className='leftIcon' 
-                            src={categoryItem.img} 
-                            alt={categoryItem.name}
-                            width='100%'
-                            height='100%'
-                          />
-                        </div>
-                        <h3>{categoryItem.name}</h3>
-                        <ArrowTail className='leadingArrow' />
+            <section>
+              <div className="categoryGrid">
+                {sectorData.sectorData.map((sectorItem, index) => (
+                  <a key={`CategoryItem-${index}`}>
+                    <div className="categoryCard">
+                      <div>
+                        <Image
+                          className="leftIcon"
+                          src={
+                            sectorItem.img
+                              ? sectorItem.img
+                              : '/assets/images/placeholder.jpg'
+                          }
+                          alt={sectorItem.name}
+                          width="100%"
+                          height="100%"
+                        />
                       </div>
-                    </a>
-                  ))}
+                      <h3>{sectorItem.name}</h3>
+                      <ArrowTail className="leadingArrow" />
+                    </div>
+                  </a>
+                ))}
+                <div className="categoryCard">
+                  <div>
+                  </div>
+                  <h3>Explore all Sectors</h3>
+                  <ArrowTail className="leadingArrow" />
                 </div>
-              </section>
-            ))}
+              </div>
+            </section>
           </div>
         </TabbedWrapper>
       </div>
@@ -186,7 +181,7 @@ export const TabbedWrapper = styled.div`
       color: #293845;
       border-radius: 10%;
       position: relative;
-      margin: 1%;      
+      margin: 1%;
     }
 
     a {
