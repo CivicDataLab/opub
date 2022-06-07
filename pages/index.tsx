@@ -14,16 +14,16 @@ import {
 } from 'components/pages/home';
 import { GetStaticProps } from 'next';
 import { fetchOrgs } from 'utils/orgs.helper';
-import { fetchFeaturedDatasets } from 'utils/fetch';
+import { fetchFeaturedDatasets, fetchSectorData } from 'utils/fetch';
 
-const Home = (data?) => {
-  console.log(data.featuredData);
+const Home = ({ data, featuredData, sectorData }) => {
+  // console.log(data.featuredData);
 
   const HeaderData = [{
     id: 'all',
     name: 'All',
     title: 'All'
-  }, ...data.data];
+  }, ...data];
 
   return (
     <>
@@ -35,12 +35,12 @@ const Home = (data?) => {
         {/* <HomeFeaturedCarousal /> */}
         <HomeAbout />
         <HomeHighlight />
-        <HomeExplore />
-        <HomePartners />
+        <HomeExplore sectorData={sectorData.search_facets.sector.items} />
+        <HomePartners partnersData={data} />
         {/* <HomeStates /> */}
         {/* <HomeQuiz /> */}
         <HomeBanner />
-        <HomeDataCarousal featuredData={data.featuredData}/>
+        <HomeDataCarousal featuredData={featuredData}/>
         <HomeFooter />
       </HomePage>
     </>
@@ -54,12 +54,13 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const featuredDatasets = await fetchFeaturedDatasets();
 
-  console.log("Get Static Props :::::>>>>> ", featuredDatasets);
+  const sectorData = await fetchSectorData();
 
   return {
     props: {
       data: data.result,
       featuredData: featuredDatasets.result.results,
+      sectorData: sectorData.result,
     },
   };
 };

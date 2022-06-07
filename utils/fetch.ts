@@ -41,6 +41,14 @@ export const fetchFeaturedDatasets = async () => {
   return featuredData;
 }
 
+export const fetchSectorData = async () => {
+  const response = await fetch(`${process.env.CKAN_URL}/package_search?facet.field=["sector"]&rows=0&facet.limit=11`);
+
+  const sectorData = await response.json();
+
+  return sectorData;
+}
+
 export async function fetchFilters(list, variable) {
   try {
     // if filters and searc found in url, also use those
