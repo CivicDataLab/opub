@@ -37,6 +37,9 @@ const data = [
   },
 ];
 
+
+// The component is not in use as of now in the Landing Page
+
 const HomeBanner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
