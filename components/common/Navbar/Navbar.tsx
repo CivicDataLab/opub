@@ -213,7 +213,7 @@ const Navitem = styled.a`
   cursor: pointer;
 
   &:hover {
-    background-color: var(--color-primary);
+    background-color: var(--nav-bg-hover);
     color: var(--color-white);
   }
 

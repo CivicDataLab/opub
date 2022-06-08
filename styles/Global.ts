@@ -77,7 +77,7 @@ html {
   --font-weight-light: 400;
 
   --nav-bg: var(--color-background-dark);
-  --nav-bg-hover: var(--background-dark-hover);
+  --nav-bg-hover: var(${theme.navigation_background_hover});
   --nav-submenu: var(--color-amazon-400);
   --nav-submenu-hover: var(--color-amazon-600);
   --nav-mobile: var(--color-amazon-400);
