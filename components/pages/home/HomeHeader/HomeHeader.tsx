@@ -6,38 +6,9 @@ import { LokSabha, VidhanSabha } from 'components/icons';
 import { Search } from 'components/data';
 import { useRouter } from 'next/router';
 
-// const schemes = [
-//   {
-//     name: 'Beti Bachao Beti Padhao (BBBP)',
-//     id: 'bbbp',
-//   },
-//   {
-//     name: 'Integrated Child Development Services (ICDS)',
-//     id: 'icds',
-//   },
-//   {
-//     name: 'Integrated Child Protection Scheme (ICPS)',
-//     id: 'icps',
-//   },
-//   {
-//     name: 'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
-//     id: 'mgnregs',
-//   },
-//   {
-//     name: 'National Health Mission (NHM)',
-//     id: 'nhm',
-//   },
-//   {
-//     name: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
-//     id: 'pmkisan',
-//   },
-// ];
-
 const HomeHeader = ({ orgs }) => {
   const [selectedOrg, setSelectedOrg] = useState(orgs[0]);
-  // const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
   const [search, setSearch] = useState('');
-  // const [selectedSabha, setSelectedSabha] = useState('Lok Sabha');
 
   const router = useRouter();
 
@@ -49,50 +20,13 @@ const HomeHeader = ({ orgs }) => {
       .replace(/[^\w-]+/g, '');
   });
 
-  // const sabhaRef = useRef(null);
-
   function handleMenuChange(val, array) {
-    // const setOrg = array === orgs ? setSelectedOrg : setSelectedScheme;
-
-    // for (let i = 0; i < array.length; i++) {
-    //   if (val === array[i].value) {
-    //     setOrg(array[i]);
-    //     return;
-    //   }
-    // }
-    // setOrg(array[0]);
-
-    // console.log(val, array);
-
     const selectedOpt = array.findIndex((orgOpt) => {
       return orgOpt.id === val;
     });
 
     setSelectedOrg(array[selectedOpt]);
   }
-
-  // function handleSabhaClick(e) {
-  //   const btn = e.target;
-  //   const value = btn.dataset.value;
-  //   // setSelectedSabha(value);
-
-  //   const selectedBtn = sabhaRef.current.querySelector(
-  //     '[aria-pressed="true"]'
-  //   ) as HTMLElement;
-
-  //   if (btn !== selectedBtn) {
-  //     selectedBtn.setAttribute('aria-pressed', 'false');
-  //     btn.setAttribute('aria-pressed', 'true');
-  //   }
-  // }
-
-  // function handleSubmitClick() {
-  //   const obj = {
-  //     state: selectedOrg.id,
-  //     scheme: selectedScheme.id,
-  //     // sabha: selectedSabha,
-  //   };
-  // }
 
   useEffect(() => {
     if (search.length > 0) {
@@ -146,7 +80,6 @@ const Header = styled.header`
   padding: 64px 0;
   min-height: calc(100vh - 182px);
   background-color: var(--color-background-light);
-  // background-image: url('/assets/images/background.svg');
   z-index: -1;
 
   display: flex;
@@ -217,6 +150,4 @@ const HeaderToggle = styled.div`
 
 const StateMenu = styled.div`
   flex: 1 0 0;
-  /* flex-basis: 20%;
-  flex-grow: 1; */
 `;
