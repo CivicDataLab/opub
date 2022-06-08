@@ -2,123 +2,21 @@ import { ArrowTail, Chevron } from 'components/icons';
 import { Tabbed } from 'components/layouts';
 import { tabbedInterface } from 'components/layouts/Tabbed/tabbed.helper';
 import Image from 'next/image';
+import router, { useRouter } from 'next/router';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-let data = {
-  tabs: [
-    {
-      name: 'Sectors',
-      id: 'NTG1',
-      ico: '/assets/images/placeholder.jpg',
-    },
-    {
-      name: 'Contributors',
-      id: 'NTG2',
-      ico: '/assets/images/placeholder.jpg',
-    },
-    {
-      name: 'Geography',
-      id: 'NTG3',
-      ico: '/assets/images/placeholder.jpg',
-    },
-  ],
-  items: [
-    {
-      content: [
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-      ],
-      id: 'NTG1',
-      ico: '/assets/images/placeholder.jpg',
-    },
-    {
-      content: [
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-      ],
-      id: 'NTG2',
-      ico: '/assets/images/placeholder.jpg',
-    },
-    {
-      content: [
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-        {
-          name: 'Dataset Category',
-          img: '/assets/images/placeholder.jpg',
-        },
-      ],
-      id: 'NTG3',
-      ico: '/assets/images/placeholder.jpg',
-    },
-  ],
-};
-
 const HomeExplore = (sectorData) => {
   const TabbedRef = useRef(null);
+  const router = useRouter();
+  const redirectToSectorPage = (sectorName) => {
+    router.push({
+      pathname: `/datasets`,
+      query: {
+        fq: `sector:(${sectorName})`,
+      },
+    });
+  };
 
   return (
     <Wrapper>
@@ -146,13 +44,15 @@ const HomeExplore = (sectorData) => {
                         />
                       </div>
                       <h3>{sectorItem.name}</h3>
-                      <ArrowTail className="leadingArrow" />
+                      <ArrowTail
+                        onClick={() => redirectToSectorPage(sectorItem.name)}
+                        className="leadingArrow"
+                      />
                     </div>
                   </a>
                 ))}
-                <div className="categoryCard">
-                  <div>
-                  </div>
+                <div className="categoryCard" onClick={() => redirectToSectorPage('')}>
+                  <div></div>
                   <h3>Explore all Sectors</h3>
                   <ArrowTail className="leadingArrow" />
                 </div>
@@ -232,6 +132,7 @@ export const TabbedWrapper = styled.div`
     .leadingArrow {
       fill: #788896;
       margin-left: auto;
+      cursor: pointer;
     }
   }
 
