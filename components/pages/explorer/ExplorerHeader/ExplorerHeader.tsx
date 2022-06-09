@@ -142,6 +142,7 @@ const Wrapper = styled.div`
       margin-right: 20px;
 
       .sm_meta__footer {
+        margin-top: 5%;
         display: flex;
         justify-content: space-between;
 
