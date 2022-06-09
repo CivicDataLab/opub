@@ -89,7 +89,7 @@ const ExplorerInfo: React.FC<{
                   {(() => {
                     switch (item.name) {
                       case 'About Data':
-                        return <AboutData />;
+                        return <AboutData data={data} />;
                       case 'Scheme Info.':
                         return <SchemeInfo />;
                       case 'Visualizations':

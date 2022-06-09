@@ -37,13 +37,14 @@ const aboutDataItem = {
   },
 };
 
-const AboutData = () => {
+const AboutData = (data: any) => {
+  // console.log(data);
   return (
     <AboutDataWrapper>
       <div className="AboutDataContainer">
         <h2>Description</h2>
-        <p>{aboutDataItem.content.description}</p>
-        <h2>About Publisher</h2>
+        <p>{data.data.result.notes}</p>
+        <h2>About Contributor</h2>
         <div className="publisherContainer">
           <Image
             alt="Logo"
@@ -52,12 +53,12 @@ const AboutData = () => {
             height={100}
           />
           <div>
-            <h3>{aboutDataItem.content.publisher}</h3>
+            <h3>{data.data.result.organization.title}</h3>
             <p>{aboutDataItem.content.publisherSubtitle}</p>
-            <a href={aboutDataItem.content.publisherLink}>Publisher Page</a>
+            <a href={aboutDataItem.content.publisherLink}>Contributor Page</a>
           </div>
         </div>
-        <p>{aboutDataItem.content.publisherDescription}</p>
+        <p>{data.data.result.organization.description}</p>
         <div>
           <h2>More by this Publisher</h2>
           {aboutDataItem.content.publisherMore.map((article, index) => (
