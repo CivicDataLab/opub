@@ -32,8 +32,8 @@ const HomePartners = (partnersData) => {
                       ? partner.image_display_url
                       : '/assets/images/placeholder.jpg'
                   }
-                  width={'100%'}
-                  height={'100%'}
+                  width={200}
+                  height={200}
                   alt=""
                   className="img-cover"
                 />
@@ -99,8 +99,12 @@ const About = styled.section`
   }
 
   figure {
-    flex-grow: 1;
-    width: 20%;
+    flex-basis:200px;
+    flex-shrink:0;
+
+    .img-cover {
+      object-fit:contain;
+    }
   }
 
   .partner___content {
@@ -108,6 +112,9 @@ const About = styled.section`
     //   font-size: 1.2rem;
     // }
 
+    margin-left:5%;
+    margin-bottom:4%;
+    
     .microDetails {
       display: flex;
       margin-top: 2%;
