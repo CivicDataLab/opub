@@ -50,7 +50,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     explorerPopulation(res.result)
   );
 
-  const headerData = await fetchAPI(context.query.explorer);
+  const headerData = await fetchAPI(context.query.explorer).then((res) => {
+    res.result.organization.image_url = `${process.env.CKAN_BASE_URL}/uploads/group/` + res.result.organization.image_url;
+    return res; 
+  });
+
+  
 
   // fetch and parse metadata csv
   const vizUrl = explorerPopulation(tempViz);
