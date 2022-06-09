@@ -35,7 +35,8 @@ const Explorer: React.FC<Props> = ({ data, fileData, headerData }) => {
           resUrl={resUrl}
         /> */}
         {/* <ExplorerRelated data={data} /> */}
-        <ExplorerInfo data={headerData} 
+        <ExplorerInfo data={headerData}
+          vizCompData = {data} 
           vizData={fileData}
           resUrl={resUrl} />
       </Wrapper>

@@ -66,14 +66,17 @@ const ExplorerInfo: React.FC<{
   meta?: any;
   vizData?: any;
   resUrl?: any;
-}> = ({ data, meta, vizData, resUrl }) => {
+  vizCompData?: any;
+}> = ({ data, meta, vizData, resUrl, vizCompData }) => {
   const TabbedRef = useRef(null);
 
   useEffect(() => {
     // ceating tabbed interface for viz selector
     const tablist = TabbedRef.current.querySelector('ul');
-    const panels = TabbedRef.current.querySelectorAll('section');
+    const panels = TabbedRef.current.querySelectorAll('.infoSections');
     tabbedInterface(tablist, panels);
+
+    console.log(tablist, panels);
   }, []);
 
   return (
@@ -91,7 +94,7 @@ const ExplorerInfo: React.FC<{
           <div className="tabdetailsContainer">
             <div className="tabDetails">
               {ExplorerData.tabs.map((item, index) => (
-                <section key={`CategoryMenu-${index}`} id={item.id}>
+                <section key={`CategoryMenu-${index}`} id={item.id} className='infoSections'>
                   {(() => {
                     switch (item.name) {
                       case 'About Data':
@@ -99,7 +102,7 @@ const ExplorerInfo: React.FC<{
                       case 'Scheme Info.':
                         return <SchemeInfo />;
                       case 'Data & APIs':
-                        return <DataAndApis />
+                        return <DataAndApis data={vizCompData} fileData={vizData} resUrl={resUrl}/>
                       case 'Visualizations':
                         return <Visualizations />;
                       case 'Data Stories':

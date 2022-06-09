@@ -158,9 +158,9 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
 
   useEffect(() => {
     // ceating tabbed interface for viz selector
-    const tablist = document.querySelector('.viz__tabs');
+    const tabVizList = document.querySelector('.viz__tabs');
     const panels = document.querySelectorAll('.viz__graph');
-    tabbedInterface(tablist, panels);
+    tabbedInterface(tabVizList, panels);
 
     // handleNewVizData('Budget Estimates');
   }, [resUrl]);
@@ -193,12 +193,12 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
 
   return (
     <>
-      <Wrapper className="container">
+      <Wrapper>
         <VizWrapper>
           <VizHeader>
             <VizTabs className="viz__tabs">
               {vizToggle.map((item, index) => (
-                <li key={`toggleItem-${index}`}>
+                <li key={`toggleVizItem-${index}`}>
                   <a href={item.id} onClick={(e) => hideMenu(e)}>
                     {item.icon}
                     {item.name}
@@ -332,7 +332,7 @@ export const VizTabs = styled.ul`
     text-overflow: ellipsis;
     text-decoration: none;
     padding-bottom: 12px;
-    min-width: 120%;
+    min-width: 200%;
     display: block;
     text-align: center;
     border-bottom: 2px solid transparent;
