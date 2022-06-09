@@ -57,16 +57,16 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
       id: '#tableView',
       icon: <TableViewIcon />,
     },
-    {
-      name: 'Bar Graph',
-      id: '#barGraph',
-      icon: <BarGraphIcon />,
-    },
-    {
-      name: 'Line Chart',
-      id: '#lineChart',
-      icon: <LineChartIcon />,
-    },
+    // {
+    //   name: 'Bar Graph',
+    //   id: '#barGraph',
+    //   icon: <BarGraphIcon />,
+    // },
+    // {
+    //   name: 'Line Chart',
+    //   id: '#lineChart',
+    //   icon: <LineChartIcon />,
+    // },
   ];
 
   const vizItems = [
@@ -89,44 +89,44 @@ const ExplorerViz = ({ data, vizData, resUrl }) => {
           <p>Vizualisation load failed</p>
         ),
     },
-    {
-      id: 'barGraph',
-      graph: (
-        <SimpleBarLineChartViz
-          color={'#00ABB7'}
-          dataset={barLineTransformer(vizData, selectedIndicator)}
-          type="bar"
-          smooth={true}
-          showSymbol={true}
-          Title={
-            selectedIndicator +
-            (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
-          }
-          subTitle={data.title}
-          unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
-        />
-      ),
-      ref: barRef,
-    },
-    {
-      id: 'lineChart',
-      graph: (
-        <SimpleBarLineChartViz
-          color={'#00ABB7'}
-          dataset={barLineTransformer(vizData, selectedIndicator)}
-          type="line"
-          smooth={true}
-          showSymbol={true}
-          Title={
-            selectedIndicator +
-            (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
-          }
-          subTitle={data.title}
-          unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
-        />
-      ),
-      ref: lineRef,
-    },
+    // {
+    //   id: 'barGraph',
+    //   graph: (
+    //     <SimpleBarLineChartViz
+    //       color={'#00ABB7'}
+    //       dataset={barLineTransformer(vizData, selectedIndicator)}
+    //       type="bar"
+    //       smooth={true}
+    //       showSymbol={true}
+    //       Title={
+    //         selectedIndicator +
+    //         (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
+    //       }
+    //       subTitle={data.title}
+    //       unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
+    //     />
+    //   ),
+    //   ref: barRef,
+    // },
+    // {
+    //   id: 'lineChart',
+    //   graph: (
+    //     <SimpleBarLineChartViz
+    //       color={'#00ABB7'}
+    //       dataset={barLineTransformer(vizData, selectedIndicator)}
+    //       type="line"
+    //       smooth={true}
+    //       showSymbol={true}
+    //       Title={
+    //         selectedIndicator +
+    //         (budgetTypes.length > 1 ? ' - ' + selectedBudgetType : '')
+    //       }
+    //       subTitle={data.title}
+    //       unit={crData.includes(selectedIndicator) ? 'Cr' : '%'}
+    //     />
+    //   ),
+    //   ref: lineRef,
+    // },
   ];
 
   useEffect(() => {

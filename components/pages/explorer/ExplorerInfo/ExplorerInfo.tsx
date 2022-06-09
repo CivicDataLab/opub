@@ -75,8 +75,6 @@ const ExplorerInfo: React.FC<{
     const tablist = TabbedRef.current.querySelector('ul');
     const panels = TabbedRef.current.querySelectorAll('.infoSections');
     tabbedInterface(tablist, panels);
-
-    console.log(tablist, panels);
   }, []);
 
   return (
