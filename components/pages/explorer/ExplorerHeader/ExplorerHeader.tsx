@@ -58,7 +58,7 @@ const ExplorerHeader:React.FC<{data: any; meta?: any}> = ({ data, meta }) => {
         <div className='Infobox'>
           <Image
               src="/assets/images/placeholder.jpg"
-              width={700}
+              width={500}
               height={350}
               alt=""
             />
@@ -118,6 +118,7 @@ const Wrapper = styled.div`
       border: 2px solid #c3cfd9;
       padding: 10px;
       font-size: 0.85em;
+      width: 30%;
 
       .dataBox{
         display: flex;
@@ -149,7 +150,7 @@ const Wrapper = styled.div`
         }
 
         .meta_footer{
-          > *: {
+          p {
             margin-right: 6px;
           }
         }
