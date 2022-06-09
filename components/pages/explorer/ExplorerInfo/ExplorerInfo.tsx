@@ -100,17 +100,22 @@ const ExplorerInfo: React.FC<{
                       case 'About Data':
                         return <AboutData data={data} />;
                       case 'Scheme Info.':
-                        return <SchemeInfo />;
+                        // return <SchemeInfo />;
+                        return 'Work in Progress';
                       case 'Data & APIs':
                         return <DataAndApis data={vizCompData} fileData={vizData} resUrl={resUrl}/>
                       case 'Visualizations':
-                        return <Visualizations />;
+                        // return <Visualizations />;
+                        return 'Work in Progress';
                       case 'Data Stories':
-                        return <DataStories />;
+                        // return <DataStories />;
+                        return 'Work in Progress';
                       case 'Rating & Reviews':
-                        return <RatingsReviews />;
+                        // return <RatingsReviews />;
+                        return 'Work in Progress';
                       case 'Pricing':
-                        return <Pricing />;
+                        // return <Pricing />;
+                        return 'Work in Progress';
                     }
                   })()}
                 </section>
