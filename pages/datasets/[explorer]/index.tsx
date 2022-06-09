@@ -5,19 +5,22 @@ import styled from 'styled-components';
 import { fetchAPI, explorerPopulation, fetchFromTags } from 'utils/explorer';
 import { resourceGetter } from 'utils/resourceParser';
 
-import { ExplorerHeader, ExplorerViz } from 'components/pages/explorer';
+import { ExplorerHeader, ExplorerInfo, ExplorerRelated, ExplorerViz } from 'components/pages/explorer';
 import tempViz from 'data/tempViz.json';
 
 type Props = {
   data: any;
   meta;
   fileData;
+  headerData;
 };
 
-const Explorer: React.FC<Props> = ({ data, fileData }) => {
+const Explorer: React.FC<Props> = ({ data, fileData, headerData }) => {
   const [resUrl, setResUrl] = useState(
     data.resUrls['CSV'] ? data.resUrls['CSV'] : ''
   );
+
+  // console.log(headerData.result)
 
   return (
     <>
@@ -25,13 +28,17 @@ const Explorer: React.FC<Props> = ({ data, fileData }) => {
         <title>Explorer | NDP</title>
       </Head>
       <Wrapper>
-        <ExplorerHeader data={data} />
-        <ExplorerViz
+        <ExplorerHeader data={headerData} />
+        {/* <ExplorerViz
           data={data}
           vizData={fileData}
           resUrl={resUrl}
-        />
+        /> */}
         {/* <ExplorerRelated data={data} /> */}
+        <ExplorerInfo data={headerData}
+          vizCompData = {data} 
+          vizData={fileData}
+          resUrl={resUrl} />
       </Wrapper>
     </>
   );
@@ -43,6 +50,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     explorerPopulation(res.result)
   );
 
+  const headerData = await fetchAPI(context.query.explorer).then((res) => {
+    res.result.organization.image_url = `${process.env.CKAN_BASE_URL}/uploads/group/` + res.result.organization.image_url;
+    return res; 
+  });
+
+  
+
   // fetch and parse metadata csv
   const vizUrl = explorerPopulation(tempViz);
   // fetch and parse data csv
@@ -52,6 +66,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       data,
       fileData,
+      headerData
     },
   };
 };

@@ -3,30 +3,97 @@ import styled from 'styled-components';
 import { Share } from 'components/actions';
 import { Tags } from 'components/data';
 import { categoryIcon, categoryTag } from 'utils/explorer';
+import Image from 'next/image';
+import { Button } from 'components/actions';
+import { Arrow, Facebook, Linkedin, Twitter } from 'components/icons';
 
 const ExplorerHeader:React.FC<{data: any; meta?: any}> = ({ data, meta }) => {
+  // console.log(data.result);
   return (
     <Wrapper>
-      <div className="container">
-        <Share title={data.title} />
-      </div>
 
-      <section className="container">
-        <HeaderContent>
-          <figure>{categoryIcon(data.tags)}</figure>
-          <div>
-            <h2>{data.title}</h2>
-            <Tags data={data.tags} />
+      <div className="container">
+        <div className='leftPanel'>
+          <HeaderContent>
+            {/* <figure>{categoryIcon(data.tags)}</figure> */}
+            <div>
+              <p className='orgName'>{data.result.organization.title}</p>
+              <h2>{data.result.title}</h2>
+              {/* <Tags data={data.tags} /> */}
+            </div>
+          </HeaderContent>
+          <Seperator />
+          <HeaderText>{data.result.notes}</HeaderText>
+          {/* {meta && (
+            <HeaderMeta>
+              {meta['Type of Scheme'] && <span>{meta['Type of Scheme']}</span>}
+              {<span>{categoryTag(data.tags)}</span>}
+            </HeaderMeta>
+          )} */}
+          <div className='sm_meta__footer'>
+            <div className='meta_footer'>
+              <IconWrapper>
+              </IconWrapper>
+              <p>Updated Weekly</p>
+              <IconWrapper>
+              </IconWrapper>
+              <p>{data.result.license ? data.result.license : 'No License' }</p>
+              <IconWrapper>
+              </IconWrapper>
+              <p>{data.result.isopen ? 'Open Access' : 'Closed Access'}</p>
+            </div>
+            <div>
+              <SMWrapper>
+                <Twitter width='20px' />
+              </SMWrapper>
+              <SMWrapper>
+                <Facebook width='20px' />
+              </SMWrapper>
+              <SMWrapper>
+                <Linkedin width='20px' />
+              </SMWrapper>
+            </div>
           </div>
-        </HeaderContent>
-        <HeaderText>{data.notes}</HeaderText>
-        {meta && (
-          <HeaderMeta>
-            {meta['Type of Scheme'] && <span>{meta['Type of Scheme']}</span>}
-            {<span>{categoryTag(data.tags)}</span>}
-          </HeaderMeta>
-        )}
-      </section>
+        </div>
+        <div className='Infobox'>
+          <Image
+              src="/assets/images/placeholder.jpg"
+              width={500}
+              height={350}
+              alt=""
+            />
+          <div className='dataBox'>
+            <p className='headTag'>Total Downloads:</p>
+            <p>37</p>
+          </div>
+          <Seperator />
+          <div className='dataBox'>
+            <p className='headTag'>Duration:</p>
+            <p>Year 2010-15</p>
+          </div>
+          <div className='dataBox'>
+            <p className='headTag'>Published On:</p>
+            <p>{data.result.metadata_created}</p>
+          </div>
+          <div className='dataBox'>
+            <p className='headTag'>Last Updated:</p>
+            <p>{data.result.metadata_modified}</p>
+          </div>
+          <Seperator />
+          <div className='dataBox'>
+            <Button
+            className='dataBox__button'
+            >
+              20
+              <Arrow className='rotateArrow' />
+            </Button>
+            <Button
+              className='dataBox__button'>
+              Get Access
+            </Button>
+          </div>
+        </div>
+      </div>
     </Wrapper>
   );
 };
@@ -41,6 +108,71 @@ const Wrapper = styled.div`
   section {
     margin-top: 2.5rem;
   }
+
+  .container {
+    display: flex;
+    justify-content: flex-start;
+
+    .Infobox{
+      background: #f7f9fa;
+      border: 2px solid #c3cfd9;
+      padding: 10px;
+      font-size: 0.85em;
+      width: 30%;
+
+      .dataBox{
+        display: flex;
+        justify-content: space-between;
+
+        .headTag {
+          font-weight: bold;
+        }
+
+        .dataBox__button {
+          font-size: 0.85em;
+
+          .rotateArrow {
+            // transform: rotateY(-90deg);
+          }
+        }
+      }
+    }
+
+    .leftPanel {
+      margin-right: 20px;
+
+      .sm_meta__footer {
+        margin-top: 5%;
+        display: flex;
+        justify-content: space-between;
+
+        div {
+          display: flex;          
+        }
+
+        .meta_footer{
+          p {
+            margin-right: 6px;
+          }
+        }
+
+      }
+    }
+  }
+
+`;
+
+const IconWrapper = styled.div`
+  width: 25px;
+  border-radius: 20px;
+  background: #c4a4d2;
+`;
+
+const SMWrapper = styled.div`
+  width: 25px;
+  border: 2px solid #c3cfd9;
+  border-radius: 20px;
+  color: #c3cfd9;
 `;
 
 const HeaderContent = styled.div`
@@ -67,6 +199,11 @@ const HeaderContent = styled.div`
     font-size: 1.75rem;
     font-weight: 800;
     line-height: 130%;
+    margin-bottom: 20px;
+  }
+
+  .orgName {
+    color: #788896;
   }
 `;
 
@@ -95,4 +232,11 @@ const HeaderMeta = styled.div`
     color: #02838b;
     font-weight: bold;
   }
+`;
+
+const Seperator = styled.div`
+  border-bottom: 2px solid #dfe6ed;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
