@@ -17,6 +17,7 @@ import Visualizations from './Visualizations';
 import RatingsReviews from './RatingsReviews';
 import SchemeInfo from './SchemeInfo';
 import RelatedDatasets from './RelatedDatasets';
+import DataAndApis from './DataAndApis';
 
 let ExplorerData = {
   tabs: [
@@ -28,6 +29,11 @@ let ExplorerData = {
     {
       name: 'Scheme Info.',
       id: 'SchemeInfo',
+      ico: '/assets/images/placeholder.jpg',
+    },
+    {
+      name: 'Data & APIs',
+      id: 'DataAPIs',
       ico: '/assets/images/placeholder.jpg',
     },
     {
@@ -92,6 +98,8 @@ const ExplorerInfo: React.FC<{
                         return <AboutData data={data} />;
                       case 'Scheme Info.':
                         return <SchemeInfo />;
+                      case 'Data & APIs':
+                        return <DataAndApis />
                       case 'Visualizations':
                         return <Visualizations />;
                       case 'Data Stories':
