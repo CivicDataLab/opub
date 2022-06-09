@@ -6,103 +6,26 @@ import { LokSabha, VidhanSabha } from 'components/icons';
 import { Search } from 'components/data';
 import { useRouter } from 'next/router';
 
-const states = [
-  {
-    name: 'Rajasthan',
-    id: 'rajasthan',
-  },
-  {
-    name: 'Uttar Pradesh',
-    id: 'uttar_pradesh',
-  },
-  {
-    name: 'Odisha',
-    id: 'odisha',
-  },
-  {
-    name: 'Gujrat',
-    id: 'gujrat',
-  },
-  {
-    name: 'Kerela',
-    id: 'kerela',
-  },
-  {
-    name: 'Tamil Nadu',
-    id: 'tamil_nadu',
-  },
-];
-
-const schemes = [
-  {
-    name: 'Beti Bachao Beti Padhao (BBBP)',
-    id: 'bbbp',
-  },
-  {
-    name: 'Integrated Child Development Services (ICDS)',
-    id: 'icds',
-  },
-  {
-    name: 'Integrated Child Protection Scheme (ICPS)',
-    id: 'icps',
-  },
-  {
-    name: 'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
-    id: 'mgnregs',
-  },
-  {
-    name: 'National Health Mission (NHM)',
-    id: 'nhm',
-  },
-  {
-    name: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
-    id: 'pmkisan',
-  },
-];
-
-const HomeHeader = () => {
-  const [selectedState, setSelectedState] = useState(states[0]);
-  const [selectedScheme, setSelectedScheme] = useState(schemes[0]);
+const HomeHeader = ({ orgs }) => {
+  const [selectedOrg, setSelectedOrg] = useState(orgs[0]);
   const [search, setSearch] = useState('');
-  const [selectedSabha, setSelectedSabha] = useState('Lok Sabha');
 
   const router = useRouter();
 
-  const sabhaRef = useRef(null);
+  orgs.map((org) => {
+    org.name = org.title;
+    org.requestId = org.name
+      .toLowerCase()
+      .replace(/ /g, '-')
+      .replace(/[^\w-]+/g, '');
+  });
 
   function handleMenuChange(val, array) {
-    const setState = array === states ? setSelectedState : setSelectedScheme;
+    const selectedOpt = array.findIndex((orgOpt) => {
+      return orgOpt.id === val;
+    });
 
-    for (let i = 0; i < array.length; i++) {
-      if (val === array[i].value) {
-        setState(array[i]);
-        return;
-      }
-    }
-    setState(array[0]);
-  }
-
-  function handleSabhaClick(e) {
-    const btn = e.target;
-    const value = btn.dataset.value;
-    setSelectedSabha(value);
-
-    const selectedBtn = sabhaRef.current.querySelector(
-      '[aria-pressed="true"]'
-    ) as HTMLElement;
-
-    if (btn !== selectedBtn) {
-      selectedBtn.setAttribute('aria-pressed', 'false');
-      btn.setAttribute('aria-pressed', 'true');
-    }
-  }
-
-  function handleSubmitClick() {
-    const obj = {
-      state: selectedState.id,
-      scheme: selectedScheme.id,
-      sabha: selectedSabha,
-    };
+    setSelectedOrg(array[selectedOpt]);
   }
 
   useEffect(() => {
@@ -111,6 +34,10 @@ const HomeHeader = () => {
         pathname: `/datasets`,
         query: {
           q: search,
+          fq:
+            selectedOrg.id === 'all'
+              ? ''
+              : `organization:(${selectedOrg.requestId})`,
         },
       });
     }
@@ -123,9 +50,24 @@ const HomeHeader = () => {
   return (
     <Header>
       <div className="container">
-        <h1>Search through Open and Private Datasets</h1>
+        <h1>One Stop Solution for Nationwide Data Needs</h1>
+        <p>
+          A platform that serves for data seekers, publishers and change
+          makers.
+        </p>
         <HeaderControls>
-          <Search newSearch={handleDatasetsChange} />
+          <SchemeSelector>
+            <StateMenu className="fill">
+              <Menu
+                options={orgs}
+                handleChange={(e) => handleMenuChange(e, orgs)}
+                heading="All"
+                value={selectedOrg.name}
+                showLabel={false}
+              />
+            </StateMenu>
+            <Search newSearch={handleDatasetsChange} />
+          </SchemeSelector>
         </HeaderControls>
       </div>
     </Header>
@@ -138,7 +80,6 @@ const Header = styled.header`
   padding: 64px 0;
   min-height: calc(100vh - 182px);
   background-color: var(--color-background-light);
-  background-image: url('/assets/images/background.svg');
   z-index: -1;
 
   display: flex;
@@ -150,8 +91,15 @@ const Header = styled.header`
     margin: 0 auto;
   }
 
-  h1 {
+  h1,
+  p {
     text-align: center;
+  }
+  h1 {
+    font-size: 2vw;
+  }
+  p {
+    font-size: 1.5vw;
   }
 `;
 
@@ -201,6 +149,5 @@ const HeaderToggle = styled.div`
 `;
 
 const StateMenu = styled.div`
-  flex-basis: 20%;
-  flex-grow: 1;
+  flex: 1 0 0;
 `;

@@ -12,7 +12,7 @@ ${cssReset}
 ${cssNormalise}
 
 html {
-  --color-primary: ${theme.color_amazon_100};
+  --color-primary: ${theme.primary};
   --color-secondary : ${theme.color_maple_100};
   --color-tertiary : ${theme.color_olive_100};
 
@@ -77,7 +77,7 @@ html {
   --font-weight-light: 400;
 
   --nav-bg: var(--color-background-dark);
-  --nav-bg-hover: var(--background-dark-hover);
+  --nav-bg-hover: var(${theme.navigation_background_hover});
   --nav-submenu: var(--color-amazon-400);
   --nav-submenu-hover: var(--color-amazon-600);
   --nav-mobile: var(--color-amazon-400);
