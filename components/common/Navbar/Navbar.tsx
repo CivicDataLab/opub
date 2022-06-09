@@ -214,6 +214,7 @@ const Navitem = styled.a`
 
   &:hover {
     background-color: var(--nav-bg-hover);
+    color: var(--color-white);
   }
 
   &.active {
