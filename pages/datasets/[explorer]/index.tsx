@@ -12,12 +12,15 @@ type Props = {
   data: any;
   meta;
   fileData;
+  headerData;
 };
 
-const Explorer: React.FC<Props> = ({ data, fileData }) => {
+const Explorer: React.FC<Props> = ({ data, fileData, headerData }) => {
   const [resUrl, setResUrl] = useState(
     data.resUrls['CSV'] ? data.resUrls['CSV'] : ''
   );
+
+  // console.log(headerData.result)
 
   return (
     <>
@@ -25,14 +28,14 @@ const Explorer: React.FC<Props> = ({ data, fileData }) => {
         <title>Explorer | NDP</title>
       </Head>
       <Wrapper>
-        <ExplorerHeader data={data} />
+        <ExplorerHeader data={headerData} />
         {/* <ExplorerViz
           data={data}
           vizData={fileData}
           resUrl={resUrl}
         /> */}
         {/* <ExplorerRelated data={data} /> */}
-        <ExplorerInfo data={data} 
+        <ExplorerInfo data={headerData} 
           vizData={fileData}
           resUrl={resUrl} />
       </Wrapper>
@@ -46,6 +49,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     explorerPopulation(res.result)
   );
 
+  const headerData = await fetchAPI(context.query.explorer);
+
   // fetch and parse metadata csv
   const vizUrl = explorerPopulation(tempViz);
   // fetch and parse data csv
@@ -55,6 +60,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       data,
       fileData,
+      headerData
     },
   };
 };

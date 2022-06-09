@@ -8,7 +8,7 @@ import { Button } from 'components/actions';
 import { Arrow, Facebook, Linkedin, Twitter } from 'components/icons';
 
 const ExplorerHeader:React.FC<{data: any; meta?: any}> = ({ data, meta }) => {
-  // console.log(data, meta);
+  // console.log(data.result);
   return (
     <Wrapper>
 
@@ -17,13 +17,13 @@ const ExplorerHeader:React.FC<{data: any; meta?: any}> = ({ data, meta }) => {
           <HeaderContent>
             {/* <figure>{categoryIcon(data.tags)}</figure> */}
             <div>
-              <p className='orgName'>{data.organization}</p>
-              <h2>{data.title}</h2>
+              <p className='orgName'>{data.result.organization.title}</p>
+              <h2>{data.result.title}</h2>
               {/* <Tags data={data.tags} /> */}
             </div>
           </HeaderContent>
           <Seperator />
-          <HeaderText>{data.notes}</HeaderText>
+          <HeaderText>{data.result.notes}</HeaderText>
           {/* {meta && (
             <HeaderMeta>
               {meta['Type of Scheme'] && <span>{meta['Type of Scheme']}</span>}
@@ -37,10 +37,10 @@ const ExplorerHeader:React.FC<{data: any; meta?: any}> = ({ data, meta }) => {
               <p>Updated Weekly</p>
               <IconWrapper>
               </IconWrapper>
-              <p>CC-BY-NC</p>
+              <p>{data.result.license ? data.result.license : 'No License' }</p>
               <IconWrapper>
               </IconWrapper>
-              <p>Closed Access</p>
+              <p>{data.result.isopen ? 'Open Access' : 'Closed Access'}</p>
             </div>
             <div>
               <SMWrapper>
@@ -64,7 +64,7 @@ const ExplorerHeader:React.FC<{data: any; meta?: any}> = ({ data, meta }) => {
             />
           <div className='dataBox'>
             <p className='headTag'>Total Downloads:</p>
-            <p>53977</p>
+            <p>37</p>
           </div>
           <Seperator />
           <div className='dataBox'>
@@ -73,11 +73,11 @@ const ExplorerHeader:React.FC<{data: any; meta?: any}> = ({ data, meta }) => {
           </div>
           <div className='dataBox'>
             <p className='headTag'>Published On:</p>
-            <p>19 Oct 2017</p>
+            <p>{data.result.metadata_created}</p>
           </div>
           <div className='dataBox'>
             <p className='headTag'>Last Updated:</p>
-            <p>21 Apr 2022</p>
+            <p>{data.result.metadata_modified}</p>
           </div>
           <Seperator />
           <div className='dataBox'>
