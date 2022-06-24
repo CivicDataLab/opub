@@ -1,12 +1,12 @@
 import React from 'react';
 import { saveAs } from 'file-saver';
-import { stripTitle } from 'utils/explorer';
 import { Download } from 'components/icons';
 import { Button } from 'components/actions';
+import { truncate } from 'utils/helper';
 
 function fileName(type, name, indicator, format) {
   // splitting the string to find the required part of title
-  const shortName = stripTitle(name);
+  const shortName = truncate(name, 30);  
 
   // If there is no type, eg: table, don;t add it to the name
   if (type != 'NA' && format != 'csv')
