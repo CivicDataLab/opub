@@ -71,11 +71,8 @@ function createDummyCanvas(srcCanvas) {
 }
 
 const DownloadViz = ({ viz, type, name, indicator }) => {
-  function svg2img() {
-    const canvas = document.querySelector(
-      `${viz} > .echarts-for-react canvas`
-    ) as HTMLCanvasElement;
-    const myChart = createDummyCanvas(canvas);
+  function svg2img(canvasElm) {
+    const myChart = createDummyCanvas(canvasElm);
 
     saveAs(myChart, fileName(type, name, indicator, 'jpeg'));
   }
@@ -83,7 +80,21 @@ const DownloadViz = ({ viz, type, name, indicator }) => {
   function downloadSelector(viz) {
     if (viz == '#tableView')
       export_table_to_csv(fileName(type, name, indicator, 'csv'));
-    else svg2img();
+    else {
+      if (typeof window !== 'undefined') {
+        import('html2canvas')
+          .then((html2canvas) => {
+            html2canvas
+              .default(document.querySelector(viz), {
+                scale: 2,
+              })
+              .then((canvasElm) => svg2img(canvasElm));
+          })
+          .catch((e) => {
+            console.log('load failed');
+          });
+      }
+    }
   }
 
   return (
