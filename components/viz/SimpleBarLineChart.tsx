@@ -1,7 +1,7 @@
 import React from 'react';
 import * as echarts from 'echarts/core';
 import { BarChart, LineChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
+import { SVGRenderer } from 'echarts/renderers';
 import {
   GridComponent,
   DatasetComponent,
@@ -110,7 +110,7 @@ const SimpleBarLineChartViz: React.FC<SimpleBarLineChartProps> = ({
   echarts.use([
     BarChart,
     LineChart,
-    CanvasRenderer,
+    SVGRenderer,
     GridComponent,
     TitleComponent,
     DatasetComponent,
