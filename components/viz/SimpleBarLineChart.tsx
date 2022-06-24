@@ -11,6 +11,7 @@ import {
 } from 'echarts/components';
 
 import ReactEChartsCore from 'echarts-for-react/lib/core';
+import { truncate } from 'utils/helper';
 
 function seriesMaker(color, dataset, type, smooth, showSymbol, unit) {
   const SetSeries = [];
@@ -93,7 +94,7 @@ const SimpleBarLineChartViz: React.FC<SimpleBarLineChartProps> = ({
     title: {
       text: Title,
       left: 'center',
-      subtext: subTitle,
+      subtext: truncate(subTitle, 130),
     },
     // toolbox: {
     //   show: true,
