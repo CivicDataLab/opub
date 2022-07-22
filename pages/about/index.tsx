@@ -1,10 +1,10 @@
 import React from 'react';
-import Head from 'next/head';
 import { PartnerCard, TeamCard } from 'components/pages/about';
 import { Header } from 'components/layouts';
-import AboutPage from './AboutPage';
+import styled from 'styled-components';
+import { Seo } from 'components/common';
 
-const About = ({members: members, partners: partners}) => {
+const About = ({ members: members, partners: partners }) => {
   const headerData = {
     title: 'The Team',
     content:
@@ -43,8 +43,6 @@ const About = ({members: members, partners: partners}) => {
   // ];
 
   // Use getStaticProps here instead of calling function OR useState
-
-  
 
   // const team = [
   //   {
@@ -87,11 +85,13 @@ const About = ({members: members, partners: partners}) => {
   //   },
   // ];
 
+  const seo = {
+    title: 'About Us | OPub',
+  };
+
   return (
     <div>
-      <Head>
-        <title>About Us | OPub</title>
-      </Head>
+      <Seo seo={seo} />
       <Header data={headerData} />
       <AboutPage>
         <h3 className="partners__heading">Partners</h3>
@@ -126,21 +126,20 @@ const About = ({members: members, partners: partners}) => {
 };
 
 export async function getStaticProps() {
-
   const memberReq = await fetch(`${process.env.STRAPI_URL}/members`);
   const memberRes = await memberReq.json();
-  
+
   let members = [];
 
   memberRes.map((item) => {
     members.push({
-        name: item.name,
-        title: item.title,
-        image: `${process.env.STRAPI_URL}` + item.image.url,
-        github: item.github,
-        linkedin: item.linkedin,
-        twitter: item.twitter,
-      })
+      name: item.name,
+      title: item.title,
+      image: `${process.env.STRAPI_URL}` + item.image.url,
+      github: item.github,
+      linkedin: item.linkedin,
+      twitter: item.twitter,
+    });
   });
 
   const partnerReq = await fetch(`${process.env.STRAPI_URL}/partners`);
@@ -156,17 +155,91 @@ export async function getStaticProps() {
       linkedin: item.linkedin,
       twitter: item.twitter,
       img: item.img ? `${process.env.STRAPI_URL}` + item.img.url : '',
-    })
-  })
-
-  // console.log(partners);
+    });
+  });
 
   return {
     props: {
       members: members,
-      partners: partners
+      partners: partners,
     },
-  }
+  };
 }
 
 export default About;
+
+const AboutPage = styled.main`
+  width: 1100px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+
+  .partners__heading {
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 130%;
+    color: #000;
+  }
+
+  .partners {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    justify-content: space-between;
+    align-items: stretch;
+
+    li {
+      width: 48%;
+
+      > div {
+        display: grid;
+        height: 100%;
+        grid-template-rows: max-content 1fr max-content;
+      }
+    }
+  }
+  .about__team {
+    margin-top: 4rem;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 130%;
+      color: rgba(0, 0, 0, 0.32);
+
+      span {
+        background: #4965b2;
+        border-radius: 2px;
+        width: 3rem;
+        display: inline-block;
+        height: 3px;
+        margin-right: 0.5rem;
+      }
+    }
+
+    p {
+      font-size: 2.5rem;
+      line-height: 130%;
+      margin-top: 10px;
+    }
+
+    ul {
+      margin-top: 3rem;
+      background-color: #fff;
+      border-radius: 12px;
+      border: 1px solid #f1eef1;
+      padding: 0 6rem 5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    li {
+      width: 33.3%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+`;

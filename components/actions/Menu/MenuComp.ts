@@ -10,23 +10,33 @@ interface MenuProps {
    * should the menu stick to left or right
    */
   readonly position?: 'left' | 'right';
+
+  /**
+   * show or hide label of menu
+   */
+  readonly showLabel?: boolean;
 }
 
-export const MenuComp = styled.div`
-  display: flex;
+export const MenuComp = styled.div<MenuProps>`
+  display: grid;
+  grid-template-columns: ${(props: any) =>
+    props.showLabel == true ? 'minmax(0, auto) 1fr' : '1fr'};
   align-items: center;
 `;
 
 export const MenuLabel = styled.span`
   font-weight: var(--font-weight-medium);
-  color: var(--text-light-light);
-  min-width: fit-content;
+  color: var(--text-light-medium);
+  font-size: 14px;
 `;
 
 export const Wrapper = styled.div`
   position: relative;
   height: 100%;
-  width: 100%;
+
+  button {
+    color: var(--text-light-high);
+  }
 `;
 
 export const MenuButton = styled.button`
@@ -34,7 +44,7 @@ export const MenuButton = styled.button`
   border: var(--border-1);
   border-radius: 4px;
   box-shadow: var(--box-shadow-inset);
-  padding: 8px 12px;
+  padding: 11px 12px;
   line-height: 1.5;
   position: relative;
   text-align: start;
@@ -79,13 +89,12 @@ export const MenuContent = styled.ul<MenuProps>`
   background-color: var(--color-background-lighter);
   border: var(--border-1);
   box-shadow: var(--box-shadow-1);
-  border-radius: 0px 0px 4px 4px;
+  border-radius: ${(props: any) => (props.top == true ? '4px 4px 0 0' : '0 0 4px 4px')};
   padding: 8px;
 
   max-height: 300px;
   overflow-y: auto;
-  min-width: 100%;
-  width: max-content;
+  width: 100%;
 `;
 
 export const MenuItem = styled.li`

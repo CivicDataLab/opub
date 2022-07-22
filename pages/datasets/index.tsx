@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -14,6 +13,7 @@ import { Header } from 'components/layouts';
 import { Search, Total, Filter, Sort, Pagination } from 'components/data';
 import { DatasetList } from 'components/pages/datasets';
 import MobileAlter from 'components/data/MobileAlter/MobileAlter';
+import { Seo } from 'components/common';
 
 type Props = {
   data: any;
@@ -67,23 +67,21 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
     }
   }
 
-  function handleButtonClick(e: any) {
-    e.preventDefault();
-    setModalIsOpen(!modalIsOpen);
-  }
-
   const headerData = {
     title: 'All Datasets',
     content:
       'An overview of the budget allocated and the expenditure incurred under Education related accounting heads by the Government of Uttar Pradesh for in the across various fiscal years.',
   };
 
+  const seo = {
+    title: `${
+      results.length ? results[0].organization.title : 'Datasets'
+    } | OPub`,
+  };
+
   return (
     <>
-      <Head>
-        <title>HAQ | Datasets</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Seo seo={seo} />
       <Header data={headerData} />
       <Wrapper className="container">
         {data && (
@@ -120,7 +118,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query || {};
   const variables = convertToCkanSearchQuery(query);
-  const facets = await fetchFilters(list, variables, 'tender_dataset');
+  const facets = await fetchFilters(list, variables);
 
   const data = await fetchDatasets(variables);
   return {
@@ -151,7 +149,8 @@ const DatasetsComp = styled.div`
   @media (max-width: 1000px) {
     display: block;
 
-    .filters, .sort {
+    .filters,
+    .sort {
       display: none;
     }
   }

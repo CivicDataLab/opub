@@ -1,6 +1,5 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import styled from 'styled-components';
 import { fetchAPI, explorerPopulation, fetchFromTags } from 'utils/explorer';
 import { resourceGetter } from 'utils/resourceParser';
@@ -10,6 +9,7 @@ import {
   ExplorerRelated,
   ExplorerViz,
 } from 'components/pages/explorer';
+import { Seo } from 'components/common';
 
 type Props = {
   data: any;
@@ -17,12 +17,14 @@ type Props = {
   fileData: any;
 };
 
+const seo = {
+  title: 'OPub | Explorer',
+};
+
 const Explorer: React.FC<Props> = ({ data, meta, fileData }) => {
   return (
     <>
-      <Head>
-        <title>OPub | Explorer</title>
-      </Head>
+      <Seo seo={seo} />
       <Wrapper>
         <ExplorerHeader data={data} />
         <ExplorerViz data={data} meta={meta} fileData={fileData} />

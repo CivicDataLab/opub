@@ -7,12 +7,8 @@ import { ArrowDown, ArrowTail } from 'components/icons';
 import styled from 'styled-components';
 import { submenuHover, submenuClick } from './navbar.helper';
 
-import { useKeycloak } from '@react-keycloak/ssr'
-import type { KeycloakInstance } from 'keycloak-js'
-
 const Nav = ({ data }) => {
   const router = useRouter();
-  const { keycloak } = useKeycloak<KeycloakInstance>()
 
   // shows and hides the submenu on hover and focus
   useEffect(() => {
@@ -25,7 +21,7 @@ const Nav = ({ data }) => {
     <>
       <NavbarWrapper>
         <div className="container">
-          <div className={data.logo && 'header__logo'}>
+          <Logo className={data.logo && 'header__logo'}>
             <Link href="/">
               <a>
                 {data.logo ? (
@@ -41,98 +37,68 @@ const Nav = ({ data }) => {
                 )}
               </a>
             </Link>
-          </div>
+          </Logo>
 
           <Navlinks>
             <h2 className="sr-only">Navigation menu</h2>
             <ul>
               {data.links &&
-                data.links.map((navItem: any, index: number) => (
-                  <li
-                    key={`menu-${index}`}
-                    className={navItem.submenu && 'has-submenu'}
-                  >
-                    {navItem.submenu ? (
-                      <>
-                        <Navitem
-                          onClick={(e) => submenuClick(e)}
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                          as="button"
+                data.links.map((navItem: any, index: number) => {
+                  return (
+                    <li
+                      key={`menu-${index}`}
+                      className={navItem.submenu && 'has-submenu'}
+                    >
+                      {navItem.submenu ? (
+                        <>
+                          <Navitem
+                            onClick={(e) => submenuClick(e)}
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            as="button"
+                          >
+                            {navItem.name} <ArrowDown width={24} height={24} />
+                          </Navitem>
+                          {navItem.submenu.length > 0 && (
+                            <ul>
+                              {navItem.submenu.map((item, num) => (
+                                <li
+                                  key={`sub-${index}-${num}`}
+                                  className="submenu-item"
+                                >
+                                  <Link href={item.link}>
+                                    <a>
+                                      {item.name}
+                                      <ArrowTail width={24} height={24} />
+                                    </a>
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </>
+                      ) : (
+                        <Link
+                          key={`navItemDesktop-${index}`}
+                          href={navItem.link}
+                          passHref
                         >
-                          {navItem.name} <ArrowDown width={24} height={24} />
-                        </Navitem>
-                        {navItem.submenu.length > 0 && (
-                          <ul>
-                            {navItem.submenu.map((item, num) => (
-                              <li
-                                key={`sub-${index}-${num}`}
-                                className="submenu-item"
-                              >
-                                <Link href={item.link}>
-                                  <a>
-                                    {item.name}
-                                    <ArrowTail width={24} height={24} />
-                                  </a>
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </>
-                    ) : (
-                      <Link
-                        key={`navItemDesktop-${index}`}
-                        href={navItem.link}
-                        passHref
-                      >
-                        <Navitem
-                          className={
-                            router.pathname.includes(navItem.link) && 'active'
-                          }
-                        >
-                          {navItem.name}
-                        </Navitem>
-                      </Link>
-                    )}
-                  </li>
-                ))}
-                {keycloak?.authenticated ? (
-                      <>
-                      <Navitem
-                      onClick={() => {
-                        if(keycloak){
-                          window.location.href = keycloak.createAccountUrl()
-                        }
-                      }}
-                      >
-                        Profile
-                      </Navitem>
-                      <Navitem
-                      onClick={() => {
-                        if(keycloak){
-                          window.location.href = keycloak.createLogoutUrl()
-                        }
-                      }}
-                      >
-                        Logout
-                      </Navitem>
-                      </>
-                    ):(
-                      <>
-                      <Navitem
-                      onClick={() => {
-                        if(keycloak){
-                          window.location.href = keycloak.createLoginUrl()
-                        }
-                      }}
-                      >
-                        Login
-                      </Navitem>
-                      </>
-                    )}
+                          <Navitem
+                            className={
+                              router.pathname.includes(
+                                navItem.link.split('?')[0]
+                              ) && 'active'
+                            }
+                          >
+                            {navItem.name}
+                          </Navitem>
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
             </ul>
-          </Navlinks> 
+          </Navlinks>
         </div>
       </NavbarWrapper>
       <MobileNav data={data} />
@@ -147,7 +113,7 @@ export const NavbarWrapper = styled.header`
   color: var(--text-dark-high);
   padding: 13px;
 
-  @media (max-width: 800px) {
+  @media (max-width: 1096px) {
     display: none;
   }
 
@@ -178,6 +144,21 @@ export const NavbarWrapper = styled.header`
   }
 `;
 
+const Logo = styled.div`
+  display: flex;
+  align-items: center;
+
+  .obi {
+    margin-top: 8px;
+  }
+`;
+
+const Separator = styled.span`
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  margin: 0 16px;
+  height: 28px;
+`;
+
 const Navlinks = styled.nav`
   position: relative;
 
@@ -192,6 +173,8 @@ const Navlinks = styled.nav`
     &.open {
       ul {
         display: block;
+        isolation: isolate;
+        z-index: 1;
       }
     }
   }
@@ -204,7 +187,6 @@ const Navitem = styled.a`
   color: var(--text-dark-high);
   transition: background-color 200ms ease;
   width: max-content;
-  cursor: pointer;
 
   &:hover {
     background-color: var(--nav-bg-hover);
@@ -214,7 +196,7 @@ const Navitem = styled.a`
     box-shadow: inset 0 -2px 0 0 #fff;
     font-weight: 500;
 
-    @media (max-width: 800px) {
+    @media (max-width: 1096px) {
       box-shadow: inset 3px 0 0 0 #fff;
     }
   }

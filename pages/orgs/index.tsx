@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { fetchOrgs } from './orgs.helper';
-import { Total } from 'components/data';
 import { OrgCard } from 'components/pages/orgs';
 import { Header } from 'components/layouts';
+import { Seo } from 'components/common';
 
 type Props = {
   data: any;
@@ -17,12 +16,14 @@ const headerData = {
   content: 'A list of all organizations under the Justice Hub Platform.',
 };
 
+const seo = {
+  title: 'Organizations | Opub',
+};
+
 const Orgs: React.FC<Props> = ({ data }) => {
   return (
     <>
-      <Head>
-        <title>Organizations | OPub</title>
-      </Head>
+      <Seo seo={seo} />
       <Header data={headerData} />
 
       <main className="container">
