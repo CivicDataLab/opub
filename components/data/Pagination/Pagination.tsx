@@ -11,16 +11,16 @@ import { ArrowDown } from 'components/icons';
 
 const paginationItems = [
   {
-    name: '10',
-    id: '10',
+    title: '10',
+    value: '10',
   },
   {
-    name: '20',
-    id: '20',
+    title: '20',
+    value: '20',
   },
   {
-    name: '50',
-    id: '50',
+    title: '50',
+    value: '50',
   },
 ];
 
@@ -38,8 +38,8 @@ const Pagination: React.FC<{ total: number; newPage: any }> = ({
     const from = router.query.from ? router.query.from : '0';
     const size = router.query.size ? router.query.size : '10';
     SetMaxPage(Math.floor((total - 1) / parseInt(size as string)) + 1);
-    
-    setResultSize(size as string);    
+
+    setResultSize(size as string);
 
     const pageNo = Math.floor(
       parseInt(from as string) / parseInt(size as string) + 1
