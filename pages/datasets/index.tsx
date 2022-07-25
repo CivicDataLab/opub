@@ -120,7 +120,7 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query || {};
   const variables = convertToCkanSearchQuery(query);
-  const facets = await fetchFilters(list, variables, 'tender_dataset');
+  const facets = await fetchFilters(list, variables);
 
   const data = await fetchDatasets(variables);
   return {
@@ -151,7 +151,8 @@ const DatasetsComp = styled.div`
   @media (max-width: 1000px) {
     display: block;
 
-    .filters, .sort {
+    .filters,
+    .sort {
       display: none;
     }
   }
