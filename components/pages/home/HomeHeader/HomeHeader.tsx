@@ -6,55 +6,56 @@ import { LokSabha, VidhanSabha } from 'components/icons';
 
 const states = [
   {
-    name: 'Rajasthan',
-    id: 'rajasthan',
+    title: 'Rajasthan',
+    value: 'rajasthan',
   },
   {
-    name: 'Uttar Pradesh',
-    id: 'uttar_pradesh',
+    title: 'Uttar Pradesh',
+    value: 'uttar_pradesh',
   },
   {
-    name: 'Odisha',
-    id: 'odisha',
+    title: 'Odisha',
+    value: 'odisha',
   },
   {
-    name: 'Gujrat',
-    id: 'gujrat',
+    title: 'Gujrat',
+    value: 'gujrat',
   },
   {
-    name: 'Kerela',
-    id: 'kerela',
+    title: 'Kerela',
+    value: 'kerela',
   },
   {
-    name: 'Tamil Nadu',
-    id: 'tamil_nadu',
+    title: 'Tamil Nadu',
+    value: 'tamil_nadu',
   },
 ];
 
 const schemes = [
   {
-    name: 'Beti Bachao Beti Padhao (BBBP)',
-    id: 'bbbp',
+    title: 'Beti Bachao Beti Padhao (BBBP)',
+    value: 'bbbp',
   },
   {
-    name: 'Integrated Child Development Services (ICDS)',
-    id: 'icds',
+    title: 'Integrated Child Development Services (ICDS)',
+    value: 'icds',
   },
   {
-    name: 'Integrated Child Protection Scheme (ICPS)',
-    id: 'icps',
+    title: 'Integrated Child Protection Scheme (ICPS)',
+    value: 'icps',
   },
   {
-    name: 'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
-    id: 'mgnregs',
+    title:
+      'Mahatma Gandhi National Rural Employment Guarantee Scheme (MGNREGS)',
+    value: 'mgnregs',
   },
   {
-    name: 'National Health Mission (NHM)',
-    id: 'nhm',
+    title: 'National Health Mission (NHM)',
+    value: 'nhm',
   },
   {
-    name: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
-    id: 'pmkisan',
+    title: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
+    value: 'pmkisan',
   },
 ];
 
@@ -69,7 +70,7 @@ const HomeHeader = () => {
     const setState = array === states ? setSelectedState : setSelectedScheme;
 
     for (let i = 0; i < array.length; i++) {
-      if (val === array[i].id) {
+      if (val === array[i].value) {
         setState(array[i]);
         return;
       }
@@ -79,8 +80,8 @@ const HomeHeader = () => {
 
   function handleSabhaClick(e) {
     const btn = e.target;
-    const id = btn.dataset.id;
-    setSelectedSabha(id);
+    const value = btn.dataset.value;
+    setSelectedSabha(value);
 
     const selectedBtn = sabhaRef.current.querySelector(
       '[aria-pressed="true"]'
@@ -94,10 +95,11 @@ const HomeHeader = () => {
 
   function handleSubmitClick() {
     const obj = {
-      state: selectedState.id,
-      scheme: selectedScheme.id,
+      state: selectedState.value,
+      scheme: selectedScheme.value,
       sabha: selectedSabha,
     };
+    console.log(obj);
   }
 
   return (
@@ -133,7 +135,7 @@ const HomeHeader = () => {
                 options={states}
                 handleChange={(e) => handleMenuChange(e, states)}
                 heading="Select State"
-                value={selectedState.name}
+                value={selectedState.title}
                 showLabel={false}
               />
             </StateMenu>
@@ -142,7 +144,7 @@ const HomeHeader = () => {
                 options={schemes}
                 handleChange={(e) => handleMenuChange(e, schemes)}
                 heading="Select any Scheme"
-                value={selectedScheme.name}
+                value={selectedScheme.title}
                 showLabel={false}
               />
             </div>
