@@ -1,11 +1,20 @@
 import Head from 'next/head';
 import styled from 'styled-components';
 import React from 'react';
-import { HomeAbout, HomeHeader, HomeHighlight, HomeQuiz, HomeStates } from 'components/pages/home';
+import {
+  HomeAbout,
+  HomeHeader,
+  HomeHighlight,
+  HomeQuiz,
+  HomeStates,
+} from 'components/pages/home';
+import { Seo } from 'components/common';
+import HomeCarousel from 'components/pages/home/HomeCarousel';
 
 export default function Home() {
   return (
     <>
+      <Seo />
       <Head>
         <title>Open Publishers</title>
       </Head>
@@ -15,6 +24,7 @@ export default function Home() {
         <HomeAbout />
         <HomeStates />
         <HomeQuiz />
+        <HomeCarousel />
       </HomePage>
     </>
   );

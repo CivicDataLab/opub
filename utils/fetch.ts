@@ -22,7 +22,7 @@ export const fetchDatasets = async (variables) => {
       : `fq=(tags:scheme-category AND groups:budgets-for-justice)`;
 
   const response = await fetch(
-    `${process.env.CKAN_URL}/package_search?${varString}`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?${varString}`
   );
   const data = await response.json();
   return data;
@@ -36,7 +36,7 @@ export async function fetchFilters(list, variable) {
     }`;
 
     const fetchData = await fetch(
-      `${process.env.CKAN_URL}/package_search?facet.field=[${list}]&${queryVars}`
+      `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?facet.field=[${list}]&${queryVars}`
     ).then((res) => res.json());
     return fetchData.result.search_facets;
   } catch (error) {

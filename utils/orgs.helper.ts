@@ -1,6 +1,6 @@
 export async function fetchOrgs() {
   const response = await fetch(
-    `${process.env.CKAN_URL}/organization_list?all_fields=true&limit=15`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/organization_list?all_fields=true&limit=15`
   );
   const data = await response.json();
   return data;
@@ -21,7 +21,7 @@ export async function fetchOrgDatasets(id, variable) {
     varArray.length > 0 ? varArray.join('&') : `fq=(organization:${id})`;
 
   const response = await fetch(
-    `${process.env.CKAN_URL}/package_search?${params}`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?${params}`
   );
   const data = await response.json();
   return data;
@@ -35,7 +35,7 @@ export async function fetchOrgFilters(list, variable) {
     }`;
 
     const fetchData = await fetch(
-      `${process.env.CKAN_URL}/package_search?facet.field=[${list}]&${queryVars}`
+      `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?facet.field=[${list}]&${queryVars}`
     ).then((res) => res.json());
     return fetchData.result.search_facets;
   } catch (error) {
@@ -45,7 +45,7 @@ export async function fetchOrgFilters(list, variable) {
 
 export async function fetchOrgDetails(id) {
   const response = await fetch(
-    `${process.env.CKAN_URL}/organization_show?id=${id}`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/organization_show?id=${id}`
   );
   const data = await response.json();
   return data;

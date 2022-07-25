@@ -13,6 +13,11 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   /**
    * Button Content
    */
+  buttonSize?: 'sm' | 'md';
+
+  /**
+   * Button Content
+   */
   icon: React.ReactElement;
 
   /**
@@ -24,6 +29,11 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
    * custom class for button
    */
   buttonClass?: string;
+
+  /**
+   * closeWidget from parent
+   */
+  closeWidget?: boolean;
 
   /**
    * Button style
@@ -41,9 +51,11 @@ const Widget = ({
   buttonContent,
   title = 'widget',
   buttonStyle = 'custom',
+  buttonSize = 'md',
   buttonClass,
   icon,
   children,
+  closeWidget = false,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const activatorRef = useRef(null);
@@ -56,6 +68,13 @@ const Widget = ({
       activatorRef.current.focus();
     }
   };
+
+  useEffect(() => {
+    if (closeWidget) {
+      setIsOpen(false);
+      activatorRef.current.focus();
+    }
+  }, [closeWidget]);
 
   const clickHandler = () => {
     setIsOpen(!isOpen);
@@ -88,6 +107,7 @@ const Widget = ({
     <WidgetComp onKeyUp={wrapKeyHandler}>
       <Button
         kind={buttonStyle}
+        size={buttonSize}
         aria-expanded="false"
         icon={icon}
         aria-controls={widgetID}
@@ -126,10 +146,9 @@ export const WidgetComp = styled.div`
   }
 `;
 
-const WidgetContent = styled.div`
+export const WidgetContent = styled.div`
   position: absolute;
   top: 3.5rem;
-  /* right: 0; */
   display: none;
   isolation: isolate;
   z-index: 20;

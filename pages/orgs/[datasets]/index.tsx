@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -23,6 +22,7 @@ import { DatasetListComp } from 'components/pages/datasets/List/ListComp';
 import { explorerPopulation } from 'utils/explorer';
 import Link from 'next/link';
 import { DatasetCardComp } from 'components/data/Cards/DatasetCard/CardComp';
+import { Seo } from 'components/common';
 
 type Props = {
   data: any;
@@ -89,14 +89,15 @@ const Datasets: React.FC<Props> = ({ data, facets, variables }) => {
     res_format: 'Format',
   };
 
+  const seo = {
+    title: `${
+      results.length ? results[0].organization.title : 'Datasets'
+    } | OPub`,
+  };
+
   return (
     <>
-      <Head>
-        <title>
-          {results.length ? results[0].organization.title : 'OPub'} | OPub
-        </title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Seo seo={seo} />
       <Header data={headerData} />
       <Wrapper className="container">
         {data && (
