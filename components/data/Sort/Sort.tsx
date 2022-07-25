@@ -4,24 +4,24 @@ import { Menu } from 'components/actions';
 
 const options = [
   {
-    id: 'score:desc',
-    name: 'Relevance',
+    value: 'score:desc',
+    title: 'Relevance',
   },
   {
-    id: 'title_string:asc',
-    name: 'Name Ascending',
+    value: 'title_string:asc',
+    title: 'Name Ascending',
   },
   {
-    id: 'title_string:desc',
-    name: 'Name Descending',
+    value: 'title_string:desc',
+    title: 'Name Descending',
   },
   {
-    id: 'metadata_modified:desc',
-    name: 'Last Modified',
+    value: 'metadata_modified:desc',
+    title: 'Last Modified',
   },
   {
-    id: 'views_recent:desc',
-    name: 'Popular',
+    value: 'views_recent:desc',
+    title: 'Popular',
   },
 ];
 
@@ -30,8 +30,8 @@ const Sort: React.FC<{ newSort: any; className?: string }> = ({
   className,
 }) => {
   const router = useRouter();
-  const [sort, setSort] = useState(options[0].id);
-  const [value, setValue] = useState(options[0].name);
+  const [sort, setSort] = useState(options[0].value);
+  const [value, setValue] = useState(options[0].title);
 
   useEffect(() => {
     const currentSort = router.query.sort ? router.query.sort : '';
@@ -40,8 +40,8 @@ const Sort: React.FC<{ newSort: any; className?: string }> = ({
   }, [router.query.sort]);
 
   useEffect(() => {
-    let currentSort = options.find((o) => o.id === sort);
-    currentSort && setValue(currentSort.name);
+    let currentSort = options.find((o) => o.value === sort);
+    currentSort && setValue(currentSort.title);
   }, [sort]);
 
   const handleChange = (event: any) => {
