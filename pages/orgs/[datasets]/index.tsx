@@ -15,7 +15,7 @@ import {
   Tags,
 } from 'components/data';
 import MobileAlter from 'components/data/MobileAlter/MobileAlter';
-import { fetchOrgDatasets } from '../orgs.helper';
+import { fetchOrgDatasets } from 'utils/orgs.helper';
 import { truncate } from 'utils/helper';
 import { MenuComp } from 'components/actions/Menu/MenuComp';
 import { DatasetListComp } from 'components/pages/datasets/List/ListComp';
