@@ -8,6 +8,9 @@
 <a href="https://github.com/CivicDataLab/opub/blob/main/LICENSE">
 <img alt="MIT License" src="https://img.shields.io/apm/l/atomic-design-ui.svg?"/>
 </a>
+<a href="https://github.com/CivicDataLab/opub/blob/main/LICENSE">  &nbsp;&nbsp; 
+<img alt="MIT License" src="https://github.com/CivicDataLab/opub/actions/workflows/node.js.yml/badge.svg"/>
+</a>
 </p>
 <p align="center">A platform to speed up the development of open data dashboards.</p>
 
@@ -62,7 +65,7 @@ The project requires a CKAN URL to fetch datasets. You can save them in the `.en
 ```js
 CKAN_URL = 'CKAN_URL/api/3/action';
 NEXT_PUBLIC_GOOGLE_ANALYTICS = '';
-KEYCLOAK_URL='http://localhost:8080'
+KEYCLOAK_URL = 'http://localhost:8080';
 ```
 
 ### Pages
