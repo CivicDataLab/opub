@@ -31,11 +31,10 @@ const Datasets: React.FC<Props> = ({ data, facets }) => {
   const [items, setItems] = useState(size);
   const [datsetsFilters, setDatasetsFilters] = useState(fq);
   const [pages, setPages] = useState(from);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const { results, count } = data.result;
   useEffect(() => {
-    router.push({
+    router.replace({
       pathname: router.pathname,
       query: {
         fq: datsetsFilters,
