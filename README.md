@@ -7,8 +7,8 @@
 <br/> -->
 <a href="https://github.com/CivicDataLab/opub/blob/main/LICENSE">
 <img alt="MIT License" src="https://img.shields.io/apm/l/atomic-design-ui.svg?"/>
-</a>
-<a href="https://github.com/CivicDataLab/opub/blob/main/LICENSE">  &nbsp;&nbsp; 
+</a>&nbsp;&nbsp; 
+<a href="https://github.com/CivicDataLab/opub/actions/workflows/node.js.yml">
 <img alt="MIT License" src="https://github.com/CivicDataLab/opub/actions/workflows/node.js.yml/badge.svg"/>
 </a>
 </p>
