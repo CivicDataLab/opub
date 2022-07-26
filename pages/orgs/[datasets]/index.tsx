@@ -44,7 +44,7 @@ const Datasets: React.FC<Props> = ({ data, facets, variables }) => {
   const { results, count } = data.result;
 
   useEffect(() => {
-    router.push({
+    router.replace({
       pathname: `/orgs/${router.query.datasets}`,
       query: {
         fq: datsetsFilters,
